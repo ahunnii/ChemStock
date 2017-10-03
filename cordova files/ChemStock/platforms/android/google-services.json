@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "37980510612",
+    "project_id": "chemstock-47e9c"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:37980510612:android:42ce86f4eba75387",
+        "android_client_info": {
+          "package_name": "com.emuchemstock.demo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "37980510612-b9dh3mkna4054cdtl5fe3chj4ricvutk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.emuchemstock.demo",
+            "certificate_hash": "8b35a4824b27025ea9a53e4d434393098ce8a1a9"
+          }
+        },
+        {
+          "client_id": "37980510612-pn72fm249drleb2747gukr2j3n8g9ct6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCsbhVsmD5k-GXuWOej0Jk19K6OqSYm7ps"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
