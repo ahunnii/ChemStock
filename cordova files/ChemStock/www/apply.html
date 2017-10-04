@@ -23,15 +23,15 @@
 					</div>
 					<div class="col-md-3 mb-3">
 						<label for="validationDefault01">First Name</label>
-						<input type="text" class="form-control" id="validationDefault01" required >
+						<input type="text" class="form-control" required >
 					</div>
 					<div class="col-md-1 mb-3">
 						<label for="validationDefault01">Initial</label>
-						<input type="text" class="form-control" id="validationDefault01" maxlength="1" required>
+						<input type="text" class="form-control" maxlength="1" required>
 					</div>
 					<div class="col-md-3 mb-3">
 						<label for="validationDefault02">Last Name</label>
-						<input type="text" class="form-control" id="validationDefault02" required>
+						<input type="text" class="form-control" required>
 					</div>
 					<div class="col-md-2 mb-3">
 						<label for="validationDefault02">Date of Birth</label>
@@ -50,15 +50,15 @@
 					</div>
 					<div class="col-md-1 mb-3">
 						<label for="validationDefault04">State</label>
-						<input type="text" class="form-control" minlength="2" maxlength="2" required>
+						<input type="text" class="form-control" minlength="2" maxlength="2" oninvalid="this.setCustomValidity('Must be state intials. Ex: MI')" required>
 					</div>
 					<div class="col-md-2 mb-3">
 						<label for="validationDefault05">Zip</label>
-						<input pattern="(?=.*\d).{5,5}" class="form-control" required>
+						<input pattern="(?=.*\d).{5,5}" class="form-control" oninvalid="this.setCustomValidity('Must be a five digit zip code. Ex: 48197')" required>
 					</div>
 					<div class="col-md-3 mb-3">
 						<label for="validationDefault05">Cell Phone</label>
-						<input type="text" class="form-control" id="validationDefault05" required>
+						<input pattern="(?=.*\d).{7,11}" class="form-control" oninvalid="this.setCustomValidity('Must be between 7 and 10 digits.')" >
 					</div>
 				</div>
 				
@@ -73,29 +73,29 @@
 					</div>
 					<div class="col-md-1 mb-3">
 						<label for="validationDefault04">State</label>
-						<input type="text" class="form-control" minlength="2" maxlength="2" required>
+						<input type="text" class="form-control" minlength="2" maxlength="2" oninvalid="this.setCustomValidity('Must be state intials. Ex: MI')" required>
 					</div>
 					<div class="col-md-2 mb-3">
 						<label for="validationDefault05">Zip</label>
-						<input pattern="(?=.*\d).{5,5}" class="form-control" id="validationDefault05" required>
+						<input pattern="(?=.*\d).{5,5}" class="form-control" oninvalid="this.setCustomValidity('Must be a five digit zip code. Ex: 48197')" required>
 					</div>
 					<div class="col-md-3 mb-3">
 						<label for="validationDefault05">Home Phone</label>
-						<input type="text" class="form-control" id="validationDefault05" required>
+						<input pattern="(?=.*\d).{7,11}" class="form-control" oninvalid="this.setCustomValidity('Must be between 7 and 10 digits.')" required>
 					</div>
 				</div>
 				
 				<div class="row">
 					<div class="col-md-3 mb-3">
 						<label id="validationDefault04">How did you find out about this job?</label>
-						<input type="text" class="form-control" id="validationDefault04">
+						<input type="text" class="form-control" required>
 					</div>
 					
 					<div class="col-md-1"></div>
 					
 					<div class="col-md-2 mb-3">
 						<label for="validationDefault03">Perferred weekly amount of hours?</label>
-						<input type="text" class="form-control hs" id="validationDefault04" required>
+						<input type="number" class="form-control hs" max="70" required>
 					</div>
 					<div class="col-md-2 mb-3">
 						<label for="validationDefault03">Are you work study approved?</label>
@@ -140,24 +140,15 @@
 					</div>
 					<div class="col-md-2 mb-3">
 						<label for="validationDefault05">Graduation Date</label>
-					<input type="text" class="form-control" id="validationDefault05" required>
-					<div class="invalid-feedback">
-						Please provide a valid date.
-					</div>
+						<input type="date" class="form-control" required>
 					</div>
 					<div class="col-md-2 mb-3">
 						<label for="validationDefault05">Highschool GPA</label>
-						<input type="text" class="form-control" id="validationDefault05" required>
-						<div class="invalid-feedback">
-							Please provide a valid GPA.
-						</div>
+						<input pattern="([0-5]{1})\..{1,2}" class="form-control" oninvalid="this.setCustomValidity('Must be a valid GPA. Ex: 4.0 or 3.64')" required>
 					</div>
 					<div class="col-md-2 mb-3">
 						<label for="validationDefault05">College GPA</label>
-						<input type="text" class="form-control" id="validationDefault05" required>
-						<div class="invalid-feedback">
-							Please provide a valid GPA.
-						</div>
+						<input pattern="([0-5]{1})\..{1,2}" class="form-control" oninvalid="this.setCustomValidity('Must be a valid GPA. Ex: 4.0 or 3.64')" required>
 					</div>
 				</div>
 				
@@ -188,15 +179,21 @@
 					</div>
 					<div class="col-md-2 mb-3">
 						<label for="validationDefault04">Semester</label>
-						<input type="text" class="form-control" id="validationDefault04">
+						<select class="form-control" required>
+							<option value="" disabled selected hidden></option>
+							<option value="0">Fall</option>
+							<option value="1">Winter</option>
+							<option value="2">Spring</option>
+							<option value="3">Summer</option>
+						</select>
 					</div>
 					<div class="col-md-2 mb-3">
 						<label for="validationDefault04">Year</label>
-						<input type="text" class="form-control" id="validationDefault04" required>
+						<input pattern="[0-9]{4}" class="form-control" oninvalid="this.setCustomValidity('Must be a valid year. Ex: 2017')" required>
 					</div>
 					<div class="col-md-2 mb-3">
 						<label for="validationDefault05">Intructor</label>
-						<input type="text" class="form-control" id="validationDefault05" required>
+						<input type="text" class="form-control">
 					</div>
 				</div>
 				
