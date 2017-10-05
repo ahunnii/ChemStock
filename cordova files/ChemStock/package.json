@@ -11,12 +11,19 @@
     "license": "Apache-2.0",
     "dependencies": {
         "cordova-android": "^6.2.3",
+        "cordova-filechooser": "git+https://github.com/gianlucag/cordova-filechooser.git",
         "cordova-ios": "^4.4.0",
+        "cordova-plugin-file": "^4.0.0",
+        "cordova-plugin-file-transfer": "^1.6.3",
+        "cordova-plugin-filepath": "^1.1.0",
         "cordova-plugin-whitelist": "^1.3.2"
     },
     "cordova": {
         "plugins": {
-            "cordova-plugin-whitelist": {}
+            "cordova-plugin-whitelist": {},
+            "cordova-plugin-file-transfer": {},
+            "cordova-plugin-filepath": {},
+            "com.megster.cordova.FileChooser": {}
         },
         "platforms": [
             "android",
