@@ -9,7 +9,7 @@
 	</head>
 	
     <body>
-		<form class="container" style="margin-top: 5vh;">
+		<form class="container" id="apply-form" style="margin-top: 5vh;">
 		
 			<h2>Chemistry Department: Stockroom Application</h2>
 			<p>Please fill out the form below to apply to the stockroom related jobs.</p>
@@ -116,7 +116,7 @@
 			<div class="row">
 				<div class="col-md-2 mb-3">
 					<label for="exampleFormControlFile1">Resume Upload</label>
-					<input type="file" class="form-control-file">
+					<input type="file" name="resume" class="form-control-file">
 				</div>
 			</div>
 			
@@ -193,7 +193,7 @@
 			<script type="text/javascript" src="js/popper.min.js"></script>
 			<script type="text/javascript" src="js/bootstrap.min.js"></script>
 			<script src="js/artsy.js"></script>
-			<script>
+			<script>		
 				(function ($) {
 					$("#weekly-schedule").dayScheduleSelector({
 						// Mon - Fri
@@ -231,16 +231,23 @@
 			function(e)
 			{
 				e.preventDefault();
-				var formData = new FormData($('#apply-form'));
+				var formData = new FormData($('#apply-form')[0]);
 				$.ajax({
-					type: 'post',
-					contentType: 'multipart/form-data',
-					crossDomain: true,
+					type: 'POST',
 					url: 'http://www.bradfriebe.com/test/upload.php',
-					data: $('#apply-form').serialize(),
+					crossDomain: true,
+					data: formData,
+					contentType: false,
+					processData: false,
 					success: function(data)
 					{
 						alert("Ajax call success");
+						location.href = "http://www.google.com/";
+					},
+					error: function(data)
+					{
+						alert('There was an error submitting your application');
+						location.href = "http://www.bradfriebe.com/bbb/";
 					}
 				});
 			});
