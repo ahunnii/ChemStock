@@ -2,6 +2,10 @@
 *.apk
 *.ap_
 
+#platfor and plugin folders
+platforms/
+plugins/
+
 # Files for the ART/Dalvik VM
 *.dex
 
