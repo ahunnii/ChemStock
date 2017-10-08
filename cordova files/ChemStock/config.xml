@@ -2,10 +2,10 @@
 <widget id="com.emuchemstock.chemstock" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>EMUChemStock</name>
     <description>
-        A sample Apache Cordova application that responds to the deviceready event.
+        App for EMU Chemistry Stock Room
     </description>
-    <author email="dev@cordova.apache.org" href="http://cordova.io">
-        Apache Cordova Team
+    <author email="" href="http://cordova.io">
+        Khalob Cognata, Brad Friebe, Andrew Hunn, Cammie Willett, John Zervos
     </author>
     <content src="index.html" />
     <access origin="*" />
@@ -15,6 +15,7 @@
     <allow-intent href="sms:*" />
     <allow-intent href="mailto:*" />
     <allow-intent href="geo:*" />
+    <preference name="Orientation" value="portrait" />
     <platform name="android">
         <allow-intent href="market:*" />
     </platform>
