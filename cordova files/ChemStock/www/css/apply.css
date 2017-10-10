@@ -37,6 +37,16 @@ input[type="number"] {
     -moz-appearance: textfield;
 }
 
+input[type=month]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    display: none;
+}
+
+input[type=month]{
+	font-size: 12px;
+	line-height: 1.5;
+}
+
 ::-webkit-input-placeholder { /* WebKit browsers */
     text-transform: none;
 }
