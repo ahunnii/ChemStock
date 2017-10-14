@@ -25,17 +25,11 @@ $workStudyHours = $db->real_escape_string($_POST["hoursWorkStudy"]);
 $classStanding = $db->real_escape_string($_POST["classStanding"]);
 $major = $db->real_escape_string($_POST["major"]);
 $minor = $db->real_escape_string($_POST["minor"]);
-$graduationDate = $db->real_escape_string($_POST["graduationDate"]);
+$graduationDate = $db->real_escape_string($_POST["graduationDate"]."-01");
 $highschoolGPA = $db->real_escape_string($_POST["highschoolGPA"]);
 $collegeGPA = $db->real_escape_string($_POST["collegeGPA"]);
 
-$applicationSQL = "INSERT INTO applications (studentID, email, firstName, middleInitial, lastName, dateOfBirth, localAddress, localCity, localState, localZip, cellPhone, homeAddress, homeCity, homeState, homeZip, homePhone, referral, preferredWeeklyHours, workStudyApproved, workStudyHours, classStanding, major, minor, graduationDate, highschoolGPA, collegeGPA, weeklySchedule)
- VALUES ($eID, '$email','$firstName', '$middleInitial', '$lastName', '$dateOfBirth', '$localAddress', '$localCity', '$localState', '$localZip', '$cellPhone', '$homeAddress', '$homeCity', '$homeState', '$homeZip', '$homePhone', '$referral', '$weeklyHours', '$workStudyApproved', '$workStudyHours', '$classStanding', '$major', '$minor', '$graduationDate', '$highschoolGPA', '$collegeGPA' ,'')";
-
-if($db->query($sql !== true)
-{
-	die($db->error);
-}
+$applicationSQL = "INSERT INTO applications (studentID, email, firstName, middleInitial, lastName, dateOfBirth, localAddress, localCity, localState, localZip, cellPhone, homeAddress, homeCity, homeState, homeZip, homePhone, referral, preferredWeeklyHours, workStudyApproved, workStudyHours, classStanding, major, minor, graduationDate, highschoolGPA, collegeGPA, weeklySchedule) VALUES ('$eID', '$email','$firstName', '$middleInitial', '$lastName', '$dateOfBirth', '$localAddress', '$localCity', '$localState', '$localZip', '$cellPhone', '$homeAddress', '$homeCity', '$homeState', '$homeZip', '$homePhone', '$referral', '$weeklyHours', '$workStudyApproved', '$workStudyHours', '$classStanding', '$major', '$minor', '$graduationDate', '$highschoolGPA', '$collegeGPA' ,'')";
 
 if($_FILES['resume'])
 {
@@ -43,7 +37,7 @@ if($_FILES['resume'])
 	{
 		die('Error while uploading, code: ' + $_FILES['file']['error']);
 	}
-
+	$fileType = mime_content_type($_FILES['resume']['tmp_name']);
 	$fileSize = $_FILES['resume']['size'];
 	if($fileSize > 5242880)
 	{
@@ -51,30 +45,34 @@ if($_FILES['resume'])
 	}
 
 	$fileName = $db->real_escape_string(preg_replace("/[^a-z0-9.\-]/i",'',$_FILES['resume']['name']));
-	$fileType = mime_content_type($_FILES['resume']['tmp_name']);
-	if($fileType !== "application/pdf" || $fileType !== "application/msword")
+	
+	// if($fileType !== "application/pdf" || $fileType !== "application/msword")
+	// {
+		// die('Only PDF and Microsoft Word Document are Allowed.');
+	// }
+	
+	if($db->query($applicationSQL) !== true)
 	{
-		die('Only PDF and Microsoft Word Document are Allowed.');
+		die($db->error);
 	}
 
 	$content = $db->real_escape_string(file_get_contents($_FILES['resume']['tmp_name']));
-	$sql = "SELECT id FROM applications WHERE studentID = $eID LIMIT 1";
+	$sql = "SELECT id FROM applications WHERE studentID = '$eID' LIMIT 1";
 	$result = $db->query($sql);
-	$appID = 0;
+	$appID = "";
 	if($result->num_rows > 0)
 	{
 		$row = $result->fetch_assoc();
-		$appID = $row["studentID"];
+		$appID = $row["id"];
 	}
-	
-	if($appID == 0)
+	else
 	{
 		die("Error finding application ID");
 	}
 	
 	$fileSQL= "insert into resumes (applicationID, fileName, fileType, TIMESTAMP, fileData) values ($appID, '$fileName', '$filetype', NOW(), '$content')";
 
-	if(($db->query($applicationSQL) !== true) || ($db->query($fileSQL) !== true))
+	if($db->query($fileSQL) !== true)
 	{
 		die($db->error);
 	}

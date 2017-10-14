@@ -20,7 +20,7 @@
 					<label for="inputGroupSuccess2">Student E#:</label>
 					<div class="input-group">
 						<span class="input-group-addon" style="font-weight: 700; font-size:18px;">E</span>
-						<input pattern="(?=.*\d).{8,8}" class="form-control" name="eID" required oninvalid="this.setCustomValidity('Must be an 8 digit ID number')" oninput="this.setCustomValidity('');">
+						<input pattern="(?=.*\d).{8,8}" type="text" class="form-control" name="eID" required oninvalid="this.setCustomValidity('Must be an 8 digit ID number')" oninput="this.setCustomValidity('');">
 					</div>
 				</div>
 				<div class="col-md-3 mb-3">
@@ -191,9 +191,7 @@
 				
 				<button type="submit" class="center-button mobile-button mt-5 mb-5" style="background-color:white;">Submit</button>
 			</form>
-			
-			
-			<script type="text/javascript" src="js/index.js"></script>
+	
 			<script type="text/javascript" src="js/apply.js"></script>
 			<script type="text/javascript" src="js/popper.min.js"></script>
 			<script type="text/javascript" src="js/bootstrap.min.js"></script>
@@ -248,7 +246,8 @@
 					{
 						if(data != "")
 						{
-							alert('There was an error submitting your application');
+							alert(data);
+							//alert('There was an error submitting your application');
 						}
 						else
 						{
