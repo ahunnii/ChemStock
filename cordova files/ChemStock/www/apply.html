@@ -16,92 +16,96 @@
 			
 			<h4 class="mb-3 mt-4"> Basic Information </h4>
 			<div class="row">
-				<div class="col-md-3 mb-3">
+				<div class="col-md-2 mb-3">
 					<label for="inputGroupSuccess2">Student E#:</label>
 					<div class="input-group">
 						<span class="input-group-addon" style="font-weight: 700; font-size:18px;">E</span>
-						<input pattern="(?=.*\d).{8,8}" class="form-control" required oninvalid="this.setCustomValidity('Must be an 8 digit ID number')" oninput="this.setCustomValidity('');">
+						<input pattern="(?=.*\d).{8,8}" class="form-control" name="eID" required oninvalid="this.setCustomValidity('Must be an 8 digit ID number')" oninput="this.setCustomValidity('');">
 					</div>
 				</div>
 				<div class="col-md-3 mb-3">
+					<label for="validationDefault01">Eastern Email</label>
+					<input type="text" class="form-control" name="email" required>
+				</div>
+				<div class="col-md-2 mb-3">
 					<label for="validationDefault01">First Name</label>
-					<input type="text" class="form-control" required >
+					<input type="text" class="form-control" name="firstName" required >
 				</div>
 				<div class="col-md-1 mb-3">
 					<label for="validationDefault01">Initial</label>
-					<input type="text" class="form-control" maxlength="1">
+					<input type="text" class="form-control" name="middleInitial" maxlength="1">
 				</div>
-				<div class="col-md-3 mb-3">
+				<div class="col-md-2 mb-3">
 					<label for="validationDefault02">Last Name</label>
-					<input type="text" class="form-control" required>
+					<input type="text" class="form-control" name="lastName" required>
 				</div>
 				<div class="col-md-2 mb-3">
 					<label for="validationDefault02">Date of Birth</label>
-					<input type="date" class="form-control" required>
+					<input type="date" class="form-control" name="dateOfBirth"required>
 				</div>
 			</div>
 			
 			<div class="row">
 				<div class="col-md-4 mb-3">
 					<label for="validationDefault03">Local Address</label>
-					<input type="text" class="form-control" id="validationDefault03" required>
+					<input type="text" class="form-control" id="validationDefault03" name="localAddress" required>
 				</div>
 				<div class="col-md-2 mb-3">
 					<label for="validationDefault04">City</label>
-					<input type="text" class="form-control" id="validationDefault04" required>
+					<input type="text" class="form-control" id="validationDefault04" name="localCity" required>
 				</div>
 				<div class="col-md-1 mb-3">
 					<label for="validationDefault04">State</label>
-					<input type="text" class="form-control" minlength="2" maxlength="2" oninvalid="this.setCustomValidity('Must be state intials. Ex: MI')" oninput="this.setCustomValidity('');" required>
+					<input type="text" class="form-control" minlength="2" maxlength="2" name="localState" oninvalid="this.setCustomValidity('Must be state intials. Ex: MI')" oninput="this.setCustomValidity('');" required>
 				</div>
 				<div class="col-md-2 mb-3">
 					<label for="validationDefault05">Zip</label>
-					<input pattern="(?=.*\d).{5,5}" class="form-control" oninvalid="this.setCustomValidity('Must be a five digit zip code. Ex: 48197')" oninput="this.setCustomValidity('');" required>
+					<input pattern="(?=.*\d).{5,5}" class="form-control" name="localZip" oninvalid="this.setCustomValidity('Must be a five digit zip code. Ex: 48197')" oninput="this.setCustomValidity('');" required>
 				</div>
 				<div class="col-md-3 mb-3">
 					<label for="validationDefault05">Cell Phone</label>
-					<input pattern="(?=.*\d).{7,11}" class="form-control" oninvalid="this.setCustomValidity('Must be between 7 and 10 digits.')" oninput="this.setCustomValidity('');">
+					<input pattern="(?=.*\d).{7,11}" class="form-control" name="cellPhone" oninvalid="this.setCustomValidity('Must be between 7 and 10 digits.')" oninput="this.setCustomValidity('');">
 				</div>
 			</div>
 			
 			<div class="row">
 				<div class="col-md-4 mb-3">
 					<label for="validationDefault03">Home Address</label>
-					<input type="text" class="form-control" id="validationDefault03">
+					<input type="text" class="form-control" name="homeAddress" id="validationDefault03">
 				</div>
 				<div class="col-md-2 mb-3">
 					<label for="validationDefault04">City</label>
-					<input type="text" class="form-control" id="validationDefault04">
+					<input type="text" class="form-control" name="homeCity" id="validationDefault04">
 				</div>
 				<div class="col-md-1 mb-3">
 					<label for="validationDefault04">State</label>
-					<input type="text" class="form-control" minlength="2" maxlength="2" oninvalid="this.setCustomValidity('Must be state intials. Ex: MI')" oninput="this.setCustomValidity('');">
+					<input type="text" class="form-control" name="homeState" minlength="2" maxlength="2" oninvalid="this.setCustomValidity('Must be state intials. Ex: MI')" oninput="this.setCustomValidity('');">
 				</div>
 				<div class="col-md-2 mb-3">
 					<label for="validationDefault05">Zip</label>
-					<input pattern="(?=.*\d).{5,5}" class="form-control" oninvalid="this.setCustomValidity('Must be a five digit zip code. Ex: 48197')" oninput="this.setCustomValidity('');">
+					<input pattern="(?=.*\d).{5,5}" class="form-control" name="homeZip" oninvalid="this.setCustomValidity('Must be a five digit zip code. Ex: 48197')" oninput="this.setCustomValidity('');">
 				</div>
 				<div class="col-md-3 mb-3">
 					<label for="validationDefault05">Home Phone</label>
-					<input pattern="(?=.*\d).{7,11}" class="form-control" oninvalid="this.setCustomValidity('Must be between 7 and 10 digits.')" oninput="this.setCustomValidity('');">
+					<input pattern="(?=.*\d).{7,11}" class="form-control" name="homePhone" oninvalid="this.setCustomValidity('Must be between 7 and 10 digits.')" oninput="this.setCustomValidity('');">
 				</div>
 			</div>
 			
 			<div class="row">
 				<div class="col-md-3 mb-3">
 					<label id="validationDefault04">How did you find out about this job?</label>
-					<input type="text" class="form-control" required>
+					<input type="text" class="form-control" name="referred" required>
 				</div>
 				
 				<div class="col-md-1"></div>
 				
 				<div class="col-md-2 mb-3">
 					<label for="validationDefault03">Perferred weekly amount of hours?</label>
-					<input type="number" class="form-control hs" max="70" required>
+					<input type="number" class="form-control hs" max="70" name="weeklyHours" required>
 				</div>
 				<div class="col-md-2 mb-3">
 					<label for="validationDefault03">Are you work study approved?</label>
-					<select class="form-control hs" id="validationDefault03" required>
+					<select class="form-control hs" id="validationDefault03" name="workStudyApproved" required>
 						<option value="" disabled selected hidden></option>
 						<option value="0">No</option>
 						<option value="1">Yes</option>
@@ -109,7 +113,7 @@
 				</div>
 				<div class="col-md-2 mb-3">
 					<label for="validationDefault03">How many hours of work study per week?</label>
-					<input type="number" min="0" max="60" class="form-control hs">
+					<input type="number" min="0" max="60" name="hoursWorkStudy" class="form-control hs">
 				</div>
 			</div>
 			
@@ -124,7 +128,7 @@
 			<div class="row">
 				<div class="col-md-2 mb-3">
 					<label for="validationDefault03">Class standing</label>
-					<select class="form-control" id="validationDefault03" required>
+					<select class="form-control" id="validationDefault03" name="classStanding" required>
 						<option value="" disabled selected hidden></option>
 						<option value="0">Freshman</option>
 						<option value="1">Sophmore</option>
@@ -135,23 +139,23 @@
 				</div>
 				<div class="col-md-2 mb-3">
 					<label for="validationDefault04">Major</label>
-					<input type="text" class="form-control" id="validationDefault04" required>
+					<input type="text" class="form-control" id="validationDefault04" name="major" required>
 				</div>
 				<div class="col-md-2 mb-3">
 					<label for="validationDefault04">Minor</label>
-					<input type="text" class="form-control" id="validationDefault04">
+					<input type="text" class="form-control" name="minor" id="validationDefault04">
 				</div>
 				<div class="col-md-2 mb-3">
 					<label for="validationDefault05">Graduation Date</label>
-					<input type="month" class="form-control" required>
+					<input type="month" class="form-control" name="graduationDate" required>
 				</div>
 				<div class="col-md-2 mb-3">
 					<label for="validationDefault05">Highschool GPA</label>
-					<input pattern="([0-5]{1})\..{1,2}" class="form-control" oninvalid="this.setCustomValidity('Must be a valid GPA. Ex: 4.0 or 3.64')" oninput="this.setCustomValidity('');" required>
+					<input pattern="([0-5]{1})\..{1,2}" class="form-control" name="highschoolGPA" oninvalid="this.setCustomValidity('Must be a valid GPA. Ex: 4.0 or 3.64')" oninput="this.setCustomValidity('');" required>
 				</div>
 				<div class="col-md-2 mb-3">
 					<label for="validationDefault05">College GPA</label>
-					<input pattern="([0-5]{1})\..{1,2}" class="form-control" oninvalid="this.setCustomValidity('Must be a valid GPA. Ex: 4.0 or 3.64')" oninput="this.setCustomValidity('');" required>
+					<input pattern="([0-5]{1})\..{1,2}" class="form-control" name="collegeGPA" oninvalid="this.setCustomValidity('Must be a valid GPA. Ex: 4.0 or 3.64')" oninput="this.setCustomValidity('');" required>
 				</div>
 			</div>
 			
@@ -212,7 +216,7 @@
 						stringDays  : ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'],
 						
 						// Custom template                 
-						template    : '<div class="day-schedule-selector">'         +
+						template    : '<div id="day-scheduler" class="day-schedule-selector">'         +
 						'<table class="schedule-table">'            +
 						'<thead class="schedule-header"></thead>' +
 						'<tbody class="schedule-rows"></tbody>'   +
@@ -242,7 +246,14 @@
 					processData: false,
 					success: function(data)
 					{
-						alert("Ajax call success");
+						if(data != "")
+						{
+							alert('There was an error submitting your application');
+						}
+						else
+						{
+							alert('Your app is in yo');
+						}
 					},
 					error: function(data)
 					{
