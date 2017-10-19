@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+        <link rel="stylesheet" type="text/css" href="css/login.css">
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+		<script type="text/javascript" src="js/jquery.min.js"></script>
+		<script type="text/javascript" src="cordova.js"></script>
+		<script type="text/javascript" src="js/popper.min.js"></script>
+		<script type="text/javascript" src="js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="js/googleOAuth.js"></script>
+        <title>Login</title>
+	</head>
+    <body>
+		<div class="wrapper">
+			<div class="container-center">
+				<form class="form-signin">
+					<img src="img/logo.png">
+					<h2 class="form-signin-heading">ChemStock Login</h2>
+					<img id="login" src="img/googleSignIn.png"/>
+					<label class="mt-3">Login using your @emich.edu credentials</label>
+				</form>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript">
+	// Try to silently login, otherwise wait for actual login
+	document.addEventListener("deviceready", function(){googleSilentLogin();}, false);
+	
+	$('#login').click(function()
+	{
+		googleLogin();
+	});
+	</script>
+</html>
