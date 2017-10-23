@@ -82,3 +82,7 @@ body {
 		min-width: 90%;
 	}
 }
+
+#login{
+	max-width: 190px;
+}
