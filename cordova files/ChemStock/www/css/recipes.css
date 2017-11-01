@@ -37,13 +37,13 @@ body {
 .box-top, .box-mid, .box-bot{
 	margin: auto;
 	background-color: white;
-	width: 80vw;
-	height: 12vh;
+	width: 100%;
+	height: 45px;
 	border: solid grey 1px;
 }
 
 .box-top a, .box-mid a, .box-bot a{
-	margin-left: 4vw;
+	margin-left: 20px;
 	font-size: 1em;
 	line-height: 3.5em;
 	text-align: left;
@@ -55,14 +55,14 @@ body {
 }
 
 .box-bot{
-	margin-bottom: 4vh;
+	--margin-bottom: 4vh;
 	border-radius: 0in 0in .1in .1in;
 }
 
 .input-field{
 	margin: auto;
 	text-align: center;
-	width: 80vw;
+	width: 100%;
 }
 
 .input-field input, textarea{
@@ -73,7 +73,8 @@ body {
 }
 
 textarea{
-	text-indent: 18px;
+	padding: 10px 10px 17px 17px;
+	text-indent: 0 !important;
 	font-size: 1rem !important;
 	background-color: white !important;
 	resize: none;
@@ -87,4 +88,24 @@ textarea{
 
 .side-nav{
 	width: inherit !important; 
+}
+
+@media only screen and (min-width: 993px){
+	.brand-logo{
+		text-indent: 40px;
+	}
+}
+
+.mb4{
+	margin-bottom: 4vh;
+}
+
+.mt6{
+	margin-top: 6vh;
+}
+
+.content-wrapper{
+	--min-width:80vw; 
+	margin: auto;
+	max-width: 450px;
 }
