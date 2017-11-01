@@ -83,7 +83,7 @@ function insertNewJob(){
 }
 
 function insertNewClass(){
-	var wpr = document.createElement("div");
+	var wpr = document.createElement("tr");
 	wpr.classList.add('row');
 	var col1 = document.createElement("div");
 	col1.classList.add('col-md-1');
