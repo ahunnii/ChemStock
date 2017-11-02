@@ -1,0 +1,116 @@
+body {
+    -webkit-touch-callout: none;            
+    -webkit-text-size-adjust: none;             
+    -webkit-user-select: none;                  
+    background-color:#E4E4E4;
+    background-image:-webkit-gradient(
+	linear,
+	left top,
+	left bottom,
+	color-stop(0, #A7A7A7),
+	color-stop(0.51, #E4E4E4)
+    );
+    background-attachment:fixed;
+    font-family:'HelveticaNeue-Light', 'HelveticaNeue', Helvetica, Arial, sans-serif;
+    font-size:12px;
+    margin:0px;
+    padding:0px;
+    width:100%;
+	height: 100vh;
+	background-image: -webkit-linear-gradient(top, #51b34d 0%, #a0e19a 51%);
+}
+
+.wrapper {
+	display: block;
+	align-items: left;
+	justify-content: center;
+	flex-direction: column;
+	-webkit-perspective: 500px;
+	-ms-perspective: 500px;
+	perspective: 500px;
+	position: relative;
+	min-height: 100%;
+	max-width: 100%;
+	padding: 1.5em;
+}
+
+.box-top, .box-mid, .box-bot{
+	margin: auto;
+	background-color: white;
+	width: 80vw;
+	height: 12vh;
+	border: solid grey 1px;
+}
+
+.box-top a, .box-mid a, .box-bot a{
+	margin-left: 4vw;
+	font-size: 1em;
+	line-height: 3.5em;
+	text-align: center;
+}
+
+.box-top{
+	margin-top: 4vh;
+	border-radius: .1in .1in 0in 0in;
+}
+
+.box-bot{
+	margin-bottom: 4vh;
+	border-radius: 0in 0in .1in .1in;
+}
+
+.input-field{
+	margin: auto;
+	text-align: center;
+	width: 80vw;
+}
+
+.input-field input, textarea{
+	margin: 0 !important;
+	font-size: 1rem !important;
+	background-color: white !important;
+	text-indent: 20px;
+}
+
+textarea{
+	text-indent: 18px;
+	font-size: 1rem !important;
+	background-color: white !important;
+	resize: none;
+	border-radius: .05in .05in .05in .05in;
+	height:150px !important;
+}
+
+.input-field input[type=search] ~ .material-icons{
+	top: 15% !important;
+}
+
+.sidenav {
+    height: 100%;
+    width: 0px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #009900;
+    overflow-x: hidden;
+    padding-top: 40px;
+    transition: 0.5s;
+}
+
+.sidenav a {
+    padding: 6px 6px 6px 32px;
+    text-decoration: none;
+    font-size: 17px;
+    color: #ffffff;
+    display: block;
+    transition: 0.3s;
+}
+
+.sidenav .closebtn {
+	position: absolute;
+	top: 0;
+	right: 25px;
+	font-size:30px;
+	margin-left:50px;
+}
