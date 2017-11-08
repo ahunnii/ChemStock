@@ -171,7 +171,7 @@
 			
 			<hr>
 			
-			<table id="classList"></table>
+			<table id="course-history"></table>
 			
 			<div class="row mt-3" style="margin-bottom: 0px;">
 				<div class="col-md-10 mb-1">
@@ -183,7 +183,7 @@
 			</div>
 			
 			<hr>
-			<div id="jobList"></div>
+			<table id="work-history"></table>
 			
 			<h4 class="mb-3 mt-4"> Weekly Schedule </h4>
 			<p> Indicate your schedule for the semester. Be sure to label class times with their course numbers. Ex: CHM371<p>
@@ -235,9 +235,53 @@
 			{
 				e.preventDefault();
 				var formData = new FormData($('#apply-form')[0]);
+				
+				// Get the applicant's course history
+				var courseHistory = new Array();
+				$('#course-history').find('tr').each(function(i)
+				{
+					var tds = $(this).find('td');
+					// start eq from 1 to skip delete button
+					courseHistory[i]={
+						"courseTitle": tds.eq(1).children('input')[0].value,
+						"finalGrade" : tds.eq(2).children('input')[0].value,
+						"semester" : tds.eq(3).children('select')[0].selectedIndex,
+						"year" : tds.eq(4).children('input')[0].value,
+						"instructor" : tds.eq(5).children('input')[0].value
+					}
+				});
+				
+				formData.append('courseHistory', JSON.stringify(courseHistory));
+				//console.log(courseHistory);
+				
+				// Get Applicant's work history
+				var workHistory = new Array();
+				$('#work-history').find('tr').each(function(i)
+				{
+					var tds = $(this).find('td');
+					workHistory[i]={
+						"employer": tds.eq(1).children('input')[0].value,
+						"dutiesResponsibilities" : tds.eq(2).children('input')[0].value,
+						"startDate" : tds.eq(3).children('input')[0].value,
+						"endDate" : tds.eq(4).children('input')[0].value
+					}
+				});
+				
+				
+				formData.append('workHistory', JSON.stringify(courseHistory));
+				//console.log(workHistory);
+				/*// Get the user's current class schedule
+				var weeklyScheduleData = JSON.stringify($("#weekly-schedule").jqs('export'));
+				
+				formData.append('weeklySchedule', weeklyScheduleData);
+				
+				console.log(formData);
+				console.log(weeklyScheduleData);
+				*/
+				
 				$.ajax({
 					type: 'POST',
-					url: 'http://www.bradfriebe.com/test/upload.php',
+					url: 'https://www.bradfriebe.com/chemstock/apply.php',
 					crossDomain: true,
 					data: formData,
 					contentType: false,
@@ -246,12 +290,13 @@
 					{
 						if(data != "")
 						{
-							alert(data);
-							//alert('There was an error submitting your application');
+							//alert(data);
+							alert('There was an error submitting your application');
 						}
 						else
 						{
-							alert('Your app is in yo');
+							alert("You app in yo!");
+							//alert(data);
 						}
 					},
 					error: function(data)
@@ -259,6 +304,7 @@
 						alert('There was an error submitting your application');
 					}
 				});
+				
 			});
 			</script>
 		</body>
