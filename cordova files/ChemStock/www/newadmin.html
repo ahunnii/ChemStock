@@ -8,9 +8,6 @@
         <link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection" />
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 		<script type="text/javascript" src="js/jquery.min.js"></script>
-		<script type="text/javascript" src="cordova.js"></script>
-		<!--<script type="text/javascript" src="js/popper.min.js"></script>-->
-		<!--<script type="text/javascript" src="js/bootstrap.min.js"></script>-->
 		<script type="text/javascript" src="js/googleOAuth.js"></script>
         <!--Import jQuery before materialize.js-->
         <script type="text/javascript" src="js/materialize.min.js"></script>
@@ -58,24 +55,25 @@
         </div>
 
         <br />
-        <div class=" row" style="padding-left:300px" height="50%">
 
+
+        <div class=" row" style="padding-left:300px" height="50%">
+            <!--Application Card-->
             <div class="col s12">
                 <div class="card  darken-1 z-depth-1">
                     <div class="card-content ">
                         <h5 class="card-title">Applications</h5>
                         <br />
-                        <!--<div class="col s2"> <i class="material-icons circle">face</i> </div>-->
                         <div class="col s2"> <img src=" img/view.png"  class="responsive-img"/> </div>
                         <br />
-                        <div class="col s10"><span class="black-text">Current Number of Pending Applications: 4</span></div>
+                        <div class="col s10"><span class="black-text">Current Number of Pending Applications: <span id="app_num">0</span></span></div>
                     </div>
                     <div class="card-action">
-                        <a href="#app_view" class=" green-text modal-trigger">View Applications</a>
-                        <!--<a class="waves-effect waves-light btn modal-trigger" href="#lab101">View</a>-->
+                        <a href="#" class=" green-text "  onclick="display('app');">View Applications</a>
                     </div>
                 </div>
             </div>
+            <!--Lab Card-->
             <div class="col s12">
                 <div class="card  darken-1 z-depth-1">
                     <div class="card-content ">
@@ -86,16 +84,19 @@
                         <div class="col s10"><span class="black-text">Current Number of Staff : 14</span></div>
                     </div>
                     <div class="card-action">
-                        <a href="#" class=" green-text">View All Personnel</a>
+                        <a href="#" class=" green-text" onclick="display('bc');">View All Personnel</a>
                     </div>
                 </div>
             </div>
         
         </div>
 
+
+
+        <!--View Screen-->
         <div class=" row" style="padding-left:300px" height="50%">
 
-            <div class="col s12">
+            <div class="col s12" id ="viewalllabs">
                 <div class="card-panel z-depth-1">
                     <h5>Labs</h5>
                     <br />
@@ -262,7 +263,41 @@
                     
                 </div>
             </div>
-            
+
+            <div class="col s12 hide" id="viewallapps">
+                <div class="card-panel z-depth-1">
+                    <h5>Applications</h5>
+             
+                    <!--Tabs-->
+                    <div class="row">
+                        <div class="col s12">
+                            <ul class="tabs">
+                                <li class="tab"><a class="active" href="#pend">Pending</a></li>
+                                <li class="tab "><a href="#accept">Accepted</a></li>
+                                <li class="tab"><a href="#reject">Rejected</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class=" divider"></div>
+         
+                        <div id="pend" class=" col s12">
+                            <ul class="collection" id="folla"></ul>
+                        </div>
+
+                        <div id="accept" class=" col s12">
+                            <ul class="collection"></ul>
+                        </div>
+
+                        <div id="reject" class=" col s12">
+                            <ul class="collection"></ul>
+                        </div>
+                    <p id="timestamp">Last Updated 11:9:17</p>
+                </div>
+            </div>
+            <div id="viewallpersonnel" class=" col s12 hide">
+
+            </div>
+
 
         </div>
 
@@ -519,7 +554,8 @@
                     <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Close</a>
                 </div>
             </div>
-  
+
+
             <!--Application View-->
             <div id="app_view" class="modal  modal-fixed-footer">
                 <div class="modal-content" width="90% ">
@@ -529,19 +565,17 @@
                     <div class="row">
                         <div class="col s12">
                             <ul class="tabs">
-                                <li class="tab"><a class="active" href="#pend">Pending</a></li>
-                                <!--<li class="tab col s3"><a href="#application_interview">Interview</a></li>-->
-                                <li class="tab "><a href="#accept">Accepted</a></li>
-                                
-                                <li class="tab"><a href="#reject">Rejected</a></li>
+                                <li class="tab"><a class="active" href="#currentStaff">Current</a></li>
+                                <li class="tab "><a href="#prevStaff">Previous</a></li>
+
                             </ul>
                         </div>
                     </div>
                     <br />
                     <div class=" container">
-                        <div id="pend" class=" col s12">
+                        <div id="currentStaff" class=" col s12">
                             <ul class="collection">
-                                
+
                                 <li class="collection-item avatar">
                                     <i class="material-icons circle">face</i>
                                     <span class="title">Student_Name</span>
@@ -633,47 +667,6 @@
                             </ul>
                         </div>
 
-                        <div id="reject" class=" col s12">
-                            <ul class="collection">
-
-                                <li class="collection-item avatar">
-                                    <i class="material-icons circle">face</i>
-                                    <span class="title">Student_Name</span>
-                                    <p>
-                                        Email_Address <br>
-                                        Phone_Number
-                                    </p>
-                                    <a href="#!" class="waves-effect waves-light btn secondary-content">Restore</a>
-                                </li>
-                                <li class="collection-item avatar">
-                                    <i class="material-icons circle green">face</i>
-                                    <span class="title">Student_Name</span>
-                                    <p>
-                                        Email_Address <br>
-                                        Phone_Number
-                                    </p>
-                                    <a href="#!" class="waves-effect waves-light btn secondary-content">Restore</a>
-                                </li>
-                                <li class="collection-item avatar">
-                                    <i class="material-icons circle red">face</i>
-                                    <span class="title">Student_Name</span>
-                                    <p>
-                                        Email_Address <br>
-                                        Phone_Number
-                                    </p>
-                                    <a href="#!" class="waves-effect waves-light btn secondary-content">Restore</a>
-                                </li>
-                                <li class="collection-item avatar">
-                                    <i class="material-icons circle">face</i>
-                                    <span class="title">Student_Name</span>
-                                    <p>
-                                        Email_Address <br>
-                                        Phone_Number
-                                    </p>
-                                    <a href="#!" class="waves-effect waves-light btn secondary-content">Restore</a>
-                                </li>
-                            </ul>
-                        </div>
                     </div>
 
 
@@ -689,23 +682,65 @@
 
 
         <script>
+            $apps = new Array();
+            $numOfApps = 0;
             $(document).ready(function () {
-                // the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
                 $('.modal').modal();
-            });
-
-            $(document).ready(function () {
                 $('.collapsible').collapsible();
-            });
-
-            $(document).ready(function () {
                 $('ul.tabs').tabs();
-            });
-            $(document).ready(function () {
                 $('ul.tabs').tabs('select_tab', 'tab_id');
+                $('#timestamp').html(
+                    function () {
+                        var time = new Date();
+                      
+                        return "Last time checked:  " + time.toUTCString();
+                    }
+                );
             });
 
 
-        </script>
+   
+            window.onload = (function () {
+                $.ajax
+                    ({
+                    type: "GET",
+                    url: "https://www.bradfriebe.com/chemstock/getbasicapplication.php",
+                    crossDomain: true,
+                    dataType: "json",
+                    success: function (data) {
+
+                        $apps = data;
+                        $.each(data, function (key, value) {
+                            $('#folla').append(
+                                "<li class='collection-item avatar'><i class='material-icons circle red'>face</i>" +
+                                "<span class='title'>" + value.firstName + " " + value.lastName + "</span >" +
+                                "<p>" + value.email + " <br>" + value.cellPhone + "</p><a href='#!' class='waves-effect waves-light btn secondary-content'>View Application</a> </li>"
+                            );
+                            //$numOfApps = $numOfApps + 1;
+                            $('#app_num').html($numOfApps += 1);
+                        });
+                        console.log($apps);
+                    },
+                    error: function (data) {
+                        alert('There was an error getting application info');
+                    }
+                });
+
+            });
+
+            function display(id_name) {
+                console.log(id_name);
+                if (id_name == "app") {
+                    $('#viewalllabs').addClass("hide");
+                    $('#viewallapps').removeClass("hide");
+                } else {
+                    $('#viewalllabs').removeClass("hide");
+                    $('#viewallapps').addClass("hide");
+                    }
+            };
+           
+            
+
+        </script>            
 </body>
 </html>
