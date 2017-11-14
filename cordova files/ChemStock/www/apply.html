@@ -7,9 +7,14 @@
         <!--Import materialize.css-->
         <link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection" />
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-		<script src="js/jquery.min.js"></script>
         <!--Import jQuery before materialize.js-->
-        <script type="text/javascript" src="js/materialize.min.js"></script>
+		<!--Javascript Imports-->
+		<script src="js/jquery.min.js"></script>
+		<script type="text/javascript" src="js/materialize.min.js"></script>
+		<script type="text/javascript" src="js/apply.js"></script>
+		<script type="text/javascript" src="js/popper.min.js"></script>
+		<script type="text/javascript" src="js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="js/artsy.js"></script>
 
         <title>Application</title>
 
@@ -18,7 +23,7 @@
 
 	</head>
 	
-    <body class=" teal lighten-2">
+    <body class="teal lighten-2">
 
         <!--Navigation Bar-->
         <nav class=" green">
@@ -141,8 +146,8 @@
                         </select>
                     </div>
                     <div class="col-md-2 mb-3">
-                        <label for="validationDefault03">How many hours of work study per week?</label>
-                        <input type="number" min="0" max="60" name="hoursWorkStudy" class="form-control hs">
+                        <label for="validationDefault03">Work Study Amount</label>
+                        <input type="number" min="0" name="workStudyAmount" class="form-control hs">
                     </div>
                 </div>
 
@@ -182,8 +187,8 @@
                         <input type="month" class="form-control" name="graduationDate" required>
                     </div>
                     <div class="col-md-2 mb-3">
-                        <label for="validationDefault05">Highschool GPA</label>
-                        <input pattern="([0-5]{1})\..{1,2}" class="form-control" name="highschoolGPA" oninvalid="this.setCustomValidity('Must be a valid GPA. Ex: 4.0 or 3.64')" oninput="this.setCustomValidity('');" required>
+                        <label for="validationDefault05">Highschool GPA (if known)</label>
+                        <input pattern="([0-5]{1})\..{1,2}" class="form-control" name="highschoolGPA" oninvalid="this.setCustomValidity('Must be a valid GPA. Ex: 4.0 or 3.64')" oninput="this.setCustomValidity('');">
                     </div>
                     <div class="col-md-2 mb-3">
                         <label for="validationDefault05">College GPA</label>
@@ -203,7 +208,7 @@
 
                 <hr>
 
-                <table id="classList"></table>
+                <table id="course-history"></table>
 
                 <div class="row mt-3" style="margin-bottom: 0px;">
                     <div class="col-md-10 mb-1">
@@ -215,7 +220,7 @@
                 </div>
 
                 <hr>
-                <div id="jobList"></div>
+                <table id="work-history></table>
             </div>
 
             <!--Section 3: Schedule-->
@@ -227,11 +232,6 @@
 
             <button type="submit" class="center-button mobile-button mt-5 mb-5" style="background-color:white;">Submit</button>
         </form>
-       <!--Javascript Imports-->
-			<script type="text/javascript" src="js/apply.js"></script>
-			<script type="text/javascript" src="js/popper.min.js"></script>
-			<script type="text/javascript" src="js/bootstrap.min.js"></script>
-			<script src="js/artsy.js"></script>
         <!--Materialize CSS Jquery-->
             <script>
                 $(".button-collapse").sideNav();
@@ -272,14 +272,59 @@
 				})
 			})($);
 			
+			// Form submit
 			$('#apply-form').on('submit',
 			function(e)
 			{
 				e.preventDefault();
 				var formData = new FormData($('#apply-form')[0]);
+				
+				// Get the applicant's course history
+				var courseHistory = new Array();
+				$('#course-history').find('tr').each(function(i)
+				{
+					var tds = $(this).find('td');
+					// start eq from 1 to skip delete button
+					courseHistory[i]={
+						"courseTitle": tds.eq(1).children('input')[0].value,
+						"finalGrade" : tds.eq(2).children('input')[0].value,
+						"semester" : tds.eq(3).children('select')[0].selectedIndex,
+						"year" : tds.eq(4).children('input')[0].value,
+						"instructor" : tds.eq(5).children('input')[0].value
+					}
+				});
+				
+				formData.append('courseHistory', JSON.stringify(courseHistory));
+				//console.log(courseHistory);
+				
+				// Get Applicant's work history
+				var workHistory = new Array();
+				$('#work-history').find('tr').each(function(i)
+				{
+					var tds = $(this).find('td');
+					workHistory[i]={
+						"employer": tds.eq(1).children('input')[0].value,
+						"dutiesResponsibilities" : tds.eq(2).children('input')[0].value,
+						"startDate" : tds.eq(3).children('input')[0].value,
+						"endDate" : tds.eq(4).children('input')[0].value
+					}
+				});
+				
+				
+				formData.append('workHistory', JSON.stringify(courseHistory));
+				//console.log(workHistory);
+				/*// Get the user's current class schedule
+				var weeklyScheduleData = JSON.stringify($("#weekly-schedule").jqs('export'));
+				
+				formData.append('weeklySchedule', weeklyScheduleData);
+				
+				console.log(formData);
+				console.log(weeklyScheduleData);
+				*/
+				
 				$.ajax({
 					type: 'POST',
-					url: 'http://www.bradfriebe.com/test/upload.php',
+					url: 'https://www.bradfriebe.com/chemstock/apply.php',
 					crossDomain: true,
 					data: formData,
 					contentType: false,
@@ -288,12 +333,13 @@
 					{
 						if(data != "")
 						{
-							alert(data);
-							//alert('There was an error submitting your application');
+							//alert(data);
+							alert('There was an error submitting your application');
 						}
 						else
 						{
-							alert('Your app is in yo');
+							alert("You app in yo!");
+							//alert(data);
 						}
 					},
 					error: function(data)
