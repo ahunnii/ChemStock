@@ -1,8 +1,8 @@
-<?php
+﻿<?php
 header("Access-Control-Allow-Origin: *");
 require_once("conn.php");
 
-$sql = "SELECT id, studentID, firstName, lastName, email, cellPhone, homePhone, applicationStatus, timestmp FROM applications ORDER BY timestmp DESC";
+$sql = "SELECT * FROM applications ORDER BY timestmp DESC";
 $output = array();
 if($result = $db->query($sql))
 {
@@ -10,13 +10,12 @@ if($result = $db->query($sql))
 	{
 		$output[] = $row;
 	}
-	$result->free();
 	echo json_encode($output);
+	$result->free();
 }
 else
 {
 	die($db->error);
 }
-
 $db->close();
 ?>

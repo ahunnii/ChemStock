@@ -1,5 +1,5 @@
 <?php
-header("Access-Control-Allow-Origin: *");
+header('Access-Control-Allow-Origin: *');
 require_once("conn.php");
 if(!$_POST)
 {
@@ -25,28 +25,29 @@ $homePhone = $db->real_escape_string($_POST["homePhone"]);
 $referral  = $db->real_escape_string($_POST["referred"]);
 $weeklyHours = $db->real_escape_string($_POST["weeklyHours"]);
 $workStudyApproved = $db->real_escape_string($_POST["workStudyApproved"]);
-$workStudyHours = $db->real_escape_string($_POST["hoursWorkStudy"]);
+$workStudyAmount = $db->real_escape_string($_POST["workStudyAmount"]);
 $classStanding = $db->real_escape_string($_POST["classStanding"]);
 $major = $db->real_escape_string($_POST["major"]);
 $minor = $db->real_escape_string($_POST["minor"]);
 $graduationDate = $db->real_escape_string($_POST["graduationDate"]."-01");
 $highschoolGPA = $db->real_escape_string($_POST["highschoolGPA"]);
 $collegeGPA = $db->real_escape_string($_POST["collegeGPA"]);
+// course and work history objects to insert into db
 $courseHistory = json_decode($_POST["courseHistory"],true);
 $workHistory = json_decode($_POST["workHistory"],true);
 
-$applicationSQL = "INSERT INTO applications (studentID, email, firstName, middleInitial, lastName, dateOfBirth, localAddress, localCity, localState, localZip, cellPhone, homeAddress, homeCity, homeState, homeZip, homePhone, referral, preferredWeeklyHours, workStudyApproved, workStudyHours, classStanding, major, minor, graduationDate, highschoolGPA, collegeGPA, weeklySchedule, timestamp) VALUES ('$eID', '$email','$firstName', '$middleInitial', '$lastName', '$dateOfBirth', '$localAddress', '$localCity', '$localState', '$localZip', '$cellPhone', '$homeAddress', '$homeCity', '$homeState', '$homeZip', '$homePhone', '$referral', '$weeklyHours', '$workStudyApproved', '$workStudyHours', '$classStanding', '$major', '$minor', '$graduationDate', '$highschoolGPA', '$collegeGPA' ,'', NOW())";
+$applicationSQL = "INSERT INTO applications (studentID, email, firstName, middleInitial, lastName, dateOfBirth, localAddress, localCity, localState, localZip, cellPhone, homeAddress, homeCity, homeState, homeZip, homePhone, referral, preferredWeeklyHours, workStudyApproved, workStudyAmount, classStanding, major, minor, graduationDate, highschoolGPA, collegeGPA, weeklySchedule, timestmp) VALUES ('$eID', '$email','$firstName', '$middleInitial', '$lastName', '$dateOfBirth', '$localAddress', '$localCity', '$localState', '$localZip', '$cellPhone', '$homeAddress', '$homeCity', '$homeState', '$homeZip', '$homePhone', '$referral', '$weeklyHours', '$workStudyApproved', '$workStudyAmount', '$classStanding', '$major', '$minor', '$graduationDate', '$highschoolGPA', '$collegeGPA' ,'', NOW())";
 
 if($db->query($applicationSQL) !== true)
 {
 	die($db->error);
 }
 
-$appID = $db->insert_id();
+$appID = $db->insert_id;
 
 if($appID == 0)
 {
-	$getAppIDSQL = "SELECT id FROM applications WHERE studentID = '$eID' ORDER BY timestamp DESC LMIIT 1";
+	$getAppIDSQL = "SELECT id FROM applications WHERE studentID = '$eID' ORDER BY timestmp DESC LMIIT 1";
 	$result = $db->query($getAppIDSQL);
 	if($result->num_rows > 0)
 	{
@@ -71,7 +72,7 @@ if($courseHistory[0])
 			$year = $db->real_escape_string($row['year']);
 			$instructor = $db->real_escape_string($row['instructor']);
 			
-			$courseSQL = "INSERT INTO applicantCourseHistory (applicationID, courseTitle, finalGrade, semester, year, instructor) values ($appID, '$courseTitle', '$finalGrade', '$semester', '$year', '$instructor')";
+			$courseSQL = "INSERT INTO applicantCourseHistory (applicationID, courseTitle, finalGrade, semester, yearTaken, instructor) values ($appID, '$courseTitle', '$finalGrade', '$semester', '$year', '$instructor')";
 			
 			if($db->query($courseSQL) !== true)
 			{
@@ -124,7 +125,7 @@ if($_FILES['resume'])
 
 	$content = $db->real_escape_string(file_get_contents($_FILES['resume']['tmp_name']));
 	
-	$fileSQL= "insert into resumes (applicationID, fileName, fileType, timestamp, fileData) values ($appID, '$fileName', '$filetype', NOW(), '$content')";
+	$fileSQL= "insert into resumes (applicationID, fileName, fileType, timestamp, fileData) values ($appID, '$fileName', '$fileType', NOW(), '$content')";
 
 	if($db->query($fileSQL) !== true)
 	{
@@ -132,5 +133,5 @@ if($_FILES['resume'])
 	}
 }
 
-$db->close();*/
+$db->close();
 ?>
