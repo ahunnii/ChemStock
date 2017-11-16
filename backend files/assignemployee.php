@@ -22,7 +22,9 @@ else
 			{
 				die('failed to execute query');
 			}
+			$stmt->close();
 		}
 	}
 }
+$db->close();
 ?>
