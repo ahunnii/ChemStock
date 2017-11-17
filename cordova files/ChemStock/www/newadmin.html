@@ -6,11 +6,13 @@
 		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
         <!--Import materialize.css-->
         <link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection" />
+        <link rel="stylesheet" type="text/css" href="css/main.css">
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 		<script type="text/javascript" src="js/jquery.min.js"></script>
 		<script type="text/javascript" src="js/googleOAuth.js"></script>
         <!--Import jQuery before materialize.js-->
         <script type="text/javascript" src="js/materialize.min.js"></script>
+        <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/0.10.0/lodash.min.js"></script>
         <title>Admin Page</title>
 	</head>
 
@@ -20,22 +22,14 @@
             <li class="logo center">
                     <img src=" img/logo.png" />
             </li>
-            <li><a href="#!">Applications</a></li>
+            <li><a href="#!" onclick="display('app');">Applications</a></li>
             <li><a href="#!">Personnel</a></li>
             <li class="no-padding">
                 <ul class="collapsible collapsible-accordion">
                     <li>
                         <a class="collapsible-header">Lab View<i class="material-icons">arrow_drop_down</i></a>
                         <div class="collapsible-body">
-                            <ul>
-                                <li><a href="#!">CHEM 116</a></li>
-                                <li><a href="#!">CHEM 118</a></li>
-                                <li><a href="#!">CHEM 120</a></li>
-                                <li><a href="#!">CHEM 122</a></li>
-                                <li><a href="#!">CHEM 124</a></li>
-                                <li><a href="#!">CHEM 373</a></li>
-                                <li><a href="#!">CHEM 271</a></li>
-                                <li><a href="#!">CHEM 101</a></li>
+                            <ul id="side_lab_links">
                             </ul>
                         </div>
                     </li>
@@ -56,8 +50,22 @@
 
         <br />
 
+        <!--Loading Circle-->
+        <div class="preloader-wrapper big active" id ="loadingDiv"style="position:fixed; top:50%; left:60%; z-index: 1;">
+            <div class="spinner-layer spinner-blue-only">
+                <div class="circle-clipper left">
+                    <div class="circle"></div>
+                </div><div class="gap-patch">
+                    <div class="circle"></div>
+                </div><div class="circle-clipper right">
+                    <div class="circle"></div>
+                </div>
+            </div>
+        </div>
 
+        <!--Main Area-->
         <div class=" row" style="padding-left:300px" height="50%">
+
             <!--Application Card-->
             <div class="col s12">
                 <div class="card  darken-1 z-depth-1">
@@ -77,14 +85,14 @@
             <div class="col s12">
                 <div class="card  darken-1 z-depth-1">
                     <div class="card-content ">
-                        <h5 class="card-title">Personnel</h5>
+                        <h5 class="card-title">Lab Overview</h5>
                         <br />
                         <div class="col s2"> <img src=" img/apply.png" class="responsive-img" /> </div>
                         <br />
                         <div class="col s10"><span class="black-text">Current Number of Staff : 14</span></div>
                     </div>
                     <div class="card-action">
-                        <a href="#" class=" green-text" onclick="display('bc');">View All Personnel</a>
+                        <a href="#" class=" green-text" onclick="display('bc');">View All Labs</a>
                     </div>
                 </div>
             </div>
@@ -94,177 +102,15 @@
 
 
         <!--View Screen-->
-        <div class=" row" style="padding-left:300px" height="50%">
+        <div class=" row sidenavfix">
 
-            <div class="col s12" id ="viewalllabs">
-                <div class="card-panel z-depth-1">
+            <div class="col s12 hide" id ="viewalllabs">
+                <div class="card-panel z-depth-1" id="labarea">
                     <h5>Labs</h5>
                     <br />
-                    <div class="row valign-wrapper">
-                        <div class="col s2">
-                            <span class="black-text">
-                                <b>CHEM 116</b>
-                            </span>
-                        </div>
-                        <div class="col s2">
-                            <span class="black-text">
-                                Personnel: 2
-                            </span>
-                        </div>
-                        <div class="col s2">
-                            <span class="black-text">
-                                Answer Keys: 2
-                            </span>
-                        </div>
-                        <div class="col s2">
-                            <a class="waves-effect waves-light btn">View</a>
-                        </div>
-                    </div>
-                    <div class="row valign-wrapper">
-                        <div class="col s2">
-                            <span class="black-text">
-                                <b>CHEM 118</b>
-                            </span>
-                        </div>
-                        <div class="col s2">
-                            <span class="black-text">
-                                Personnel: 2
-                            </span>
-                        </div>
-                        <div class="col s2">
-                            <span class="black-text">
-                                Answer Keys: 2
-                            </span>
-                        </div>
-                        <div class="col s2">
-                            <a class="waves-effect waves-light btn">View</a>
-                        </div>
-                    </div>
-                    <div class="row valign-wrapper">
-                        <div class="col s2">
-                            <span class="black-text">
-                                <b>CHEM 120</b>
-                            </span>
-                        </div>
-                        <div class="col s2">
-                            <span class="black-text">
-                                Personnel: 2
-                            </span>
-                        </div>
-                        <div class="col s2">
-                            <span class="black-text">
-                                Answer Keys: 2
-                            </span>
-                        </div>
-                        <div class="col s2">
-                            <a class="waves-effect waves-light btn">View</a>
-                        </div>
-                    </div>
-                    <div class="row valign-wrapper">
-                        <div class="col s2">
-                            <span class="black-text">
-                                <b>CHEM 122</b>
-                            </span>
-                        </div>
-                        <div class="col s2">
-                            <span class="black-text">
-                                Personnel: 2
-                            </span>
-                        </div>
-                        <div class="col s2">
-                            <span class="black-text">
-                                Answer Keys: 2
-                            </span>
-                        </div>
-                        <div class="col s2">
-                            <a class="waves-effect waves-light btn modal-trigger" href="#lab122">View</a>
-                        </div>
-                    </div>
-                    <div class="row valign-wrapper">
-                        <div class="col s2">
-                            <span class="black-text">
-                                <b>CHEM 124</b>
-                            </span>
-                        </div>
-                        <div class="col s2">
-                            <span class="black-text">
-                                Personnel: 2
-                            </span>
-                        </div>
-                        <div class="col s2">
-                            <span class="black-text">
-                                Answer Keys: 2
-                            </span>
-                        </div>
-                        <div class="col s2">
-                            <a class="waves-effect waves-light btn">View</a>
-                        </div>
-                    </div>
-                    <div class="row valign-wrapper">
-                        <div class="col s2">
-                            <span class="black-text">
-                                <b>CHEM 373</b>
-                            </span>
-                        </div>
-                        <div class="col s2">
-                            <span class="black-text">
-                                Personnel: 2
-                            </span>
-                        </div>
-                        <div class="col s2">
-                            <span class="black-text">
-                                Answer Keys: 2
-                            </span>
-                        </div>
-                        <div class="col s2">
-                            <a class="waves-effect waves-light btn">View</a>
-                        </div>
-                    </div>
-                    <div class="row valign-wrapper">
-                        <div class="col s2">
-                            <span class="black-text">
-                                <b>CHEM 271</b>
-                            </span>
-                        </div>
-                        <div class="col s2">
-                            <span class="black-text">
-                                Personnel: 2
-                            </span>
-                        </div>
-                        <div class="col s2">
-                            <span class="black-text">
-                                Answer Keys: 2
-                            </span>
-                        </div>
-                        <div class="col s2">
-                            <a class="waves-effect waves-light btn">View</a>
-                        </div>
-                    </div>
-                    <div class="row valign-wrapper">
-                        <div class="col s2">
-                            <span class="black-text">
-                                <b>CHEM 101</b>
-                            </span>
-                        </div>
-                        <div class="col s2">
-                            <span class="black-text">
-                                Personnel: 2
-                            </span>
-                        </div>
-                        <div class="col s2">
-                            <span class="black-text">
-                                Answer Keys: 2
-                            </span>
-                        </div>
-                        <div class="col s2">
-                            <a class="waves-effect waves-light btn modal-trigger" href="#lab101">View</a>
-                        </div>
-                    </div>
-                    
                 </div>
             </div>
-
-            <div class="col s12 hide" id="viewallapps">
+            <div class="col s12" id="viewallapps">
                 <div class="card-panel z-depth-1">
                     <h5>Applications</h5>
              
@@ -278,7 +124,7 @@
                             </ul>
                         </div>
                     </div>
-                    <div class=" divider"></div>
+                    <!--<div class=" divider"></div>-->
          
                         <div id="pend" class=" col s12">
                             <ul class="collection" id="folla"></ul>
@@ -303,387 +149,126 @@
 
 
         <div>
-            <!-- CHEM 122 -->
-            <div id="lab122" class="modal  modal-fixed-footer" >
-                <div class="modal-content" width="90% ">
-                    <h4>CHEM 122</h4>
-                    <div class=" divider"></div>
-                    <br />
-                    <div class="row">
-                        <div class="col s12">
-                            <ul class="tabs">
-                                <li class="tab col s3"><a class="active" href="#test1">Experiments</a></li>
-                                <li class="tab col s3"><a href="#test2">Personnel</a></li>
-                                <li class="tab col s3 "><a href="#test3">Answer Keys</a></li>
-                                <li class="tab col s3"><a href="#test4">Recipes/Procedures</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <br />
-                    <div class=" container">
-                        <div id="test1" class="col s12">
-                            <ul class="collection with-header">
-                                <li class="collection-header"><h4>Determination of Density</h4></li>
-                                <li class="collection-item"><div>Status: Complete</div></li>
-                                <li class="collection-item"><div>Recipes<a href="#!" class="secondary-content"><i class="material-icons">send</i></a></div></li>
-                                <li class="collection-item"><div>Answer Keys<a href="#!" class="secondary-content"><i class="material-icons">send</i></a></div></li>
-                            </ul>
-
-                            <ul class="collection with-header">
-                                <li class="collection-header"><h4>Fun with Gas Laws</h4></li>
-                                <li class="collection-item"><div>Status: Complete</div></li>
-                                <li class="collection-item"><div>Recipes<a href="#!" class="secondary-content"><i class="material-icons">send</i></a></div></li>
-                                <li class="collection-item"><div>Answer Keys<a href="#!" class="secondary-content"><i class="material-icons">send</i></a></div></li>
-                            </ul>
-                            <ul class="collection with-header">
-                                <li class="collection-header"><h4>Density of Aqueous NaCl Solutions</h4></li>
-                                <li class="collection-item"><div>Status: Complete</div></li>
-                                <li class="collection-item"><div>Recipes<a href="#!" class="secondary-content"><i class="material-icons">send</i></a></div></li>
-                                <li class="collection-item"><div>Assign Task<a href="#!" class="secondary-content"><i class="material-icons">send</i></a></div></li>
-                            </ul>
-                            <ul class="collection with-header">
-                                <li class="collection-header"><h4>Synthesis of Zinc Iodide</h4></li>
-                                <li class="collection-item"><div>Status: Complete</div></li>
-                                <li class="collection-item"><div>Recipes<a href="#!" class="secondary-content"><i class="material-icons">send</i></a></div></li>
-                                <li class="collection-item"><div>Assign Task<a href="#!" class="secondary-content"><i class="material-icons">send</i></a></div></li>
-                            </ul>
-                            <ul class="collection with-header">
-                                <li class="collection-header"><h4>Conductivity and Chemical Reactions</h4></li>
-                                <li class="collection-item"><div>Status: Complete</div></li>
-                                <li class="collection-item"><div>Recipes<a href="#!" class="secondary-content"><i class="material-icons">send</i></a></div></li>
-                                <li class="collection-item"><div>Assign Task<a href="#!" class="secondary-content"><i class="material-icons">send</i></a></div></li>
-                            </ul>
-                            <ul class="collection with-header">
-                                <li class="collection-header"><h4>Titration of an Unknown Acid</h4></li>
-                                <li class="collection-item"><div>Status: Complete</div></li>
-                                <li class="collection-item"><div>Recipes<a href="#!" class="secondary-content"><i class="material-icons">send</i></a></div></li>
-                                <li class="collection-item"><div>Assign Task<a href="#!" class="secondary-content"><i class="material-icons">send</i></a></div></li>
-                            </ul>
-                            <ul class="collection with-header">
-                                <li class="collection-header"><h4>Solution Calorimetry</h4></li>
-                                <li class="collection-item"><div>Status: Complete</div></li>
-                                <li class="collection-item"><div>Recipes<a href="#!" class="secondary-content"><i class="material-icons">send</i></a></div></li>
-                                <li class="collection-item"><div>Assign Task<a href="#!" class="secondary-content"><i class="material-icons">send</i></a></div></li>
-                            </ul>
-                            <ul class="collection with-header">
-                                <li class="collection-header"><h4>Anslysis of Calcium Carbonate Tablets</h4></li>
-                                <li class="collection-item"><div>Status: Complete</div></li>
-                                <li class="collection-item"><div>Recipes<a href="#!" class="secondary-content"><i class="material-icons">send</i></a></div></li>
-                                <li class="collection-item"><div>Assign Task<a href="#!" class="secondary-content"><i class="material-icons">send</i></a></div></li>
-                            </ul>
-                            <ul class="collection with-header">
-                                <li class="collection-header"><h4>Analysis of Phophorus in Plant Food</h4></li>
-                                <li class="collection-item"><div>Status: Pending</div></li>
-                                <li class="collection-item"><div>Recipes<a href="#!" class="secondary-content"><i class="material-icons">send</i></a></div></li>
-                                <li class="collection-item"><div>Assign Task<a href="#!" class="secondary-content"><i class="material-icons">send</i></a></div></li>
-                            </ul>
-                            <ul class="collection with-header">
-                                <li class="collection-header"><h4>Introduction to Spectrometry</h4></li>
-                                <li class="collection-item"><div>Status: Not Started</div></li>
-                                <li class="collection-item"><div>Recipes<a href="#!" class="secondary-content"><i class="material-icons">send</i></a></div></li>
-                                <li class="collection-item"><div>Assign Task<a href="#!" class="secondary-content"><i class="material-icons">send</i></a></div></li>
-                            </ul>
-                            <ul class="collection with-header">
-                                <li class="collection-header"><h4>Analysis of Apsirin</h4></li>
-                                <li class="collection-item"><div>Status: Not Started</div></li>
-                                <li class="collection-item"><div>Recipes<a href="#!" class="secondary-content"><i class="material-icons">send</i></a></div></li>
-                                <li class="collection-item"><div>Assign Task<a href="#!" class="secondary-content"><i class="material-icons">send</i></a></div></li>
-                            </ul>
-                            <ul class="collection with-header">
-                                <li class="collection-header"><h4>Lab Final</h4></li>
-                                <li class="collection-item"><div>Status: Not Started</div></li>
-                                <li class="collection-item"><div>Recipes<a href="#!" class="secondary-content"><i class="material-icons">send</i></a></div></li>
-                                <li class="collection-item"><div>Assign Task<a href="#!" class="secondary-content"><i class="material-icons">send</i></a></div></li>
-                            </ul>
-
-                        </div>
-                        <div id="test2" class="col s12">
-                            <h4>All Personnel In 122:</h4>
-                            <div class="divider"></div>
-                            <br />
-                            <p>Name 1<br />Name 2<br />Name 3</p>
-                        </div>
-                        <div id="test3" class="col s12">
-                            <h4>All Answer Keys for 122</h4>
-                            <div class=" divider"></div>
-                            <p>Answer Key Link 1 <br />Answer Key Link 1 <br />Answer Key Link 1 <br /></p>
-                        </div>
-                        <div id="test4" class="col s12">
-                            <h4>All Recipes Used in 101</h4>
-                            <div class=" divider"></div>
-                            <p>Answer Key Link 1 <br />Answer Key Link 1 <br />Answer Key Link 1 <br /></p>
-
-                        </div>
-                    </div>
-
-
-                </div>
-                <div class="modal-footer">
-                    <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Close</a>
-                </div>
-            </div>
-
-            <!--CHEM 101-->
-            <div id="lab101" class="modal  modal-fixed-footer">
-                <div class="modal-content" width="90% ">
-                    <h4>CHEM 101</h4>
-                    <div class=" divider"></div>
-                    <br />
-                    <div class="row">
-                        <div class="col s12">
-                            <ul class="tabs">
-                                <li class="tab col s3"><a class="active" href="#experiments101">Experiments</a></li>
-                                <li class="tab col s3"><a href="#personnel101">Personnel</a></li>
-                                <li class="tab col s3 "><a href="#keys101">Answer Keys</a></li>
-                                <li class="tab col s3"><a href="#recipes101">Recipes/Procedures</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <br />
-                    <div class=" container">
-                        <div id="experiments101" class="col s12">
-
-                            <ul class="collapsible" data-collapsible="accordion">
-                                <li>
-                                    <div class="collapsible-header"><i class="material-icons">filter_drama</i>Matter is Particulate</div>
-                                    <div class="collapsible-body">
-                                        <span>Status: Complete</span><br />
-                                        <span>Answer Keys:</span><br />
-                                        <span>Recipes:</span>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="collapsible-header"><i class="material-icons">place</i>Properties of Matter</div>
-                                    <div class="collapsible-body">
-                                        <span>Status: Complete</span><br />
-                                        <span>Answer Keys:</span><br />
-                                        <span>Recipes:</span>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="collapsible-header"><i class="material-icons">whatshot</i>Temperature and Phase Changes</div>
-                                    <div class="collapsible-body">
-                                        <span>Status: Complete</span><br />
-                                        <span>Answer Keys:</span><br />
-                                        <span>Recipes:</span>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="collapsible-header"><i class="material-icons">whatshot</i>Mixtures and Solutions</div>
-                                    <div class="collapsible-body">
-                                        <span>Status: Complete</span><br />
-                                        <span>Answer Keys:</span><br />
-                                        <span>Recipes:</span>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="collapsible-header"><i class="material-icons">whatshot</i>Prep Day</div>
-                                    <div class="collapsible-body">
-                                        <span>Status: Complete</span><br />
-                                        <span>Answer Keys:</span><br />
-                                        <span>Recipes:</span>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="collapsible-header"><i class="material-icons">whatshot</i>The Periodic Table</div>
-                                    <div class="collapsible-body">
-                                        <span>Status: Complete</span><br />
-                                        <span>Answer Keys:</span><br />
-                                        <span>Recipes:</span>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="collapsible-header"><i class="material-icons">whatshot</i>Chemical Reactions</div>
-                                    <div class="collapsible-body">
-                                        <span>Status: Complete</span><br />
-                                        <span>Answer Keys:</span><br />
-                                        <span>Recipes:</span>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="collapsible-header"><i class="material-icons">whatshot</i>Solubility, Conductivity, and Conservation of Matter</div>
-                                    <div class="collapsible-body">
-                                        <span>Status: Complete</span><br />
-                                        <span>Answer Keys:</span><br />
-                                        <span>Recipes:</span>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="collapsible-header"><i class="material-icons">whatshot</i>Acids and Bases</div>
-                                    <div class="collapsible-body">
-                                        <span>Status: Complete</span><br />
-                                        <span>Answer Keys:</span><br />
-                                        <span>Recipes:</span>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="collapsible-header"><i class="material-icons">whatshot</i>Final Exam</div>
-                                    <div class="collapsible-body">
-                                        <span>Status: Complete</span><br />
-                                        <span>Answer Keys:</span><br />
-                                        <span>Recipes:</span>
-                                    </div>
-                                </li>
-                            </ul>
-
-
-                        </div>
-                        <div id="personnel101" class="col s12">
-                            <h4>All Personnel In 101:</h4>
-                            <div class="divider"></div>
-                            <br />
-                            <p>Name 1<br />Name 2<br />Name 3</p>
-                        </div>
-                        <div id="keys101" class="col s12">
-                            <h4>All Answer Keys In 101:</h4>
-                            <div class="divider"></div>
-                            <br />
-                            <p>Name 1<br />Name 2<br />Name 3</p>
-                        </div>
-                        <div id="recipes101" class="col s12">
-                            <h4>All Recipes In 101:</h4>
-                            <div class="divider"></div>
-                            <br />
-                            <p>Name 1<br />Name 2<br />Name 3</p>
-                        </div>
-                    </div>
-
-
-                </div>
-                <div class="modal-footer">
-                    <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Close</a>
-                </div>
-            </div>
-
-
             <!--Application View-->
-            <div id="app_view" class="modal  modal-fixed-footer">
-                <div class="modal-content" width="90% ">
-                    <h4>Application View</h4>
-                    <div class=" divider"></div>
-                    <br />
-                    <div class="row">
-                        <div class="col s12">
-                            <ul class="tabs">
-                                <li class="tab"><a class="active" href="#currentStaff">Current</a></li>
-                                <li class="tab "><a href="#prevStaff">Previous</a></li>
-
-                            </ul>
+            <div id="app_view" class="modal  modal-fixed-footer" >
+                <div class="modal-content " >
+                    <div class="modal-body">
+                        <div class=" row">
+                            <div class="col s12 left">
+                                <h3 id="app_name" class="left">Student_Name</h3>
+                            </div>
+                            <div class="col s12 right">
+                                <h5 id="app_status" class="right">Status</h5>
+                            </div>
                         </div>
-                    </div>
-                    <br />
-                    <div class=" container">
-                        <div id="currentStaff" class=" col s12">
-                            <ul class="collection">
-
-                                <li class="collection-item avatar">
-                                    <i class="material-icons circle">face</i>
-                                    <span class="title">Student_Name</span>
-                                    <p>
-                                        Email_Address <br>
-                                        Phone_Number
-                                    </p>
-                                    <a href="#!" class="waves-effect waves-light btn secondary-content">View Application</a>
-                                </li>
-                                <li class="collection-item avatar">
-                                    <i class="material-icons circle green">face</i>
-                                    <span class="title">Student_Name</span>
-                                    <p>
-                                        Email_Address <br>
-                                        Phone_Number
-                                    </p>
-                                    <a href="#!" class="waves-effect waves-light btn secondary-content">View Application</a>
-                                </li>
-                                <li class="collection-item avatar">
-                                    <i class="material-icons circle red">face</i>
-                                    <span class="title">Student_Name</span>
-                                    <p>
-                                        Email_Address <br>
-                                        Phone_Number
-                                    </p>
-                                    <a href="#!" class="waves-effect waves-light btn secondary-content">View Application</a>
-                                </li>
-                            </ul>
+                        <div class="divider"></div>
+                        <div class="row">
+                            <div class="col s12 left left-align">
+                                <h6 id="app_timestamp">Time_Stamp</h6>
+                            </div>
+                            <div class="col s12 right right-align">
+                                <a href="#!" class=" right" style="margin-top:2%"><i class="material-icons">get_app</i></a>
+                                <h6 class="">Download Resume: </h6> 
+                            </div>
                         </div>
+                        
+                        <ul class="collapsible" data-collapsible="expandable">
+                            <li>
+                                <div class="collapsible-header"><i class="material-icons">filter_drama</i><span><h5>Basic Information</h5></span></div>
+                                <div class="collapsible-body">
+                                    <h6 id="app_studentid">Student ID</h6>
+                                    <h6 id="app_email">Student_Email</h6>
+                                    <h6 id="app_birth">Date of Birth</h6>
+                                    <h6 id="app_cellphone">Cell Phone</h6>
+                                    <h6 id="app_homephone">Home Phone</h6>
+                                    <h6 id="app_localaddress">Local Address</h6>
+                                    <h6 id="app_homeaddress">Home Address</h6>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="collapsible-header"><i class="material-icons">place</i><span><h5>Qualifications</h5></span></div>
+                                <div class="collapsible-body">
+                                    <h6 id="app_referral">How you find out about job?</h6>
+                                    <h6 id="app_workhours">Perfered Weekly Amt of Hours</h6>
+                                    <h6 id="app_was">Work Study Approved??</h6>
+                                    <h6 id="app_wasAmt">How much is it??</h6>
+                                    <h6 id="app_chemexp"><b>Previous Chem Classes: </b></h6>
+                                    <h6 id="app_workexp"><b>Previous Work Experience: </b></h6>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="collapsible-header"><i class="material-icons">whatshot</i><span><h5>School Information</h5></span></div>
+                                <div class="collapsible-body">
+                                    <h6 id="app_standing">Class Standing</h6>
+                                    <h6 id="app_major">Major</h6>
+                                    <h6 id="app_minor">Minor</h6>
+                                    <h6 id="app_graduationDate">Graduation Date</h6>
+                                    <h6 id="app_cgpa">College GPA</h6>
+                                    <h6 id="app_hgpa">High School GPA</h6>
 
-                        <div id="accept" class=" col s12">
-                            <ul class="collection">
+                                </div>
+                            </li>
+                            <li>
+                                <div class="collapsible-header"><i class="material-icons">whatshot</i><span><h5>Schedule</h5></span></div>
+                                <div class="collapsible-body"><span>Full Schedule</span></div>
+                            </li>
 
-                                <li class="collection-item avatar">
-                                    <i class="material-icons circle">face</i>
-                                    <span class="title">Student_Name</span>
-                                    <p>
-                                        Email_Address <br>
-                                        Phone_Number
-                                    </p>
-                                    <a href="#!" class="waves-effect waves-light btn secondary-content">View Contact Info</a>
-                                </li>
-                                <li class="collection-item avatar">
-                                    <i class="material-icons circle green">face</i>
-                                    <span class="title">Student_Name</span>
-                                    <p>
-                                        Email_Address <br>
-                                        Phone_Number
-                                    </p>
-                                    <a href="#!" class="waves-effect waves-light btn secondary-content">View Contact Info</a>
-                                </li>
-                                <li class="collection-item avatar">
-                                    <i class="material-icons circle red">face</i>
-                                    <span class="title">Student_Name</span>
-                                    <p>
-                                        Email_Address <br>
-                                        Phone_Number
-                                    </p>
-                                    <a href="#!" class="waves-effect waves-light btn secondary-content">View Contact Info</a>
-                                </li>
-                                <li class="collection-item avatar">
-                                    <i class="material-icons circle">face</i>
-                                    <span class="title">Student_Name</span>
-                                    <p>
-                                        Email_Address <br>
-                                        Phone_Number
-                                    </p>
-                                    <a href="#!" class="waves-effect waves-light btn secondary-content">View Contact Info</a>
-                                </li>
-                                <li class="collection-item avatar">
-                                    <i class="material-icons circle green">face</i>
-                                    <span class="title">Student_Name</span>
-                                    <p>
-                                        Email_Address <br>
-                                        Phone_Number
-                                    </p>
-                                    <a href="#!" class="waves-effect waves-light btn secondary-content">View Contact Info</a>
-                                </li>
-                                <li class="collection-item avatar">
-                                    <i class="material-icons circle red">face</i>
-                                    <span class="title">Student_Name</span>
-                                    <p>
-                                        Email_Address <br>
-                                        Phone_Number
-                                    </p>
-                                    <a href="#!" class="waves-effect waves-light btn secondary-content">View Contact Info</a>
-                                </li>
+                        </ul>
+                        <div class="row">
+                            <div class=" col s12 center">
+                                <a href="#!" class="waves-effect waves-green btn-large green ">Accept</a>
 
-                            </ul>
-                        </div>
+                            </div>
+                            <div class=" col s12 center">
+                                <a href="#!" class="waves-effect waves-green btn-large red ">Accept</a>
 
+                            </div>
+                            </div>
                     </div>
 
+                  
+                    
+             
 
+          
                 </div>
                 <div class="modal-footer">
-                    <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Close</a>
+                    <a href="#!" class="modal-action modal-close waves-effect waves-green btn green ">Close</a>
+                </div>
+            </div>
+
+            <!--Lab View-->
+            <div id="lab_view" class="modal  modal-fixed-footer">
+                <div class="modal-content ">
+                    <div class="modal-body">
+                        <div class=" row">
+                            <div class="col s12 left">
+                                <h3 class="left" id="lab_name"> Lab Name</h3>
+                            </div>
+    
+                        </div>
+                        <div class="divider"></div>
+
+                        <ul class="collapsible" data-collapsible="expandable" id="lab_collap">
+                        </ul>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <a href="#!" class="modal-action modal-close waves-effect waves-green btn green ">Close</a>
                 </div>
             </div>
         </div>
 
-
-        
-
-
         <script>
+
             $apps = new Array();
+            $exp = new Array();
+  
+            var groupedData;
             $numOfApps = 0;
+
+            //Materialize CSS setup calls
             $(document).ready(function () {
                 $('.modal').modal();
                 $('.collapsible').collapsible();
@@ -698,13 +283,23 @@
                 );
             });
 
+          
+            //Loading Indicatior for any ajax calls
+            var $loading = $('#loadingDiv').hide();
+            $(document)
+                .ajaxStart(function () {
+                    $loading.show();
+                })
+                .ajaxStop(function () {
+                    $loading.hide();
+                });
 
-   
+            //Grabs applications (its window on load because applications are by default)
             window.onload = (function () {
                 $.ajax
                     ({
                     type: "GET",
-                    url: "https://www.bradfriebe.com/chemstock/getbasicapplication.php",
+                    url: "https://www.bradfriebe.com/chemstock/getapplication.php",
                     crossDomain: true,
                     dataType: "json",
                     success: function (data) {
@@ -714,7 +309,7 @@
                             $('#folla').append(
                                 "<li class='collection-item avatar'><i class='material-icons circle red'>face</i>" +
                                 "<span class='title'>" + value.firstName + " " + value.lastName + "</span >" +
-                                "<p>" + value.email + " <br>" + value.cellPhone + "</p><a href='#!' class='waves-effect waves-light btn secondary-content'>View Application</a> </li>"
+                                "<p>" + value.email + " <br>" + value.cellPhone + "</p><a href='#app_view' class='waves-effect waves-light btn secondary-content modal-trigger' id = " + key + " onclick='populate_modal(this.id);' >View Application</a> </li>"
                             );
                             //$numOfApps = $numOfApps + 1;
                             $('#app_num').html($numOfApps += 1);
@@ -725,9 +320,95 @@
                         alert('There was an error getting application info');
                     }
                 });
-
+           
             });
 
+            //Grabs current lab setup
+            $(document).ready (function () {
+               
+                $.ajax
+                    ({
+                        type: "GET",
+                        url: "https://www.bradfriebe.com/chemstock/getexperiments.php",
+                        crossDomain: true,
+                        dataType: "json",
+                        success: function (data) {
+                            $exp = data;
+                            groupedData = _.groupBy($exp, function (d) { return d.labID });
+                            $.each(groupedData, function (key, value) {
+                                custom_filter(value);
+                            });
+                        },
+                        error: function (data) {
+                            alert('There was an error getting application info');
+                        }
+                    });
+            });
+
+            //Filters through the experiments
+            function custom_filter(id_name) {
+
+                $('#labarea').append(
+                    "<div class='divider'></div></br><div class='row valign-wrapper'><div class='col s2'><span class='black-text'><b>" + id_name[0].labName + "</b></span></div>" +
+
+
+                    " <div class='col s2'>" +
+
+                    " <a href='#lab_view' class='waves-effect waves-light btn green secondary-content modal-trigger' id=" + id_name[0].labID + " onclick='populate_modal_exp(this.id);' >View Lab</a>" +
+                    "</div> </div> " 
+                    
+      );
+
+                $('#side_lab_links').append(
+                    " <li><a href='#lab_view' class=' modal-trigger' id=" + id_name[0].labID + " onclick='populate_modal_exp(this.id);' >CHEM " + id_name[0].labID + '</a ></li >'
+
+                );
+           
+            }
+
+            //Populates modals for application
+            function populate_modal(id_name) {
+                //Basic Information
+                $('#app_status').html($apps[id_name].applicationStatus);
+                $('#app_name').html($apps[id_name].firstName + " " +( ($apps[id_name].middleInitial == null) ? "" : $apps[id_name].middleInitial )+ " " + $apps[id_name].lastName);
+                $('#app_email').html("<b>Email:</b> " + $apps[id_name].email);
+                $('#app_homephone').html("<b>Home Phone:</b> " + $apps[id_name].homePhone);
+                $('#app_cellphone').html("<b>Cell Phone:</b> " + $apps[id_name].cellPhone);
+                $('#app_studentid').html("<b>Student Id:</b> E" + $apps[id_name].studentID);
+                $('#app_timestamp').html("Submitted: " + $apps[id_name].timestamp);
+                $('#app_localaddress').html("<b>Local Address: </b></br>" + $apps[id_name].localAddress + "</br>" + $apps[id_name].localCity + "," + $apps[id_name].localState + " " + $apps[id_name].localZip);
+                $('#app_homeaddress').html("<b>Home Address: </b></br>" +
+                    (($apps[id_name].homeAddress ==null) ? "Same As Local" : ($apps[id_name].homeAddress + "</br>" + $apps[id_name].homeCity + "," + $apps[id_name].homeState + " " + $apps[id_name].homeZip)));
+                $('#app_birth').html("<b>Date of Birth: </b> " + $apps[id_name].dateOfBirth);
+                $('#app_standing').html("<b>Class Standing:</b> " + $apps[id_name].classStanding);
+                $('#app_cgpa').html("<b>College GPA:</b> " + $apps[id_name].collegeGPA);
+                $('#app_graduationDate').html("<b>Graduation Date:</b> " + $apps[id_name].graduationDate);
+                $('#app_hgpa').html("<b>High School GPA:</b> " + $apps[id_name].highschoolGPA);
+                $('#app_major').html("<b>Major:</b> " + $apps[id_name].major);
+                $('#app_minor').html("<b>Minor:</b> " +( ($apps[id_name].minor == null) ? "Does Not Have One" : $apps[id_name].minor));
+                $('#app_workhours').html("<b>Preferred Weekly Hours:</b> " + $apps[id_name].preferredWeeklyHours);
+                $('#app_referral').html("<b>Referral:</b> " + $apps[id_name].referral);
+                $('#app_wsa').html("<b>Work Study Approved?:</b> " + $apps[id_name].workStudyApproved);
+                $('#app_wasAmt').html("<b>Work Study Amount:</b> " + $apps[id_name].workStudyHours);
+                return "#" + id_name;
+            }
+
+            //Populates modals for experiments
+            function populate_modal_exp(id_lab) {
+             
+                $('#lab_collap').html("");
+                $('#lab_name').html("<h5>" + groupedData[id_lab][0].labName + "</h5>");
+
+                $.each(groupedData[id_lab], function (key, value) {
+                    $('#lab_collap').append(
+                        "<li>" +
+                        " <div class='collapsible-header'><i class='material-icons'>filter_drama</i><span>" + value.experimentName + "</span ></div >"+
+                        "<div class='collapsible-body'></div></li>" 
+                    );
+                });
+            }
+
+            //Switches application and lab views
             function display(id_name) {
                 console.log(id_name);
                 if (id_name == "app") {
@@ -739,7 +420,6 @@
                     }
             };
            
-            
 
         </script>            
 </body>

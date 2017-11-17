@@ -1,0 +1,45 @@
+{
+  "class": {
+    "CHEM 101": [
+      { "lab": "Matter is Particulate" },
+      { "lab": "Properties of Matter" },
+      { "lab": "Temperature and Phase Changes" },
+      { "lab": "Mixtures and Solutions" },
+      { "lab": "Prep Day" },
+      { "lab": "The Periodic Table" },
+      { "lab": "Chemical Reactions" },
+      { "lab": "Solubility, Conductivity, and Conservation of Matter" },
+      { "lab": "Acids and Bases" },
+      { "lab": "Final Exam 101" }
+    ],
+    "CHEM 116": [
+      { "lab": "Alchemy and Measurement" },
+      { "lab": "What am I Breathing?" },
+      { "lab": "Determination of Density" },
+      { "lab": "Preparation of Cosmetics" },
+      { "lab": "What does a Molecule Look Like?" },
+      { "lab": "Chemical Moles" },
+      { "lab": "Calorimetry and Heat of Reaction" },
+      { "lab": "What Makes Water Hard?" },
+      { "lab": "Qualitative Analysis of Common Household Chemicals" },
+      { "lab": "Which Common Materials are Acids and Bases?" },
+      { "lab": "How Much Acid in Food?" },
+      { "lab": "Sugar in Drinks" },
+      { "lab": "Final Exam 116" }
+    ],
+    "CHEM 118": [
+      { "lab": "Introduction, Safety, Bunsen Burner" },
+      { "lab": "What are Your Measurements?" },
+      { "lab": "Identification of a Pure Substance" },
+      { "lab": "You Cannot Judge a Compound..." },
+      { "lab": "Qualitative Analysis" },
+      { "lab": "How the Mole Can Help Determine..." },
+      { "lab": "Spectroscopy: The Electron..." },
+      { "lab": "Chemical Bonding & Molecular Shapes" },
+      { "lab": "Chemists Have Solutions" },
+      { "lab": "Vinegar Titration" },
+      { "lab": "Acids and Bases" },
+      { "lab": "Check-out and Final Exam 118" }
+    ]
+  }
+}
