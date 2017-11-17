@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html>
 	<head>
@@ -423,4 +424,431 @@
 
         </script>            
 </body>
+=======
+<!DOCTYPE html>
+<html>
+	<head>
+	    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+        <!--<link rel="stylesheet" type="text/css" href="css/login.css">-->
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+        <!--Import materialize.css-->
+        <link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection" />
+        <link rel="stylesheet" type="text/css" href="css/main.css">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+		<script type="text/javascript" src="js/jquery.min.js"></script>
+		<script type="text/javascript" src="js/googleOAuth.js"></script>
+        <!--Import jQuery before materialize.js-->
+        <script type="text/javascript" src="js/materialize.min.js"></script>
+        <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/0.10.0/lodash.min.js"></script>
+        <title>Admin Page</title>
+	</head>
+
+	<body class="green lighten-2">
+        <!--Navigation Bar-->
+        <ul id="slide-out" class="side-nav fixed">
+            <li class="logo center">
+                    <img src=" img/logo.png" />
+            </li>
+            <li><a href="#!" onclick="display('app');">Applications</a></li>
+            <li><a href="#!">Personnel</a></li>
+            <li class="no-padding">
+                <ul class="collapsible collapsible-accordion">
+                    <li>
+                        <a class="collapsible-header">Lab View<i class="material-icons">arrow_drop_down</i></a>
+                        <div class="collapsible-body">
+                            <ul id="side_lab_links">
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        <div class="navbar-fixed">
+            <nav>
+                <div class="nav-wrapper green">
+                    <a href="#!" class="brand-logo" style=" padding-left:350px">ChemStock</a>
+                    <ul class="right hide-on-med-and-down">
+                        <li><a href="sass.html" Sass</a></li>
+                        <li><a href="badges.html">Components</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+
+        <br />
+
+        <!--Loading Circle-->
+        <div class="preloader-wrapper big active" id ="loadingDiv"style="position:fixed; top:50%; left:60%; z-index: 1;">
+            <div class="spinner-layer spinner-blue-only">
+                <div class="circle-clipper left">
+                    <div class="circle"></div>
+                </div><div class="gap-patch">
+                    <div class="circle"></div>
+                </div><div class="circle-clipper right">
+                    <div class="circle"></div>
+                </div>
+            </div>
+        </div>
+
+        <!--Main Area-->
+        <div class=" row" style="padding-left:300px" height="50%">
+
+            <!--Application Card-->
+            <div class="col s12">
+                <div class="card  darken-1 z-depth-1">
+                    <div class="card-content ">
+                        <h5 class="card-title">Applications</h5>
+                        <br />
+                        <div class="col s2"> <img src=" img/view.png"  class="responsive-img"/> </div>
+                        <br />
+                        <div class="col s10"><span class="black-text">Current Number of Pending Applications: <span id="app_num">0</span></span></div>
+                    </div>
+                    <div class="card-action">
+                        <a href="#" class=" green-text "  onclick="display('app');">View Applications</a>
+                    </div>
+                </div>
+            </div>
+            <!--Lab Card-->
+            <div class="col s12">
+                <div class="card  darken-1 z-depth-1">
+                    <div class="card-content ">
+                        <h5 class="card-title">Lab Overview</h5>
+                        <br />
+                        <div class="col s2"> <img src=" img/apply.png" class="responsive-img" /> </div>
+                        <br />
+                        <div class="col s10"><span class="black-text">Current Number of Staff : 14</span></div>
+                    </div>
+                    <div class="card-action">
+                        <a href="#" class=" green-text" onclick="display('bc');">View All Labs</a>
+                    </div>
+                </div>
+            </div>
+        
+        </div>
+
+
+
+        <!--View Screen-->
+        <div class=" row sidenavfix">
+
+            <div class="col s12 hide" id ="viewalllabs">
+                <div class="card-panel z-depth-1" id="labarea">
+                    <h5>Labs</h5>
+                    <br />
+                </div>
+            </div>
+            <div class="col s12" id="viewallapps">
+                <div class="card-panel z-depth-1">
+                    <h5>Applications</h5>
+             
+                    <!--Tabs-->
+                    <div class="row">
+                        <div class="col s12">
+                            <ul class="tabs">
+                                <li class="tab"><a class="active" href="#pend">Pending</a></li>
+                                <li class="tab "><a href="#accept">Accepted</a></li>
+                                <li class="tab"><a href="#reject">Rejected</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!--<div class=" divider"></div>-->
+         
+                        <div id="pend" class=" col s12">
+                            <ul class="collection" id="folla"></ul>
+                        </div>
+
+                        <div id="accept" class=" col s12">
+                            <ul class="collection"></ul>
+                        </div>
+
+                        <div id="reject" class=" col s12">
+                            <ul class="collection"></ul>
+                        </div>
+                    <p id="timestamp">Last Updated 11:9:17</p>
+                </div>
+            </div>
+            <div id="viewallpersonnel" class=" col s12 hide">
+
+            </div>
+
+
+        </div>
+
+
+        <div>
+            <!--Application View-->
+            <div id="app_view" class="modal  modal-fixed-footer" >
+                <div class="modal-content " >
+                    <div class="modal-body">
+                        <div class=" row">
+                            <div class="col s12 left">
+                                <h3 id="app_name" class="left">Student_Name</h3>
+                            </div>
+                            <div class="col s12 right">
+                                <h5 id="app_status" class="right">Status</h5>
+                            </div>
+                        </div>
+                        <div class="divider"></div>
+                        <div class="row">
+                            <div class="col s12 left left-align">
+                                <h6 id="app_timestamp">Time_Stamp</h6>
+                            </div>
+                            <div class="col s12 right right-align">
+                                <a href="#!" class=" right" style="margin-top:2%"><i class="material-icons">get_app</i></a>
+                                <h6 class="">Download Resume: </h6> 
+                            </div>
+                        </div>
+                        
+                        <ul class="collapsible" data-collapsible="expandable">
+                            <li>
+                                <div class="collapsible-header"><i class="material-icons">filter_drama</i><span><h5>Basic Information</h5></span></div>
+                                <div class="collapsible-body">
+                                    <h6 id="app_studentid">Student ID</h6>
+                                    <h6 id="app_email">Student_Email</h6>
+                                    <h6 id="app_birth">Date of Birth</h6>
+                                    <h6 id="app_cellphone">Cell Phone</h6>
+                                    <h6 id="app_homephone">Home Phone</h6>
+                                    <h6 id="app_localaddress">Local Address</h6>
+                                    <h6 id="app_homeaddress">Home Address</h6>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="collapsible-header"><i class="material-icons">place</i><span><h5>Qualifications</h5></span></div>
+                                <div class="collapsible-body">
+                                    <h6 id="app_referral">How you find out about job?</h6>
+                                    <h6 id="app_workhours">Perfered Weekly Amt of Hours</h6>
+                                    <h6 id="app_was">Work Study Approved??</h6>
+                                    <h6 id="app_wasAmt">How much is it??</h6>
+                                    <h6 id="app_chemexp"><b>Previous Chem Classes: </b></h6>
+                                    <h6 id="app_workexp"><b>Previous Work Experience: </b></h6>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="collapsible-header"><i class="material-icons">whatshot</i><span><h5>School Information</h5></span></div>
+                                <div class="collapsible-body">
+                                    <h6 id="app_standing">Class Standing</h6>
+                                    <h6 id="app_major">Major</h6>
+                                    <h6 id="app_minor">Minor</h6>
+                                    <h6 id="app_graduationDate">Graduation Date</h6>
+                                    <h6 id="app_cgpa">College GPA</h6>
+                                    <h6 id="app_hgpa">High School GPA</h6>
+
+                                </div>
+                            </li>
+                            <li>
+                                <div class="collapsible-header"><i class="material-icons">whatshot</i><span><h5>Schedule</h5></span></div>
+                                <div class="collapsible-body"><span>Full Schedule</span></div>
+                            </li>
+
+                        </ul>
+                        <div class="row">
+                            <div class=" col s12 center">
+                                <a href="#!" class="waves-effect waves-green btn-large green ">Accept</a>
+
+                            </div>
+                            <div class=" col s12 center">
+                                <a href="#!" class="waves-effect waves-green btn-large red ">Accept</a>
+
+                            </div>
+                            </div>
+                    </div>
+
+                  
+                    
+             
+
+          
+                </div>
+                <div class="modal-footer">
+                    <a href="#!" class="modal-action modal-close waves-effect waves-green btn green ">Close</a>
+                </div>
+            </div>
+
+            <!--Lab View-->
+            <div id="lab_view" class="modal  modal-fixed-footer">
+                <div class="modal-content ">
+                    <div class="modal-body">
+                        <div class=" row">
+                            <div class="col s12 left">
+                                <h3 class="left" id="lab_name"> Lab Name</h3>
+                            </div>
+    
+                        </div>
+                        <div class="divider"></div>
+
+                        <ul class="collapsible" data-collapsible="expandable" id="lab_collap">
+                        </ul>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <a href="#!" class="modal-action modal-close waves-effect waves-green btn green ">Close</a>
+                </div>
+            </div>
+        </div>
+
+        <script>
+
+            $apps = new Array();
+            $exp = new Array();
+  
+            var groupedData;
+            $numOfApps = 0;
+
+            //Materialize CSS setup calls
+            $(document).ready(function () {
+                $('.modal').modal();
+                $('.collapsible').collapsible();
+                $('ul.tabs').tabs();
+                $('ul.tabs').tabs('select_tab', 'tab_id');
+                $('#timestamp').html(
+                    function () {
+                        var time = new Date();
+                      
+                        return "Last time checked:  " + time.toUTCString();
+                    }
+                );
+            });
+
+          
+            //Loading Indicatior for any ajax calls
+            var $loading = $('#loadingDiv').hide();
+            $(document)
+                .ajaxStart(function () {
+                    $loading.show();
+                })
+                .ajaxStop(function () {
+                    $loading.hide();
+                });
+
+            //Grabs applications (its window on load because applications are by default)
+            window.onload = (function () {
+                $.ajax
+                    ({
+                    type: "GET",
+                    url: "https://www.bradfriebe.com/chemstock/getapplication.php",
+                    crossDomain: true,
+                    dataType: "json",
+                    success: function (data) {
+
+                        $apps = data;
+                        $.each(data, function (key, value) {
+                            $('#folla').append(
+                                "<li class='collection-item avatar'><i class='material-icons circle red'>face</i>" +
+                                "<span class='title'>" + value.firstName + " " + value.lastName + "</span >" +
+                                "<p>" + value.email + " <br>" + value.cellPhone + "</p><a href='#app_view' class='waves-effect waves-light btn secondary-content modal-trigger' id = " + key + " onclick='populate_modal(this.id);' >View Application</a> </li>"
+                            );
+                            //$numOfApps = $numOfApps + 1;
+                            $('#app_num').html($numOfApps += 1);
+                        });
+                        console.log($apps);
+                    },
+                    error: function (data) {
+                        alert('There was an error getting application info');
+                    }
+                });
+           
+            });
+
+            //Grabs current lab setup
+            $(document).ready (function () {
+               
+                $.ajax
+                    ({
+                        type: "GET",
+                        url: "https://www.bradfriebe.com/chemstock/getexperiments.php",
+                        crossDomain: true,
+                        dataType: "json",
+                        success: function (data) {
+                            $exp = data;
+                            groupedData = _.groupBy($exp, function (d) { return d.labID });
+                            $.each(groupedData, function (key, value) {
+                                custom_filter(value);
+                            });
+                        },
+                        error: function (data) {
+                            alert('There was an error getting application info');
+                        }
+                    });
+            });
+
+            //Filters through the experiments
+            function custom_filter(id_name) {
+
+                $('#labarea').append(
+                    "<div class='divider'></div></br><div class='row valign-wrapper'><div class='col s2'><span class='black-text'><b>" + id_name[0].labName + "</b></span></div>" +
+
+
+                    " <div class='col s2'>" +
+
+                    " <a href='#lab_view' class='waves-effect waves-light btn green secondary-content modal-trigger' id=" + id_name[0].labID + " onclick='populate_modal_exp(this.id);' >View Lab</a>" +
+                    "</div> </div> " 
+                    
+      );
+
+                $('#side_lab_links').append(
+                    " <li><a href='#lab_view' class=' modal-trigger' id=" + id_name[0].labID + " onclick='populate_modal_exp(this.id);' >CHEM " + id_name[0].labID + '</a ></li >'
+
+                );
+           
+            }
+
+            //Populates modals for application
+            function populate_modal(id_name) {
+                //Basic Information
+                $('#app_status').html($apps[id_name].applicationStatus);
+                $('#app_name').html($apps[id_name].firstName + " " +( ($apps[id_name].middleInitial == null) ? "" : $apps[id_name].middleInitial )+ " " + $apps[id_name].lastName);
+                $('#app_email').html("<b>Email:</b> " + $apps[id_name].email);
+                $('#app_homephone').html("<b>Home Phone:</b> " + $apps[id_name].homePhone);
+                $('#app_cellphone').html("<b>Cell Phone:</b> " + $apps[id_name].cellPhone);
+                $('#app_studentid').html("<b>Student Id:</b> E" + $apps[id_name].studentID);
+                $('#app_timestamp').html("Submitted: " + $apps[id_name].timestamp);
+                $('#app_localaddress').html("<b>Local Address: </b></br>" + $apps[id_name].localAddress + "</br>" + $apps[id_name].localCity + "," + $apps[id_name].localState + " " + $apps[id_name].localZip);
+                $('#app_homeaddress').html("<b>Home Address: </b></br>" +
+                    (($apps[id_name].homeAddress ==null) ? "Same As Local" : ($apps[id_name].homeAddress + "</br>" + $apps[id_name].homeCity + "," + $apps[id_name].homeState + " " + $apps[id_name].homeZip)));
+                $('#app_birth').html("<b>Date of Birth: </b> " + $apps[id_name].dateOfBirth);
+                $('#app_standing').html("<b>Class Standing:</b> " + $apps[id_name].classStanding);
+                $('#app_cgpa').html("<b>College GPA:</b> " + $apps[id_name].collegeGPA);
+                $('#app_graduationDate').html("<b>Graduation Date:</b> " + $apps[id_name].graduationDate);
+                $('#app_hgpa').html("<b>High School GPA:</b> " + $apps[id_name].highschoolGPA);
+                $('#app_major').html("<b>Major:</b> " + $apps[id_name].major);
+                $('#app_minor').html("<b>Minor:</b> " +( ($apps[id_name].minor == null) ? "Does Not Have One" : $apps[id_name].minor));
+                $('#app_workhours').html("<b>Preferred Weekly Hours:</b> " + $apps[id_name].preferredWeeklyHours);
+                $('#app_referral').html("<b>Referral:</b> " + $apps[id_name].referral);
+                $('#app_wsa').html("<b>Work Study Approved?:</b> " + $apps[id_name].workStudyApproved);
+                $('#app_wasAmt').html("<b>Work Study Amount:</b> " + $apps[id_name].workStudyHours);
+                return "#" + id_name;
+            }
+
+            //Populates modals for experiments
+            function populate_modal_exp(id_lab) {
+             
+                $('#lab_collap').html("");
+                $('#lab_name').html("<h5>" + groupedData[id_lab][0].labName + "</h5>");
+
+                $.each(groupedData[id_lab], function (key, value) {
+                    $('#lab_collap').append(
+                        "<li>" +
+                        " <div class='collapsible-header'><i class='material-icons'>filter_drama</i><span>" + value.experimentName + "</span ></div >"+
+                        "<div class='collapsible-body'></div></li>" 
+                    );
+                });
+            }
+
+            //Switches application and lab views
+            function display(id_name) {
+                console.log(id_name);
+                if (id_name == "app") {
+                    $('#viewalllabs').addClass("hide");
+                    $('#viewallapps').removeClass("hide");
+                } else {
+                    $('#viewalllabs').removeClass("hide");
+                    $('#viewallapps').addClass("hide");
+                    }
+            };
+           
+
+        </script>            
+</body>
+>>>>>>> master
 </html>

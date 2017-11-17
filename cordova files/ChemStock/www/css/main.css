@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿.modal {
     width: 60% !important;
     max-height: 150% !important;
@@ -11,3 +12,18 @@ height:50%;
 .modal h6{
     font-size:18.5px;
 }
+=======
+﻿.modal {
+    width: 60% !important;
+    max-height: 150% !important;
+    overflow-y: hidden !important;
+}
+
+.sidenavfix{
+padding-left:300px;
+height:50%;
+}
+.modal h6{
+    font-size:18.5px;
+}
+>>>>>>> master
