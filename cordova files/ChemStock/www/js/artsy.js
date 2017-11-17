@@ -61,7 +61,7 @@
         return '<td style="border: solid 1px white; height: 10vh;" class="time-slot" data-time="' + hhmm(d) + '" data-day="' + days[i] + '"></td>'
       }).join();
 
-      $el.append('<tr><td class="time-label">' + hmmAmPm(d) + '</td>' + daysInARow + '</tr>');
+      $el.append('<tr><td class="time-label" style="border-top: hidden;">' + hmmAmPm(d) + '</td>' + daysInARow + '</tr>');
     });
   };
 
