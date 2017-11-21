@@ -35,8 +35,14 @@ $collegeGPA = $db->real_escape_string($_POST["collegeGPA"]);
 // course and work history objects to insert into db
 $courseHistory = json_decode($_POST["courseHistory"],true);
 $workHistory = json_decode($_POST["workHistory"],true);
+$schedule = json_decode($_POST["weeklySchedule"],true);
+$weeklySchedule = "";
+foreach($schedule as $timeslot)
+{
+	$weeklySchedule = $weeklySchedule.",".$timeslot['day'].":".$timeslot['startTime']."-".$timeslot['endTime'].":".$timeslot['content'];
+}
 
-$applicationSQL = "INSERT INTO applications (studentID, email, firstName, middleInitial, lastName, dateOfBirth, localAddress, localCity, localState, localZip, cellPhone, homeAddress, homeCity, homeState, homeZip, homePhone, referral, preferredWeeklyHours, workStudyApproved, workStudyAmount, classStanding, major, minor, graduationDate, highschoolGPA, collegeGPA, weeklySchedule, timestmp) VALUES ('$eID', '$email','$firstName', '$middleInitial', '$lastName', '$dateOfBirth', '$localAddress', '$localCity', '$localState', '$localZip', '$cellPhone', '$homeAddress', '$homeCity', '$homeState', '$homeZip', '$homePhone', '$referral', '$weeklyHours', '$workStudyApproved', '$workStudyAmount', '$classStanding', '$major', '$minor', '$graduationDate', '$highschoolGPA', '$collegeGPA' ,'', NOW())";
+$applicationSQL = "INSERT INTO applications (studentID, email, firstName, middleInitial, lastName, dateOfBirth, localAddress, localCity, localState, localZip, cellPhone, homeAddress, homeCity, homeState, homeZip, homePhone, referral, preferredWeeklyHours, workStudyApproved, workStudyAmount, classStanding, major, minor, graduationDate, highschoolGPA, collegeGPA, weeklySchedule, timestmp) VALUES ('$eID', '$email','$firstName', '$middleInitial', '$lastName', '$dateOfBirth', '$localAddress', '$localCity', '$localState', '$localZip', '$cellPhone', '$homeAddress', '$homeCity', '$homeState', '$homeZip', '$homePhone', '$referral', '$weeklyHours', '$workStudyApproved', '$workStudyAmount', '$classStanding', '$major', '$minor', '$graduationDate', '$highschoolGPA', '$collegeGPA' , '$weeklySchedule', NOW())";
 
 if($db->query($applicationSQL) !== true)
 {

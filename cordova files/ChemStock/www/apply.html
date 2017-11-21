@@ -271,12 +271,118 @@
 					//console.log(selected);
 				})
 			})($);
+				
+			function jsonSchedule(){
+				var array = [];
+				var objs = [];
+				
+				$('.schedule-table').find(".time-slot").each(function () {
+					if(this.dataset.selected == "selected"){
+						//push each selected time-slot onto array
+						array.push({"day":dayToText(this.dataset.day), "time":this.dataset.time, "content":this.innerHTML});
+					}
+				});
+				
+				//Sort time-slots into ranges
+				var max = "0";
+				var prevTime = 0;
+
+				for(i=0;i<array.length;i++){
+					if(array[i]["content"]!= null && objs.indexOf(array[i]["content"]) < 0){
+						max = array[i]["time"];
+						prevTime = parseInt(array[i]["time"]);
+						for(x=0;x<array.length;x++){
+							if(array[i]["day"] == array[x]["day"] && array[i]["content"] == array[x]["content"] && prevTime == (parseInt(array[x]["time"])-1)){
+								if(max < array[x]["time"]){
+									max = array[x]["time"];
+								}
+								prevTime = parseInt(array[x]["time"]);
+								array.splice(x, 1);
+								x--;
+							}
+						}
+						objs.push({"day":array[i]["day"], "startTime":array[i]["time"], "endTime":max, "content":array[i]["content"]});	
+						array.splice(i, 1);
+						i--;
+					}
+				}
+				
+				//Resulting json
+				return JSON.stringify(objs);
+			}
 			
+			function dayToText(num){
+				var day = "";
+				num = parseInt(num);
+				switch(num){
+					case 1:
+						day = "M";
+						break;
+					case 2:
+						day = "T";
+						break;
+					case 3:
+						day = "W";
+						break;
+					case 4:
+						day = "TR";
+						break;
+					case 5:
+						day = "F";
+						break;
+					default:
+						day = "Something went wrong in dayToText function";
+						break;
+					}
+				return day;
+			}
+			
+			
+			// Form submit
 			$('#apply-form').on('submit',
 			function(e)
 			{
 				e.preventDefault();
 				var formData = new FormData($('#apply-form')[0]);
+				
+				// Get the applicant's course history
+				var courseHistory = new Array();
+				$('#course-history').find('tr').each(function(i)
+				{
+					var tds = $(this).find('td');
+					// start eq from 1 to skip delete button
+					courseHistory[i]={
+						"courseTitle": tds.eq(1).children('input')[0].value,
+						"finalGrade" : tds.eq(2).children('input')[0].value,
+						"semester" : tds.eq(3).children('select')[0].selectedIndex,
+						"year" : tds.eq(4).children('input')[0].value,
+						"instructor" : tds.eq(5).children('input')[0].value
+					}
+				});
+				
+				formData.append('courseHistory', JSON.stringify(courseHistory));
+				//console.log(courseHistory);
+				
+				// Get Applicant's work history
+				var workHistory = new Array();
+				$('#work-history').find('tr').each(function(i)
+				{
+					var tds = $(this).find('td');
+					workHistory[i]={
+						"employer": tds.eq(1).children('input')[0].value,
+						"dutiesResponsibilities" : tds.eq(2).children('input')[0].value,
+						"startDate" : tds.eq(3).children('input')[0].value,
+						"endDate" : tds.eq(4).children('input')[0].value
+					}
+				});
+				
+				
+				formData.append('workHistory', JSON.stringify(workHistory));
+				
+				// Get weekly schedule
+				var weeklyScheduleData = jsonSchedule();
+				formData.append('weeklySchedule', weeklyScheduleData);
+				
 				$.ajax({
 					type: 'POST',
 					url: 'http://www.bradfriebe.com/test/upload.php',
