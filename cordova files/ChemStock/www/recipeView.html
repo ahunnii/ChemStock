@@ -13,7 +13,7 @@
     <!--Import jQuery before materialize.js-->
     <script type="text/javascript" src="js/materialize.min.js"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/0.10.0/lodash.min.js"></script>
-    <script type="text/javascript"src="js/main.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
     <title>Lab Overview</title>
 </head>
 
@@ -24,18 +24,18 @@
             <img src=" img/logo.png" />
         </li>
         <li><a href="#!" onclick="display('viewalllab');">Lab View</a></li>
-        <li class="active"><a href="#!"  onclick="display('viewalltasks');">Tasks</a></li>
-        <li><a href="#!"  onclick="display('viewallemp');">Contact Staff</a></li>
-        <li><a href="recipeView.html">Recipes</a></li>
-        <li ><a href="calculator.html">Function Calculator</a></li>
+        <li class="active"><a href="#!" onclick="display('viewalltasks');">Tasks</a></li>
+        <li><a href="#!" onclick="display('viewallemp');">Contact Staff</a></li>
+        <li><a href="#!">Recipes</a></li>
+        <li><a href="calculator.html">Function Calculator</a></li>
     </ul>
     <div class="navbar-fixed">
         <nav>
             <div class="nav-wrapper green">
                 <div class="container">
                     <a href="#!" class="brand-logo">ChemStock</a>
-                    <a href="#!" data-activates="mobile" class="button-collapse">
-                        <i class="material-icons">menu</i>
+                    <a href="#!" data-activates="mobile" class="button-collapse" onclick="IconSwap();">
+                        <i class="material-icons" id="menu_icon" >menu</i>
                     </a>
                     <ul class="right hide-on-med-and-down">
                         <li><a href="#!">Lab View</a></li>
@@ -50,7 +50,7 @@
     </div>
 
     <br />
-    <!--Comment-->
+
     <!--Loading Circle-->
     <div class="preloader-wrapper big active" id="loadingDiv" style="position:fixed; top:50%; left:50%; z-index: 1;">
         <div class="spinner-layer spinner-blue-only">
@@ -64,109 +64,85 @@
         </div>
     </div>
 
-    <!--Add New Task Button-->
-    <a class="btn-floating btn-large red modal-trigger" style="position:fixed;right:3%;bottom:3%" href="#add_task">
-        <i class="large material-icons">mode_edit</i>
-    </a>
 
-    <!--Add New Task Button-->
-    <a class="btn-floating btn-large red modal-trigger" style="position:fixed;left:3%;bottom:3%" href="#current_task">
-        <i class="large material-icons">mode_edit</i>
-    </a>
-    <!--Top View Area-->
-    <div class=" row" id="top_view" >
-        <!--Task Card-->
-        <div class="col s12" id="task_card">
-            <div class="card  darken-1 z-depth-1">
-                <div class="card-content ">
-                    <h5 class="card-title" jd="view_lab_name">CHEM 122</h5>
-                    <br />
-                    <div class="col s10"><span class="black-text">Pending Tasks: <span id="app_num">0</span></span></div>
-                    <div class="col s10"><span class="black-text">Pending Tasks: <span id="app_num">0</span></span></div>
-                    <div class="col s10"><span class="black-text">Pending Tasks: <span id="app_num">0</span></span></div>
-                </div>
-                <div class="card-action">
-                    <a href="#" class=" green-text " onclick="display('app');">View Applications</a>
-                </div>
-            </div>
-        </div>
+    <!--View Area-->
 
-        <!--Lab Card-->
-        <div class="col s12 hide" id="lab_card">
-            <div class="card  darken-1 z-depth-1">
-                <div class="card-content ">
-                    <h5 class="card-title" id="lab_name">Lab</h5>
-                    <br />
-                    <div class="col s10"><span class="black-text">Location: 202</span></div>
-                    <div class="col s10"><span class="black-text">Assigned To Lab: Andrew, Mishka, Alex, Emily</span></div>
-                </div>
-            </div>
-        </div>
-
-        <!--Employee Card-->
-        <div id="emp_card"class="col s12 hide">
-            <div class="card  darken-1 z-depth-1">
-                <div class="card-content ">
-                    <h5 class="card-title" jd="view_lab_name">Contacts</h5>
-                    <br />
-                    <ul class="collection" id="contact_collection">
-                        <li class="collection-item avatar">
-                            <i class="material-icons circle red">face</i>
-                            <span class="title">Andrew Hunn</span>
-                            <p>
-                                <a href="mailto:ahunnii@emich.edu">ahunnii@emich.edu</a> <br>
-                                <a href=" tel:9897801111">9897801111</a>
-                            </p>
-                        </li>
-                        <li class="collection-item avatar">
-                            <i class="material-icons circle red">face</i>
-                            <span class="title">Andrew Hunn</span>
-                            <p>
-                                <a href="mailto:ahunnii@emich.edu">ahunnii@emich.edu</a> <br>
-                                <a href=" tel:9897801111">9897801111</a>
-                            </p>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!--Bottom View Area-->
     <div class=" row " id="bottom_view">
-        <div  id="viewalltasks"class="col s12" >
+
+        <div id="recipe_search" class="col s12">
+            <nav>
+                <div class="nav-wrapper green lighten-4">
+                    <form>
+                        <div class="input-field">
+                            <input id="search" type="search" required>
+                            <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+                            <i class="material-icons">close</i>
+                        </div>
+                    </form>
+                </div>
+            </nav>
+
             <div class="card-panel z-depth-1">
-                <h5>Tasks</h5>
+                <h5>Recipes: All</h5>
                 <div class=" divider"></div>
 
-                <div id="pend" class=" col s12">
-                    <div class="collection">
-                        <a href="#!" class="collection-item">Alvin</a>
-                        <a href="#!" class="collection-item active">Alvin</a>
-                        <a href="#!" class="collection-item">Alvin</a>
-                        <a href="#!" class="collection-item">Alvin</a>
-                    </div>
+                <div id="pend" >
+                    <ul class="collection">
+                        <li class="collection-item"><div>Potassium Permagnate<a href="#!" class="secondary-content" ><i class="material-icons">send</i></a></div></li>
+                        <li class="collection-item"><div>Methenol<a href="#!" class="secondary-content" onclick="toggle_view('recipe_view');"><i class="material-icons">send</i></a></div></li>
+                        <li class="collection-item"><div>CHEM 122 Lab Final Unknowns<a href="#!" class="secondary-content"><i class="material-icons">send</i></a></div></li>
+                        <li class="collection-item"><div>pH 4, 7 Buffer<a href="#!" class="secondary-content"><i class="material-icons">send</i></a></div></li>
+                    </ul>
                 </div>
                 <p id="timestamp">Last Updated 11:9:17</p>
             </div>
         </div>
-        <div id="viewalllab" class=" col s12 hide">
+        <div id="recipe_view" class=" col s12 hide">
+            <div class="card-panel z-depth-1">
+                <h4 id="recipe_name">0.050 M Methanol</h4>
+                <div class=" divider"></div>
+                <br />
+                 <h5 id="recipe_amt" ><b>Prep Quantity: </b>2L</h5>
+                <h5 id="recipe_expTitle"><b>Experiment: </b><br />CHEM 122 Conductivity</h5>
+                <h5 id="recipe_required"><b>Reqired Chemicals: </b>Methanol(4ml), Water(1996ml)</h5>
+                <h5 id="recipe_formula"><b>Formula/FW:</b><br /> CH4O , 32.04 g/mol</h5>
+
+                <h5><b>Procedure:</b></h5>
+                <p id="recipe_text" class="flow-text">
+                    With a 2 L volumetric flask,  fill roughly quarter ways with distilled water. Measure out
+                    4 mls of methanol and add to flask. Use squirt bottle to get all the methanol to the flask. Fill to line
+                    making sure that the closer you get to the mark, to switch to squirt bottle and eye dropper to avoid going over. 
+                    Once finished, add stir bar to flask and stir for roughly 20 mins.
+                </p>
+                <p id="timestamp">Last Updated 11:9:17</p>
+            </div>
+        </div>
+        <div id="recipe_edit" class=" col s12 hide">
             <div class="card-panel z-depth-1">
                 <h5>Experiments</h5>
                 <div class=" divider"></div>
                 <br />
 
-                    <ul class="collapsible" data-collapsible="accordion" id="exp_collection">
+                <ul class="collapsible" data-collapsible="accordion" id="exp_collection"></ul>
 
-                    </ul>
-       
 
 
                 <p id="timestamp">Last Updated 11:9:17</p>
             </div>
         </div>
+        <div id="recipe_add" class=" col s12 hide">
+            <div class="card-panel z-depth-1">
+                <h5>Experiments</h5>
+                <div class=" divider"></div>
+                <br />
+
+                <ul class="collapsible" data-collapsible="accordion" id="exp_collection"></ul>
 
 
+
+                <p id="timestamp">Last Updated 11:9:17</p>
+            </div>
+        </div>
     </div>
 
 
@@ -241,10 +217,10 @@
                     <h6 class="left-align" id="task_date"> 2017-11-14</h6>
                     <div class="divider"></div>
                     <p id="task_content" class="flow-text">Hey, I didn't have a chance to do change over. Can you please do this tonight? Just make sure everything is filled.</p>
-        
+
                 </div>
             </div>
-       
+
             <div class="modal-footer">
                 <a href="#!" class="modal-action modal-close waves-effect waves-red btn-flat ">Cancel</a>
                 <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Accept</a>
@@ -254,7 +230,11 @@
 
     <script>
         $exp = new Array();
+
+        //Temp Variables to be removed when database connection has been set
+        var links = ["#recipe_view", "#recipe_search", "#recipe_edit", "#recipe_add"];
         $currentLab = 122;
+
         var groupedData;
         $numOfApps = 0;
 
@@ -309,7 +289,18 @@
         });
 
         //Filters through the experiments
-
+        function IconSwap() {
+            if ($('#recipe_search').hasClass('hide')) {
+                $('#menu_icon').html("arrow_back");
+                $('#recipe_view').addClass("hide");
+                $('#recipe_search').removeClass("hide");
+            }
+            //} else {
+            //    $('#menu_icon').html("menu");
+            //    $('#recipe_search').addClass("hide");
+            //    $('#recipe_view').removeClass("hide");
+            //}
+        }
         function FilterLabView(lab) {
 
             $('#lab_name').html(groupedData[lab][0].labName);
@@ -323,8 +314,8 @@
 
         }
         //Populates modals for experiments
-        function populate_modal_exp(id_lab) {
-
+        function DisplayRecipe(recipe_id) {
+            $('#menu_icon').html("arrow_back");
             $('#lab_collap').html("");
             $('#lab_name').html("<h5>" + groupedData[id_lab][0].labName + "</h5>");
 
@@ -337,31 +328,23 @@
             });
         }
         //Switches application and lab views
-        function display(id_name) {
+        function toggle_view(id_name) {
 
-            if (id_name == "viewalllab") {
-                $('#viewalltasks').addClass("hide");
-                $('#viewalllab').removeClass("hide");
-                $('#task_card').addClass("hide");
-                $('#emp_card').addClass("hide");
-                $('#lab_card').removeClass("hide");
-            } else if (id_name == "viewalltasks") {
-                $('#viewalltasks').removeClass("hide");
-                $('#viewalllab').addClass("hide");
-                $('#task_card').removeClass("hide");
-                $('#lab_card').addClass("hide");
-                $('#emp_card').addClass("hide");
-            } else if (id_name == "viewallemp") {
-                $('#viewalltasks').addClass("hide");
-                $('#viewalllab').addClass("hide");
-                $('#task_card').addClass("hide");
-                $('#lab_card').addClass("hide");
-                $('#emp_card').removeClass("hide");
-
+            if (id_name == "recipe_view") {
+                $('#recipe_view').removeClass("hide");
+                $('#recipe_search').addClass("hide");
+                $('#menu_icon').html("arrow_back");
             }
             $('.button-collapse').sideNav('hide');
         }
- 
+
+        function RecipeView() {
+            $('#menu_icon').html("arrow_back");
+            $('#recipe_search').addClass("hide");
+            $('#recipe_view').removeClass("hide");
+        }
+
+
     </script>
 </body>
 </html>

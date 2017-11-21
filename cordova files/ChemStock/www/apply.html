@@ -7,20 +7,9 @@
         <!--Import materialize.css-->
         <link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection" />
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-<<<<<<< HEAD
 		<script src="js/jquery.min.js"></script>
         <!--Import jQuery before materialize.js-->
         <script type="text/javascript" src="js/materialize.min.js"></script>
-=======
-        <!--Import jQuery before materialize.js-->
-		<!--Javascript Imports-->
-		<script src="js/jquery.min.js"></script>
-		<script type="text/javascript" src="js/materialize.min.js"></script>
-		<script type="text/javascript" src="js/apply.js"></script>
-		<script type="text/javascript" src="js/popper.min.js"></script>
-		<script type="text/javascript" src="js/bootstrap.min.js"></script>
-		<script type="text/javascript" src="js/artsy.js"></script>
->>>>>>> master
 
         <title>Application</title>
 
@@ -29,11 +18,7 @@
 
 	</head>
 	
-<<<<<<< HEAD
     <body class=" teal lighten-2">
-=======
-    <body class="teal lighten-2">
->>>>>>> master
 
         <!--Navigation Bar-->
         <nav class=" green">
@@ -156,13 +141,8 @@
                         </select>
                     </div>
                     <div class="col-md-2 mb-3">
-<<<<<<< HEAD
                         <label for="validationDefault03">How many hours of work study per week?</label>
                         <input type="number" min="0" max="60" name="hoursWorkStudy" class="form-control hs">
-=======
-                        <label for="validationDefault03">Work Study Amount</label>
-                        <input type="number" min="0" name="workStudyAmount" class="form-control hs">
->>>>>>> master
                     </div>
                 </div>
 
@@ -175,11 +155,7 @@
             </div>
 
             <!--Section 2: Qualifications-->
-<<<<<<< HEAD
             <div class=" card-panel ">
-=======
-            <div class="card-panel">
->>>>>>> master
                 <h4 class="mb-3 mt-4"> Qualifications </h4>
                 <div class="row">
                     <div class="col-md-2 mb-3">
@@ -206,13 +182,8 @@
                         <input type="month" class="form-control" name="graduationDate" required>
                     </div>
                     <div class="col-md-2 mb-3">
-<<<<<<< HEAD
                         <label for="validationDefault05">Highschool GPA</label>
                         <input pattern="([0-5]{1})\..{1,2}" class="form-control" name="highschoolGPA" oninvalid="this.setCustomValidity('Must be a valid GPA. Ex: 4.0 or 3.64')" oninput="this.setCustomValidity('');" required>
-=======
-                        <label for="validationDefault05">Highschool GPA (if known)</label>
-                        <input pattern="([0-5]{1})\..{1,2}" class="form-control" name="highschoolGPA" oninvalid="this.setCustomValidity('Must be a valid GPA. Ex: 4.0 or 3.64')" oninput="this.setCustomValidity('');">
->>>>>>> master
                     </div>
                     <div class="col-md-2 mb-3">
                         <label for="validationDefault05">College GPA</label>
@@ -232,11 +203,7 @@
 
                 <hr>
 
-<<<<<<< HEAD
                 <table id="classList"></table>
-=======
-                <table id="course-history"></table>
->>>>>>> master
 
                 <div class="row mt-3" style="margin-bottom: 0px;">
                     <div class="col-md-10 mb-1">
@@ -248,14 +215,8 @@
                 </div>
 
                 <hr>
-<<<<<<< HEAD
                 <div id="jobList"></div>
             </div>
-=======
-                <table id="work-history"></table>
-			</div>
-            
->>>>>>> master
 
             <!--Section 3: Schedule-->
             <div class=" card-panel">
@@ -266,15 +227,11 @@
 
             <button type="submit" class="center-button mobile-button mt-5 mb-5" style="background-color:white;">Submit</button>
         </form>
-<<<<<<< HEAD
        <!--Javascript Imports-->
 			<script type="text/javascript" src="js/apply.js"></script>
 			<script type="text/javascript" src="js/popper.min.js"></script>
 			<script type="text/javascript" src="js/bootstrap.min.js"></script>
 			<script src="js/artsy.js"></script>
-=======
-
->>>>>>> master
         <!--Materialize CSS Jquery-->
             <script>
                 $(".button-collapse").sideNav();
@@ -315,129 +272,14 @@
 				})
 			})($);
 			
-			function jsonSchedule(){
-				var array = [];
-				var objs = [];
-				
-				$('.schedule-table').find(".time-slot").each(function () {
-					if(this.dataset.selected == "selected"){
-						//push each selected time-slot onto array
-						array.push({"day":dayToText(this.dataset.day), "time":this.dataset.time, "content":this.innerHTML});
-					}
-				});
-				
-				//Sort time-slots into ranges
-				var max = "0";
-				var prevTime = 0;
-
-				for(i=0;i<array.length;i++){
-					if(array[i]["content"]!= null && objs.indexOf(array[i]["content"]) < 0){
-						max = array[i]["time"];
-						prevTime = parseInt(array[i]["time"]);
-						for(x=0;x<array.length;x++){
-							if(array[i]["day"] == array[x]["day"] && array[i]["content"] == array[x]["content"] && prevTime == (parseInt(array[x]["time"])-1)){
-								if(max < array[x]["time"]){
-									max = array[x]["time"];
-								}
-								prevTime = parseInt(array[x]["time"]);
-								array.splice(x, 1);
-								x--;
-							}
-						}
-						objs.push({"day":array[i]["day"], "startTime":array[i]["time"], "endTime":max, "content":array[i]["content"]});	
-						array.splice(i, 1);
-						i--;
-					}
-				}
-				
-				//Resulting json
-				return JSON.stringify(objs);
-			}
-			
-			function dayToText(num){
-				var day = "";
-				num = parseInt(num);
-				switch(num){
-					case 1:
-						day = "Monday";
-						break;
-					case 2:
-						day = "Tuesday";
-						break;
-					case 3:
-						day = "Wednesday";
-						break;
-					case 4:
-						day = "Thursday";
-						break;
-					case 5:
-						day = "Friday";
-						break;
-					default:
-						day = "Something went wrong in dayToText function";
-						break;
-					}
-				return day;
-			}
-			
-			// Form submit
 			$('#apply-form').on('submit',
 			function(e)
 			{
 				e.preventDefault();
 				var formData = new FormData($('#apply-form')[0]);
-				
-				// Get the applicant's course history
-				var courseHistory = new Array();
-				$('#course-history').find('tr').each(function(i)
-				{
-					var tds = $(this).find('td');
-					// start eq from 1 to skip delete button
-					courseHistory[i]={
-						"courseTitle": tds.eq(1).children('input')[0].value,
-						"finalGrade" : tds.eq(2).children('input')[0].value,
-						"semester" : tds.eq(3).children('select')[0].selectedIndex,
-						"year" : tds.eq(4).children('input')[0].value,
-						"instructor" : tds.eq(5).children('input')[0].value
-					}
-				});
-				
-				formData.append('courseHistory', JSON.stringify(courseHistory));
-				//console.log(courseHistory);
-				
-				// Get Applicant's work history
-				var workHistory = new Array();
-				$('#work-history').find('tr').each(function(i)
-				{
-					var tds = $(this).find('td');
-					workHistory[i]={
-						"employer": tds.eq(1).children('input')[0].value,
-						"dutiesResponsibilities" : tds.eq(2).children('input')[0].value,
-						"startDate" : tds.eq(3).children('input')[0].value,
-						"endDate" : tds.eq(4).children('input')[0].value
-					}
-				});
-				
-				
-				formData.append('workHistory', JSON.stringify(workHistory));
-				//console.log(workHistory);
-				/*// Get the user's current class schedule
-				var weeklyScheduleData = JSON.stringify($("#weekly-schedule").jqs('export'));
-				
-				formData.append('weeklySchedule', weeklyScheduleData);
-				
-				console.log(formData);
-				console.log(weeklyScheduleData);
-				*/
-				
-				
-				//I added this for you Brad and left your comments above
-				var weeklyScheduleData = jsonSchedule();
-				formData.append('weeklySchedule', weeklyScheduleData);
-				
 				$.ajax({
 					type: 'POST',
-					url: 'https://www.bradfriebe.com/chemstock/apply.php',
+					url: 'http://www.bradfriebe.com/test/upload.php',
 					crossDomain: true,
 					data: formData,
 					contentType: false,
@@ -451,13 +293,12 @@
 						}
 						else
 						{
-							alert("You app in yo!");
+							alert('Your app is in yo');
 						}
 					},
 					error: function(data)
 					{
-						//alert(data);
-						alert('There was an internal error, please try again later');
+						alert('There was an error submitting your application');
 					}
 				});
 			});
