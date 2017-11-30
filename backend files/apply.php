@@ -25,12 +25,20 @@ $homePhone = $db->real_escape_string($_POST["homePhone"]);
 $referral  = $db->real_escape_string($_POST["referred"]);
 $weeklyHours = $db->real_escape_string($_POST["weeklyHours"]);
 $workStudyApproved = $db->real_escape_string($_POST["workStudyApproved"]);
-$workStudyAmount = $db->real_escape_string($_POST["workStudyAmount"]);
+$workStudyAmount = $db->real_escape_string($_POST["amountWorkStudy"]);
+if($workStudyAmount == "")
+{
+	$workStudyAmount = "0";
+}
 $classStanding = $db->real_escape_string($_POST["classStanding"]);
 $major = $db->real_escape_string($_POST["major"]);
 $minor = $db->real_escape_string($_POST["minor"]);
 $graduationDate = $db->real_escape_string($_POST["graduationDate"]."-01");
 $highschoolGPA = $db->real_escape_string($_POST["highschoolGPA"]);
+if($highschoolGPA == "")
+{
+	$highschoolGPA = "0.0";
+}
 $collegeGPA = $db->real_escape_string($_POST["collegeGPA"]);
 // course and work history objects to insert into db
 $courseHistory = json_decode($_POST["courseHistory"],true);
@@ -39,6 +47,11 @@ $schedule = json_decode($_POST["weeklySchedule"],true);
 $weeklySchedule = "";
 foreach($schedule as $timeslot)
 {
+	if($weeklySchedule == "")
+	{
+		$weeklySchedule = $timeslot['day'].":".$timeslot['startTime']."-".$timeslot['endTime'].":".$timeslot['content'];
+		next;
+	}
 	$weeklySchedule = $weeklySchedule.",".$timeslot['day'].":".$timeslot['startTime']."-".$timeslot['endTime'].":".$timeslot['content'];
 }
 

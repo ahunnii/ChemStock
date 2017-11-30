@@ -123,7 +123,7 @@
                 <div class="row">
                     <div class="col-md-3 mb-3">
                         <label id="validationDefault04">How did you find out about this job?</label>
-                        <input type="text" class="form-control" name="referred" required>
+                        <input type="text" class="form-control" name="referred">
                     </div>
 
                     <div class="col-md-1"></div>
@@ -136,13 +136,13 @@
                         <label for="validationDefault03">Are you work study approved?</label>
                         <select class="form-control hs" id="validationDefault03" name="workStudyApproved" required>
                             <option value="" disabled selected hidden></option>
-                            <option value="0">No</option>
-                            <option value="1">Yes</option>
+                            <option value="No">No</option>
+                            <option value="Yes">Yes</option>
                         </select>
                     </div>
                     <div class="col-md-2 mb-3">
-                        <label for="validationDefault03">How many hours of work study per week?</label>
-                        <input type="number" min="0" max="60" name="hoursWorkStudy" class="form-control hs">
+                        <label for="validationDefault03">Amount of work study?</label>
+                        <input type="number" min="0" name="amountWorkStudy" class="form-control hs">
                     </div>
                 </div>
 
@@ -162,11 +162,11 @@
                         <label for="validationDefault03">Class standing</label>
                         <select class="form-control" id="validationDefault03" name="classStanding" required>
                             <option value="" disabled selected hidden></option>
-                            <option value="0">Freshman</option>
-                            <option value="1">Sophmore</option>
-                            <option value="2">Junior</option>
-                            <option value="3">Senior</option>
-                            <option value="3">Graduate Student</option>
+                            <option value="Freshman">Freshman</option>
+                            <option value="Sophmore">Sophmore</option>
+                            <option value="Junior">Junior</option>
+                            <option value="Senior">Senior</option>
+                            <option value="Graduate Student">Graduate Student</option>
                         </select>
                     </div>
                     <div class="col-md-2 mb-3">
@@ -182,8 +182,8 @@
                         <input type="month" class="form-control" name="graduationDate" required>
                     </div>
                     <div class="col-md-2 mb-3">
-                        <label for="validationDefault05">Highschool GPA</label>
-                        <input pattern="([0-5]{1})\..{1,2}" class="form-control" name="highschoolGPA" oninvalid="this.setCustomValidity('Must be a valid GPA. Ex: 4.0 or 3.64')" oninput="this.setCustomValidity('');" required>
+                        <label for="validationDefault05">Highschool GPA (if known)</label>
+                        <input pattern="([0-5]{1})\..{1,2}" class="form-control" name="highschoolGPA" oninvalid="this.setCustomValidity('Must be a valid GPA. Ex: 4.0 or 3.64')" oninput="this.setCustomValidity('');">
                     </div>
                     <div class="col-md-2 mb-3">
                         <label for="validationDefault05">College GPA</label>
@@ -203,7 +203,7 @@
 
                 <hr>
 
-                <table id="classList"></table>
+                <table id="course-history"></table>
 
                 <div class="row mt-3" style="margin-bottom: 0px;">
                     <div class="col-md-10 mb-1">
@@ -215,7 +215,7 @@
                 </div>
 
                 <hr>
-                <div id="jobList"></div>
+                <table id="work-history"></table>
             </div>
 
             <!--Section 3: Schedule-->
@@ -385,7 +385,7 @@
 				
 				$.ajax({
 					type: 'POST',
-					url: 'http://www.bradfriebe.com/test/upload.php',
+					url: 'https://www.bradfriebe.com/chemstock/apply.php',
 					crossDomain: true,
 					data: formData,
 					contentType: false,
