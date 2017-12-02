@@ -8,7 +8,7 @@
     $.ajax({
       url: urlBuilt,
 	  type: "POST",
-	  dataType: 'jsonp',
+	 // dataType: 'jsonp',
 	  data: {
 		  'value1': email,
 		  'value2': subject,
