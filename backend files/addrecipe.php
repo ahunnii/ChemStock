@@ -1,6 +1,6 @@
 <?php
 require_once("conn.php");
-if(isset($_POST['name']) && isset($_POST['prepQuantity']) && isset($_POST['experiment']) && isset($_POST['requiredChemicals'] && isset($_POST{'formula']) && isset($_POST['procedure']))
+if(isset($_POST['name']) && isset($_POST['prepQuantity']) && isset($_POST['experiment']) && isset($_POST['requiredChemicals']) && isset($_POST{'formula']) && isset($_POST['procedure']))
 {
 	$name = $db->real_escape_string($_POST['name']);
 	$prepQuantity = $db->real_escape_string($_POST['prepQuantity']);
