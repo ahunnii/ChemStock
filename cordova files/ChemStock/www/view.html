@@ -14,6 +14,7 @@
     <script type="text/javascript" src="js/materialize.min.js"></script>
     <script type="text/javascript" src="js/lodash.min.js"></script>
     <script type="text/javascript"src="js/main.js"></script>
+	<script type="text/javascript"src="js/email-alert.js"></script>
     <title>Lab Overview</title>
 </head>
 
@@ -24,7 +25,7 @@
             <img src=" img/logo.png" />
         </li>
         <li><a href="#!" onclick="display('viewalllab');">Lab View</a></li>
-        <li class="active"><a href="#!"  onclick="display('viewalltasks');">Tasks</a></li>
+        <li class="active"><a href="#!" onclick="display('viewalltasks');">Tasks</a></li>
         <li><a href="#!"  onclick="display('viewallemp');">Contact Staff</a></li>
         <li><a href="recipeView.html">Recipes</a></li>
         <li ><a href="calculator.html">Function Calculator</a></li>
@@ -64,19 +65,10 @@
         </div>
     </div>
 
-    <!--Add New Task Button-->
-    <a class="btn-floating btn-large red modal-trigger" style="position:fixed;right:3%;bottom:3%" href="#add_task">
-        <i class="large material-icons">mode_edit</i>
-    </a>
-
-    <!--Add New Task Button-->
-    <a class="btn-floating btn-large red modal-trigger" style="position:fixed;left:3%;bottom:3%" href="#current_task">
-        <i class="large material-icons">mode_edit</i>
-    </a>
     <!--Top View Area-->
     <div class=" row" id="top_view" >
         <!--Task Card-->
-        <div class="col s12" id="task_card">
+        <div class="col s12" id="task_card" name="task_card">
             <div class="card  darken-1 z-depth-1">
                 <div class="card-content ">
                     <h5 class="card-title" jd="view_lab_name">CHEM 122</h5>
@@ -136,18 +128,32 @@
     <div class=" row " id="bottom_view">
         <div  id="viewalltasks"class="col s12" >
             <div class="card-panel z-depth-1">
-                <h5>Tasks</h5>
+                <h5>Unviewed Tasks</h5>
+                <div class="divider"></div>
+
+                <div id="pend" class=" col s12">
+                    <div class="collection">
+                        <a href="#!" class="collection-item modal-trigger">Task Title 1</a>
+                        <a href="#current_task" class="collection-item modal-trigger">Changeover</a>
+                        <a href="#!" class="collection-item modal-trigger">Task Title 2</a>
+                        <a href="#!" class="collection-item modal-trigger">Task Title 3</a>
+                    </div>
+                </div>
+				
+                <h5>Accepted Tasks</h5>
                 <div class=" divider"></div>
 
                 <div id="pend" class=" col s12">
                     <div class="collection">
-                        <a href="#!" class="collection-item">Alvin</a>
-                        <a href="#!" class="collection-item active">Alvin</a>
-                        <a href="#!" class="collection-item">Alvin</a>
-                        <a href="#!" class="collection-item">Alvin</a>
+                        <a href="#!" class="collection-item modal-trigger">Task Title 1</a>
+                        <a href="#accepted_task" class="collection-item modal-trigger">Changeover</a>
+                        <a href="#!" class="collection-item modal-trigger">Task Title 2</a>
+                        <a href="#!" class="collection-item modal-trigger">Task Title 3</a>
                     </div>
                 </div>
-                <p id="timestamp">Last Updated 11:9:17</p>
+				
+				<a href="#add_task" class="right waves-effect waves-green btn green modal-trigger">Create Task</a>
+                <p id="timestamp">Last Updated 11/9/17</p>
             </div>
         </div>
         <div id="viewalllab" class=" col s12 hide">
@@ -162,7 +168,10 @@
        
 
 
-                <p id="timestamp">Last Updated 11:9:17</p>
+                <p id="timestamp">Last Updated 11/9/17</p>
+				
+				
+				
             </div>
         </div>
 
@@ -179,7 +188,7 @@
                 <div class="modal-body">
                     <div class=" row">
                         <div class="col s12 left">
-                            <h3 class="left" id="lab_name"> Lab Name</h3>
+                            <h3 class="left" id="lab_name">Assign a Task</h3>
                         </div>
 
                     </div>
@@ -189,39 +198,18 @@
                         <form class="col s12">
                             <div class="row">
                                 <div class="input-field col s6">
-                                    <input placeholder="Placeholder" id="first_name" type="text" class="validate">
-                                    <label for="first_name">First Name</label>
+                                    <input id="task_name" type="text" class="validate">
+                                    <label for="task_name">Task Name</label>
                                 </div>
                                 <div class="input-field col s6">
-                                    <input id="last_name" type="text" class="validate"><br />
-                                    <label for="last_name">Last Name</label>
+                                    <input id="user_name" type="text" class="validate">
+                                    <label for="user_name">Participant</label>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="input-field col s12">
-                                    <input disabled value="I am not editable" id="disabled" type="text" class="validate">
-                                    <label for="disabled">Disabled</label>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="input-field col s12">
-                                    <input id="password" type="password" class="validate">
-                                    <label for="password">Password</label>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="input-field col s12">
-                                    <input id="email" type="email" class="validate">
-                                    <label for="email">Email</label>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col s12">
-                                    This is an inline input field:
-                                    <div class="input-field inline">
-                                        <input id="email" type="email" class="validate">
-                                        <label for="email" data-error="wrong" data-success="right">Email</label>
-                                    </div>
+                                    <input id="task_desc" type="text" class="validate">
+                                    <label for="task_desc">Task Description<label>
                                 </div>
                             </div>
                         </form>
@@ -229,13 +217,14 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <a href="#!" class="modal-action modal-close waves-effect waves-green btn green ">Close</a>
+				<a href="#!" class="modal-action modal-close waves-effect waves-red btn-flat">Cancel</a>
+                <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Assign</a>
             </div>
         </div>
 
-        <!--Current Task Modal-->
-        <div id="current_task" class="modal  modal-fixed-footer" style="width:90% !important">
-            <div class="modal-content ">
+        <!--Example of Current Task Modal-->
+        <div id="current_task" name="current_task" class="modal modal-fixed-footer" style="width:90% !important">
+            <div class="modal-content">
                 <div class="modal-body">
                     <h4 class="left-align" id="task_name"> Changeover</h4>
                     <h6 class="left-align" id="task_date"> 2017-11-14</h6>
@@ -247,7 +236,24 @@
        
             <div class="modal-footer">
                 <a href="#!" class="modal-action modal-close waves-effect waves-red btn-flat ">Cancel</a>
-                <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Accept</a>
+                <a href="#!" onclick="triggerEmailAlert('khalob1@yahoo.com','Hey its me, ur brother', 'do this thing');" class="modal-action modal-close waves-effect waves-green btn-flat ">Accept</a>
+            </div>
+        </div>
+		
+		<!--Example of Accepted Task Modal-->
+        <div id="accepted_task" name="accepted_task" class="modal modal-fixed-footer" style="width:90% !important">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <h4 class="left-align" id="task_name"> Changeover</h4>
+                    <h6 class="left-align" id="task_date"> 2017-11-14</h6>
+                    <div class="divider"></div>
+                    <p id="task_content" class="flow-text">Hey, I didn't have a chance to do change over. Can you please do this tonight? Just make sure everything is filled.</p>
+        
+                </div>
+            </div>
+       
+            <div class="modal-footer">
+                <a href="#!" class="modal-action modal-close waves-effect waves-red btn-flat ">Cancel</a>
             </div>
         </div>
     </div>
@@ -361,7 +367,13 @@
             }
             $('.button-collapse').sideNav('hide');
         }
- 
+		
+		//Send email when task is accepted
+		function notifyTaskAccepted(subj, body) {
+			var mailString = 'mailto:khalob1@yahoo.com?subject=' + subj + '&body=' + body;
+			window.open(mailString);
+		}
+		
     </script>
 </body>
 </html>
