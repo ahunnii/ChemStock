@@ -1,13 +1,14 @@
 <?php
 require_once('conn.php');
 
-if(isset($_POST['id']) && isset($_POST['name']) && isset($_POST['prepQuantity']) && isset($_POST['experiment']) && isset($_POST['requiredChemicals']) && isset($_POST{'formula']) && isset($_POST['prepProcedure']))
+if(isset($_POST['id']) && isset($_POST['name']) && isset($_POST['prepQuantity']) && isset($_POST['prepType']) && isset($_POST['experiment']) && isset($_POST['requiredChemicals']) && isset($_POST{'formula']) && isset($_POST['prepProcedure']))
 {
-	$stmt = $db->prepare("UPDATE recipe SET name = ?, prepQuantity = ?, experiment = ?, requiredChemicals = ?, formula = ?, prepProcedure = ? WHERE id = ?");
+	$stmt = $db->prepare("UPDATE recipe SET name = ?, prepQuantity = ?, prepType = ?, experiment = ?, requiredChemicals = ?, formula = ?, prepProcedure = ? WHERE id = ?");
 	
 	$id = $db->real_escape_string($_POST['id']);
 	$name = $db->real_escape_string($_POST['name']);
 	$prepQuantity = $db->real_escape_string($_POST['prepQuantity']);
+	$prepType = $db->real_escape_string($_POST['prepType']);
 	$experiment = $db->real_escape_string($_POST['experiment']);
 	$requiredChemicals = $db->real_escape_string($_POST['requiredChemicals']);
 	$formula = $db->real_escape_string($_POST['formula']);
@@ -15,6 +16,7 @@ if(isset($_POST['id']) && isset($_POST['name']) && isset($_POST['prepQuantity'])
 	
 	$stmt->bind_param('s',$name);
 	$stmt->bind_param('d',$prepQuantity);
+	$stmt->bind_param('s',$prepType);
 	$stmt->bind_param('s',$experiment);
 	$stmt->bind_param('s',$requiredChemicals);
 	$stmt->bind_param('s',$formula);

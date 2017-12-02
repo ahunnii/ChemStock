@@ -3,7 +3,7 @@ require_once('conn.php');
 
 if(isset($_GET['id']))
 {
-	$stmt = $db->prepare("SELECT id, name, prepQuantity, experiment, requiredChemicals, formula, recipeProcedure FROM recipes WHERE id=?");
+	$stmt = $db->prepare("SELECT id, name, prepQuantity, prepType, experiment, requiredChemicals, formula, recipeProcedure FROM recipes WHERE id=?");
 	$stmt->bind_param('i', $id);
 	
 	$id = $db->real_escape_string($_GET['id']);
@@ -13,13 +13,14 @@ if(isset($_GET['id']))
 		die('query failed to execute');
 	}
 	
-	$stmt->bind_result($id, $name, $prepQuantity, $experiment, $requiredChemicals, $formula, $recipeProcedure);
+	$stmt->bind_result($id, $name, $prepQuantity, $prepType, $experiment, $requiredChemicals, $formula, $recipeProcedure);
 	$stmt->fetch();
 	
 	$recipe = array();
 	$recipe['id'] = $id;
 	$recipe['name'] = $name;
 	$recipe['prepQuantity'] = $prepQuantity;
+	$recipe['prepType'] = $prepType;
 	$recipe['experiment'] = $experiment;
 	$recipe['requiredChemicals'] = $requiredChemicals;
 	$recipe['formula'] = $formula;
