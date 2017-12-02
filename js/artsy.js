@@ -58,10 +58,10 @@
 
     $.each(generateDates(start, end, interval), function (i, d) {
       var daysInARow = $.map(new Array(days.length), function (_, i) {
-        return '<td class="time-slot" data-time="' + hhmm(d) + '" data-day="' + days[i] + '"></td>'
+        return '<td style="border: solid 1px white; height: 10vh;" class="time-slot" data-time="' + hhmm(d) + '" data-day="' + days[i] + '"></td>'
       }).join();
 
-      $el.append('<tr><td class="time-label">' + hmmAmPm(d) + '</td>' + daysInARow + '</tr>');
+      $el.append('<tr><td class="time-label" style="border-top: hidden;">' + hmmAmPm(d) + '</td>' + daysInARow + '</tr>');
     });
   };
 
@@ -74,7 +74,7 @@
   }
 
   DayScheduleSelector.prototype.select = function ($slot) { $slot.attr('data-selected', 'selected'); }
-  DayScheduleSelector.prototype.deselect = function ($slot) { $slot.removeAttr('data-selected'); }
+  DayScheduleSelector.prototype.deselect = function ($slot) { $slot.removeAttr('data-selected'); $slot.text("");}
 
   function isSlotSelected($slot) { return $slot.is('[data-selected]'); }
   function isSlotSelecting($slot) { return $slot.is('[data-selecting]'); }
@@ -246,7 +246,10 @@
     var hours = date.getHours()
       , minutes = date.getMinutes()
       , ampm = hours >= 12 ? 'pm' : 'am';
-    return hours + ':' + ('0' + minutes).slice(-2) + ampm;
+	  if(hours>12){
+		  hours = hours - 12;
+		}
+    return hours + /*':' + ('0' + minutes).slice(-2) + */ampm;
   }
 
   /**
