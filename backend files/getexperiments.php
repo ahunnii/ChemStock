@@ -10,12 +10,9 @@ if($result = $db->query($sql))
 	{
 		$output[] = $row;
 	}
-	echo json_encode($output);
 	$result->free();
+	echo json_encode($output);
 }
-else
-{
-	die($db->error);
-}
+
 $db->close();
 ?>
