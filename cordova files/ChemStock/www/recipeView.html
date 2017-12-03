@@ -87,11 +87,8 @@
                 <div class=" divider"></div>
 
                 <div id="pend" >
-                    <ul class="collection">
-                        <li class="collection-item"><div>Potassium Permagnate<a href="#!" class="secondary-content" ><i class="material-icons">send</i></a></div></li>
-                        <li class="collection-item"><div>Methenol<a href="#!" class="secondary-content" onclick="toggle_view('recipe_view');"><i class="material-icons">send</i></a></div></li>
-                        <li class="collection-item"><div>CHEM 122 Lab Final Unknowns<a href="#!" class="secondary-content"><i class="material-icons">send</i></a></div></li>
-                        <li class="collection-item"><div>pH 4, 7 Buffer<a href="#!" class="secondary-content"><i class="material-icons">send</i></a></div></li>
+                    <ul class="collection" id="recipe_collection">
+                       <!-- <li class="collection-item"><div>Methenol<a href="#!" class="secondary-content" onclick="toggle_view('recipe_view');"><i class="material-icons">send</i></a></div></li>-->
                     </ul>
                 </div>
                 <p id="timestamp">Last Updated 11:9:17</p>
@@ -100,6 +97,7 @@
         <div id="recipe_view" class=" col s12 hide">
             <div class="card-panel z-depth-1">
                 <h4 id="recipe_name">0.050 M Methanol</h4>
+                <h6 id="recipe_id" class="hide">idname</h6>
                 <div class=" divider"></div>
                 <br />
                  <h5 id="recipe_amt" ><b>Prep Quantity: </b>2L</h5>
@@ -116,18 +114,91 @@
                 </p>
                 <p id="timestamp">Last Updated 11:9:17</p>
             </div>
+
+
+            <div class="fixed-action-btn horizontal">
+                <a class="btn-floating btn-large red" onclick="GenerateRecipeEdit()";>
+                    <i class="large material-icons">mode_edit</i>
+                </a>
+
+            </div>
+
         </div>
         <div id="recipe_edit" class=" col s12 hide">
             <div class="card-panel z-depth-1">
-                <h5>Experiments</h5>
-                <div class=" divider"></div>
-                <br />
 
-                <ul class="collapsible" data-collapsible="accordion" id="exp_collection"></ul>
+                <form class="col s12" id="test">
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input placeholder="Placeholder" id="edit_recipe_name" type="text" class="validate">
+                            <label for="first_name">Name of Recipe</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input placeholder="Placeholder" id="edit_recipe_expTitle" type="text" class="validate">
+                            <label for="first_name">Name of Experiment</label>
+                        </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input placeholder="Placeholder" id="edit_recipe_amt" type="text" class="validate">
+                                <label for="first_name">Amount of Prep</label>
+                            </div>
+                            <div class="input-field col s12">
+                                <select id="edit_recipe_prefix">
+                                    <option value="" disabled selected>Prefix</option>
+                                    <option value="Liters">Liters</option>
+                                    <option value="Grams">Grams</option>
+                                    <option value="Mililiters">Mililiters</option>
+                                </select>
+                                <!--<label>Materialize Select</label>-->
+                            </div>
+                        </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input placeholder="Placeholder" id="edit_recipe_formula" type="text" class="validate">
+                            <label for="first_name">Formula/FW</label>
+                        </div>
+                    </div>
+                    <!--<div class="row">
+                        <div class="input-field col s12">
+                            <input placeholder="Placeholder" id="edit_recipe_required" type="text" class="validate">
+                            <label for="first_name">Required Chemicals</label>
+                        </div>
+                    </div>-->
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <textarea id="edit_recipe_required" class="materialize-textarea"></textarea>
+                            <label for="edit_recipe_required">Required Chemicals</label>
+                        </div>
+                    </div>
+                    <!--<div class="row">
+                        <div class="input-field col s12">
+                            <input placeholder="Placeholder" id="edit_recipe_text" type="text" class="validate">
+                            <label for="first_name">Recipe Body</label>
+                        </div>
+
+
+                    </div>-->
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <textarea id="edit_recipe_text" class="materialize-textarea"></textarea>
+                            <label for="edit_recipe_text">Recipe</label>
+                        </div>
+                    </div>
+</form>
 
 
 
                 <p id="timestamp">Last Updated 11:9:17</p>
+            </div>
+            <div class="fixed-action-btn horizontal">
+                <a class="btn-floating btn-large red" onclick="UpdateRecipe()" ;>
+                    <i class="large material-icons">mode_edit</i>
+                </a>
+
             </div>
         </div>
         <div id="recipe_add" class=" col s12 hide">
@@ -245,6 +316,10 @@
             $('ul.tabs').tabs();
             $('ul.tabs').tabs('select_tab', 'tab_id');
             $(".button-collapse").sideNav();
+            $('#edit_recipe_text').val('New Text');
+            $('#edit_recipe_text').trigger('autoresize');
+            $('#edit_recipe_required').val('New Text');
+            $('#edit_recipe_required').trigger('autoresize');
             $('#timestamp').html(
                 function () {
                     var time = new Date();
@@ -268,38 +343,174 @@
 
         //Grabs current lab setup
         $(document).ready(function () {
+            GenerateRecipe();
+        });
 
+
+        function GenerateRecipe() {
             $.ajax
                 ({
                     type: "GET",
-                    url: "https://www.bradfriebe.com/chemstock/getexperiments.php",
+                    url: "https://www.bradfriebe.com/chemstock/getrecipe.php",
                     crossDomain: true,
                     dataType: "json",
                     success: function (data) {
-                        //$exp = data;
-                        groupedData = _.groupBy(data, function (d) { return d.labID });
-                       // $.each(groupedData, function (key, value) {
-                            FilterLabView($currentLab);
-                       // });
+
+                        $.each(data, function (key, value) {
+                            $('#recipe_collection').append(
+                                "<li class='collection-item'><div>" + value.name + "<a href='#!' class='secondary-content' onclick='GenerateRecipeView(" + value.id + ");'><i class='material-icons'>send</i></a></div></li>"
+                               );
+                        });
+                    },
+                    error: function (data) {
+                        alert('There was an error getting the list of recipes...');
+                    }
+                });
+        }
+
+        function GenerateRecipeView(x) {
+            $.ajax
+                ({
+                    type: "GET",
+                    url: "https://www.bradfriebe.com/chemstock/getrecipe.php",
+                    crossDomain: true,
+                    dataType: "json",
+                    data:{id:x},
+                    success: function (data) {
+                        $('#recipe_name').html(data.name);
+                        $('#recipe_expTitle').html("<b>Experiment: </b><br />" + data.experiment );
+                        $('#recipe_amt').html("<b>Prep Quantity: </b><br />" + data.prepQuantity + " " + data.prepType );
+                        $('#recipe_formula').html("<b>Formula/FW:</b><br />" + data.formula);
+                        $('#recipe_text').html(data.recipeProcedure);
+                        $('#recipe_required').html("<b>Reqired Chemicals: </b>" + data.requiredChemicals);
+                        $('#recipe_id').html(data.id);
                     },
                     error: function (data) {
                         alert('There was an error getting application info');
                     }
                 });
-        });
+
+            $('#recipe_view').removeClass("hide");
+            $('#recipe_search').addClass("hide");
+            $('#menu_icon').html("arrow_back");
+        }
+
+        function GenerateRecipeEdit() {
+
+            var y = $('#recipe_id').html();
+            y = parseInt(y);
+            $.ajax
+                ({
+                    type: "GET",
+                    url: "https://www.bradfriebe.com/chemstock/getrecipe.php",
+                    crossDomain: true,
+                    dataType: "json",
+                    data: { id: y },
+                    success: function (data) {
+                        console.log(data);
+                        $('#recipe_view').addClass("hide");
+                        $('#recipe_edit').removeClass("hide");
+                        
+                        $('#edit_recipe_name').val(data.name);
+                        $('#edit_recipe_expTitle').val( data.experiment);
+                        $('#edit_recipe_amt').val(data.prepQuantity);
+                        $('#edit_recipe_prefix').val(data.prepType);
+                        $('#edit_recipe_formula').val(data.formula);
+                        $('#edit_recipe_text').val(data.recipeProcedure);
+                        $('#edit_recipe_required').val(data.requiredChemicals);
+                       
+                    },
+                    error: function (data) {
+                        alert('There was an error getting application info');
+                    }
+                });
+
+            $('#recipe_view').removeClass("hide");
+            $('#recipe_search').addClass("hide");
+            $('#menu_icon').html("arrow_back");
+        }
+
+        function ReturnVal(id) {
+            return $(id).val();
+        }
+        function UpdateRecipe() {
+            var data = new Array();
+            data.push(parseInt($('#recipe_id').html()));
+            data.push(ReturnVal('#edit_recipe_name'));
+            data.push(ReturnVal('#edit_recipe_amt'));
+            data.push(ReturnVal('#edit_recipe_prefix'));
+            data.push(ReturnVal('#edit_recipe_expTitle'));
+            data.push(ReturnVal('#edit_recipe_required'));
+            data.push(ReturnVal('#edit_recipe_formula'));
+            data.push(ReturnVal('#edit_recipe_text'));
+
+            console.log(data);
+            var formData = new FormData();
+            
+            formData.append('id', 1);
+            formData.append('name', "Meth" );
+            formData.append('prepQuantity', "2");
+            formData.append('prepType',"Liters" );
+            formData.append('experiment', "Nah:");
+            formData.append('requiredChemicals', "na");
+            formData.append('formula', "naaaa");
+            formData.append('prepProcedure', "in a mix");
+
+            for (var pair of formData.entries()) {
+                console.log(pair[0] + ', ' + pair[1]);
+            }
+            $.ajax({
+                type:'POST',
+                url: 'https://www.bradfriebe.com/chemstock/editrecipe.php',
+                crossDomain: true,
+                data: formData,
+                processData: false,
+                success: function (data) {
+                    if (data != "") {
+                        alert(data);
+                        //alert('ERROR');
+                    }
+                    else {
+                        alert("Updated to database");
+                    }
+                    // updated successfully
+                },
+                error: function (data) {
+                    //alert(data);
+                    alert('There was an internal error, please try again later');
+                }
+            });
+        }
+
+        function EditRecipeView() {
+            $('#recipe_view').addClass("hide");
+            $('#recipe_edit').removeClass("hide");
+            $('#edit_recipe_name').val($('#recipe_name').html());
+            $('#edit_recipe_expTitle').val($('#recipe_expTitle').html());
+            $('#edit_recipe_amt').val($('#recipe_amt').html());
+            window.alert($('#edit_recipe_amt').find("Liters").text()); // work)
+            $('#edit_recipe_formula').html("<b>Formula/FW:</b><br />" + data.formula);
+            $('#edit_recipe_text').html(data.recipeProcedure);
+            $('#edit_recipe_required').html("<b>Reqired Chemicals: </b>" + data.requiredChemicals);
+        }
 
         //Filters through the experiments
+        //Filters through the experiments
         function IconSwap() {
-            if ($('#recipe_search').hasClass('hide')) {
-                $('#menu_icon').html("arrow_back");
-                $('#recipe_view').addClass("hide");
-                $('#recipe_search').removeClass("hide");
+
+            if ($('#menu_icon').html("arrow_back")) {
+                if ($('#recipe_edit').hasClass("hide")) {
+                    $('#recipe_view').addClass("hide");
+                    $('#recipe_search').removeClass("hide");
+                    $('#menu_icon').html("menu");
+                } else if ($('#recipe_view').hasClass("hide")) {
+                    $('#recipe_edit').addClass("hide");
+                    $('#recipe_view').removeClass("hide");
+                }
+                $('.button-collapse').sideNav('hide');
+
             }
-            //} else {
-            //    $('#menu_icon').html("menu");
-            //    $('#recipe_search').addClass("hide");
-            //    $('#recipe_view').removeClass("hide");
-            //}
+
         }
         function FilterLabView(lab) {
 
@@ -313,6 +524,11 @@
             });
 
         }
+
+        function ViewRecipe() {
+
+        }
+
         //Populates modals for experiments
         function DisplayRecipe(recipe_id) {
             $('#menu_icon').html("arrow_back");
