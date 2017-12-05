@@ -29,3 +29,8 @@
 	left:40px;
 	font-weight: 500;
 }
+
+nav .input-field input{
+	padding-left: 0;
+	text-indent: 2.5em;
+}
