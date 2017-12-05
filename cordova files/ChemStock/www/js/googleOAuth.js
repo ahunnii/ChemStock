@@ -2,7 +2,7 @@
 
 function googleLogin()
 {
-	window.plugins.googleplus.login(
+    cordova.plugins.googleplus.login(
 	{},
 	function(userInfo)
 	{

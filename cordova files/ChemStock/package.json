@@ -13,7 +13,7 @@
     "cordova-android": "^6.2.3",
     "cordova-filechooser": "git+https://github.com/gianlucag/cordova-filechooser.git",
     "cordova-ios": "^4.4.0",
-    "cordova-plugin-googleplus": "~5.1.1"
+    "cordova-plugin-googleplus": "^5.1.1"
   },
   "cordova": {
     "plugins": {

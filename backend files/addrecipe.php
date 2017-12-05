@@ -11,7 +11,11 @@ if(isset($_POST['name']) && isset($_POST['prepQuantity']) && isset($_POST['prepT
 	$formula = $db->real_escape_string($_POST['formula']);
 	$procedure = $db->real_escape_string($_POST['prepProcedure']);
 	
+<<<<<<< HEAD
 	$stmt = $db->prepare("INSERT INTO recipes (name, prepQuantity, experiment, requiredChemicals, formula, prepProcedure) VALUES (?,?,?,?,?,?)");
+=======
+	$stmt = $db->prepare("INSERT INTO recipes (name, prepQuantity, prepType, experiment, requiredChemicals, formula, prepProcedure) VALUES (?,?,?,?,?,?,?)");
+>>>>>>> 236733f3c8ec4ca7bdbe5bfbec5774339c176510
 	$stmt->bind_param('sdsssss', $name,$prepQuantity,$prepType,$experiment,$requiredChemicals,$formula,$procedure);
 	
 	if(!$stmt->execute())
@@ -21,5 +25,4 @@ if(isset($_POST['name']) && isset($_POST['prepQuantity']) && isset($_POST['prepT
 	$stmt->close();
 }
 $db->close();
-
 ?>
