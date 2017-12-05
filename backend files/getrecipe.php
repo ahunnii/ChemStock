@@ -4,7 +4,7 @@ require_once('conn.php');
 
 if(isset($_GET['id']))
 {
-	$stmt = $db->prepare("SELECT id, name, prepQuantity, prepType, experiment, requiredChemicals, formula, recipeProcedure FROM recipes WHERE id=?");
+	$stmt = $db->prepare("SELECT id, name, prepQuantity, prepType, experiment, requiredChemicals, formula, prepProcedure FROM recipes WHERE id=?");
 	$stmt->bind_param('i', $id);
 	
 	$id = $db->real_escape_string($_GET['id']);
@@ -14,7 +14,7 @@ if(isset($_GET['id']))
 		die('query failed to execute');
 	}
 	
-	$stmt->bind_result($id, $name, $prepQuantity, $prepType, $experiment, $requiredChemicals, $formula, $recipeProcedure);
+	$stmt->bind_result($id, $name, $prepQuantity, $prepType, $experiment, $requiredChemicals, $formula, $prepProcedure);
 	$stmt->fetch();
 	
 	$recipe = array();
@@ -25,7 +25,7 @@ if(isset($_GET['id']))
 	$recipe['experiment'] = $experiment;
 	$recipe['requiredChemicals'] = $requiredChemicals;
 	$recipe['formula'] = $formula;
-	$recipe['recipeProcedure'] = $recipeProcedure;
+	$recipe['prepProcedure'] = $prepProcedure;
 	
 	$stmt->close();
 	echo json_encode($recipe);

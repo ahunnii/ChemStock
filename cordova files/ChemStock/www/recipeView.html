@@ -131,27 +131,34 @@
         <div id="recipe_edit" class=" col s12 hide">
             <div class="card-panel z-depth-1">
 
-                <form class="col s12" id="test">
-                    <div class="row">
+                <form class="col s12" id="editform" name="form" method="post">
+
+                    <div class="row hide">
                         <div class="input-field col s12">
-                            <input placeholder="Placeholder" id="edit_recipe_name" type="text" class="validate">
+                            <input placeholder="Placeholder" id="edit_recipe_id" type="text" class="validate" name="id" value="">
                             <label for="first_name">Name of Recipe</label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="input-field col s12">
-                            <input placeholder="Placeholder" id="edit_recipe_expTitle" type="text" class="validate">
+                            <input placeholder="Placeholder" id="edit_recipe_name" type="text" class="validate" name="name">
+                            <label for="first_name">Name of Recipe</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input placeholder="Placeholder" id="edit_recipe_expTitle" type="text" class="validate" name="experiment">
                             <label for="first_name">Name of Experiment</label>
                         </div>
                         </div>
 
                         <div class="row">
                             <div class="input-field col s12">
-                                <input placeholder="Placeholder" id="edit_recipe_amt" type="text" class="validate">
+                                <input placeholder="Placeholder" id="edit_recipe_amt" type="text" class="validate"name="prepQuantity">
                                 <label for="first_name">Amount of Prep</label>
                             </div>
                             <div class="input-field col s12">
-                                <select id="edit_recipe_prefix">
+                                <select id="edit_recipe_prefix" name="prepType">
                                     <option value="" disabled selected>Prefix</option>
                                     <option value="Liters">Liters</option>
                                     <option value="Grams">Grams</option>
@@ -162,7 +169,7 @@
                         </div>
                     <div class="row">
                         <div class="input-field col s12">
-                            <input placeholder="Placeholder" id="edit_recipe_formula" type="text" class="validate">
+                            <input placeholder="Placeholder" id="edit_recipe_formula" type="text" class="validate" name="formula">
                             <label for="first_name">Formula/FW</label>
                         </div>
                     </div>
@@ -174,7 +181,7 @@
                     </div>-->
                     <div class="row">
                         <div class="input-field col s12">
-                            <textarea id="edit_recipe_required" class="materialize-textarea"></textarea>
+                            <textarea id="edit_recipe_required" class="materialize-textarea" name="requiredChemicals"></textarea>
                             <label for="edit_recipe_required">Required Chemicals</label>
                         </div>
                     </div>
@@ -188,7 +195,7 @@
                     </div>-->
                     <div class="row">
                         <div class="input-field col s12">
-                            <textarea id="edit_recipe_text" class="materialize-textarea"></textarea>
+                            <textarea id="edit_recipe_text" class="materialize-textarea" name="prepProcedure"></textarea>
                             <label for="edit_recipe_text">Recipe</label>
                         </div>
                     </div>
@@ -203,7 +210,7 @@
                     <i class="material-icons">menu</i>
                 </a>
                 <ul>
-                    <li><a class="btn-floating green" onclick="UpdateRecipe();"><i class="material-icons">publish</i></a></li>
+                    <li><a class="btn-floating green" id="editclick"><i class="material-icons">publish</i></a></li>
                     <li><a class="btn-floating blue darken-1"><i class="material-icons">cancel</i></a></li>
 
                 </ul>
@@ -215,68 +222,50 @@
                 <form class="col s12" id="form" name="form" method="post">
                     <div class="row">
                         <div class="input-field col s12">
-                            <input placeholder="Placeholder" id="add_recipe_name" type="text" class="validate" name="add_recipe_name">
+                            <input placeholder="Placeholder" id="add_recipe_name" type="text" class="validate" name="name">
                             <label for="first_name">Name of Recipe</label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="input-field col s12">
-                            <input placeholder="Placeholder" id="add_recipe_expTitle" type="text" class="validate" name="add_recipe_expTitle">
+                            <input placeholder="Placeholder" id="add_recipe_expTitle" type="text" class="validate" name="experiment">
                             <label for="first_name">Name of Experiment</label>
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="input-field col s12">
-                            <input placeholder="Placeholder" id="add_recipe_amt" type="text" class="validate" name="add_recipe_amt">
+                            <input placeholder="Placeholder" id="add_recipe_amt" type="text" class="validate" name="prepQuantity">
                             <label for="first_name">Amount of Prep</label>
                         </div>
                         <div class="input-field col s12">
-                            <select id="add_recipe_prefix"  name="add_recipe_prefix">
+                            <select id="add_recipe_prefix"  name="prepType">
                                 <option value="" disabled selected>Prefix</option>
                                 <option value="Liters">Liters</option>
                                 <option value="Grams">Grams</option>
                                 <option value="Mililiters">Mililiters</option>
                             </select>
-                            <!--<label>Materialize Select</label>-->
                         </div>
                     </div>
                     <div class="row">
                         <div class="input-field col s12">
-                            <input placeholder="Placeholder" id="add_recipe_formula" type="text" class="validate" name=" add_recipe_formula">
+                            <input placeholder="Placeholder" id="add_recipe_formula" type="text" class="validate" name=" formula">
                             <label for="first_name">Formula/FW</label>
                         </div>
                     </div>
-                    <!--<div class="row">
-                <div class="input-field col s12">
-                    <input placeholder="Placeholder" id="edit_recipe_required" type="text" class="validate">
-                    <label for="first_name">Required Chemicals</label>
-                </div>
-            </div>-->
                     <div class="row">
                         <div class="input-field col s12">
-                            <textarea id="add_recipe_required" class="materialize-textarea" name="add_recipe_required"></textarea>
+                            <textarea id="add_recipe_required" class="materialize-textarea" name="requiredChemicals"></textarea>
                             <label for="add_recipe_required">Required Chemicals</label>
                         </div>
                     </div>
-                    <!--<div class="row">
-                <div class="input-field col s12">
-                    <input placeholder="Placeholder" id="edit_recipe_text" type="text" class="validate">
-                    <label for="first_name">Recipe Body</label>
-                </div>
-
-
-            </div>-->
                     <div class="row">
                         <div class="input-field col s12">
-                            <textarea id="add_recipe_text" class="materialize-textarea" name=" add_recipe_text"></textarea>
+                            <textarea id="add_recipe_text" class="materialize-textarea" name=" prepProcedure"></textarea>
                             <label for="add_recipe_text">Recipe</label>
                         </div>
                     </div>
                 </form>
-
-
-
                 <p id="timestamp">Last Updated 11:9:17</p>
             </div>
             <div class="fixed-action-btn horizontal click-to-toggle">
@@ -284,7 +273,7 @@
                     <i class="material-icons">menu</i>
                 </a>
                 <ul>
-                    <li><a class="btn-floating green" type="submit" onclick="AddRecipe()"><i class="material-icons">publish</i></a></li>
+                    <li><a class="btn-floating green" id="testclick"><i class="material-icons">publish</i></a></li>
                     <li><a class="btn-floating blue darken-1"><i class="material-icons">cancel</i></a></li>
 
                 </ul>
@@ -374,12 +363,12 @@
                         $('#recipe_expTitle').html("<b>Experiment: </b><br />" + data.experiment );
                         $('#recipe_amt').html("<b>Prep Quantity: </b><br />" + data.prepQuantity + " " + data.prepType );
                         $('#recipe_formula').html("<b>Formula/FW:</b><br />" + data.formula);
-                        $('#recipe_text').html(data.recipeProcedure);
+                        $('#recipe_text').html(data.prepProcedure);
                         $('#recipe_required').html("<b>Reqired Chemicals: </b>" + data.requiredChemicals);
                         $('#recipe_id').html(data.id);
                     },
                     error: function (data) {
-                        alert('There was an error getting application info');
+                        alert('There was an error getting recipe info');
                     }
                 });
 
@@ -409,7 +398,7 @@
                         $('#edit_recipe_amt').val(data.prepQuantity);
                         $('#edit_recipe_prefix').val(data.prepType);
                         $('#edit_recipe_formula').val(data.formula);
-                        $('#edit_recipe_text').val(data.recipeProcedure);
+                        $('#edit_recipe_text').val(data.prepProcedure);
                         $('#edit_recipe_required').val(data.requiredChemicals);
                        
                     },
@@ -422,34 +411,29 @@
             $('#recipe_search').addClass("hide");
             $('#menu_icon').html("arrow_back");
         }
-
         function GenerateRecipeAdd(){
             $('#recipe_search').addClass("hide");
             $('#recipe_add').removeClass("hide");
             $('#menu_icon').html("arrow_back");
         }
 
-        function AddRecipe() {
-            var formData = new FormData($('#form')[0]);
+        $('#testclick').on('click', function (e) {
+            e.preventDefault();
+            var formData = new FormData($('#form')[0]);
 
 
-            //formData.append('name', 'Meth');
-            //formData.append('prepQuantity', '2');
-            //formData.append('prepType', 'Liters');
-            //formData.append('experiment', 'Nah:');
-            //formData.append('requiredChemicals', 'na');
-            //formData.append('formula', 'naaaa');
-            //formData.append('prepProcedure', 'in a mix');
+
+
 
             //for (var pair of formData.entries()) {
-               // console.log(pair[0] + ', ' + pair[1]);
+            // console.log(pair[0] + ', ' + pair[1]);
             //}
             $.ajax({
                 type: 'POST',
                 url: 'https://www.bradfriebe.com/chemstock/addrecipe.php',
                 crossDomain: true,
                 data: formData,
-                contentType:false,
+                contentType: false,
                 processData: false,
                 success: function (data) {
                     if (data != "") {
@@ -468,33 +452,28 @@
                 }
 
             });
-        }
 
-        function ReturnVal(id) {
-            return $(id).val();
-        }
+        })
+        $('#editclick').on('click', function (e) {
+            e.preventDefault();
+            var y = $('#recipe_id').html();
+            y = parseInt(y);
+            $('#edit_recipe_id').val(y);
+            var formData = new FormData($('#editform')[0]);
 
-        function UpdateRecipe() {
 
-            var formData = new FormData();
-            
-            formData.append('id', 1);
-            formData.append('name', "Meth" );
-            formData.append('prepQuantity', "2");
-            formData.append('prepType',"Liters" );
-            formData.append('experiment', "Nah:");
-            formData.append('requiredChemicals', "na");
-            formData.append('formula', "naaaa");
-            formData.append('prepProcedure', "in a mix");
 
-            for (var pair of formData.entries()) {
-                console.log(pair[0] + ', ' + pair[1]);
-            }
+
+
+            //for (var pair of formData.entries()) {
+            // console.log(pair[0] + ', ' + pair[1]);
+            //}
             $.ajax({
-                type:'POST',
+                type: 'POST',
                 url: 'https://www.bradfriebe.com/chemstock/editrecipe.php',
                 crossDomain: true,
                 data: formData,
+                contentType: false,
                 processData: false,
                 success: function (data) {
                     if (data != "") {
@@ -512,7 +491,95 @@
                 }
 
             });
+
+        })
+
+
+        //function AddRecipe() {
+        //    var formData = new FormData($('#form')[0]);
+
+
+
+        //    //formData.append('name', 'Meth');
+        //    //formData.append('prepQuantity', '2');
+        //    //formData.append('prepType', 'Liters');
+        //    //formData.append('experiment', 'Nah:');
+        //    //formData.append('requiredChemicals', 'na');
+        //    //formData.append('formula', 'naaaa');
+        //    //formData.append('prepProcedure', 'in a mix');
+
+        //    //for (var pair of formData.entries()) {
+        //       // console.log(pair[0] + ', ' + pair[1]);
+        //    //}
+        //    $.ajax({
+        //        type: 'POST',
+        //        url: 'https://www.bradfriebe.com/chemstock/addrecipe.php',
+        //        crossDomain: true,
+        //        data: formData,
+        //        contentType:false,
+        //        processData: false,
+        //        success: function (data) {
+        //            if (data != "") {
+        //                alert(data);
+        //                //alert('ERROR');
+        //            }
+        //            else {
+        //                alert("Updated to database");
+        //                alert(JSON.stringify(data));
+        //            }
+        //            // updated successfully
+        //        },
+        //        error: function (data) {
+        //            alert(json.stringify(data));
+        //            alert('There was an internal error, please try again later');
+        //        }
+
+        //    });
+        //}
+
+        function ReturnVal(id) {
+            return $(id).val();
         }
+
+        //function UpdateRecipe() {
+
+        //    var formData = new FormData();
+            
+        //    formData.append('id', 1);
+        //    formData.append('name', "Meth" );
+        //    formData.append('prepQuantity', "2");
+        //    formData.append('prepType',"Liters" );
+        //    formData.append('experiment', "Nah:");
+        //    formData.append('requiredChemicals', "na");
+        //    formData.append('formula', "naaaa");
+        //    formData.append('prepProcedure', "in a mix");
+
+        //    for (var pair of formData.entries()) {
+        //        console.log(pair[0] + ', ' + pair[1]);
+        //    }
+        //    $.ajax({
+        //        type:'POST',
+        //        url: 'https://www.bradfriebe.com/chemstock/editrecipe.php',
+        //        crossDomain: true,
+        //        data: formData,
+        //        processData: false,
+        //        success: function (data) {
+        //            if (data != "") {
+        //                alert(data);
+        //                //alert('ERROR');
+        //            }
+        //            else {
+        //                alert("Updated to database");
+        //            }
+        //            // updated successfully
+        //        },
+        //        error: function (data) {
+        //            //alert(data);
+        //            alert('There was an internal error, please try again later');
+        //        }
+
+        //    });
+        //}
 
 
         //Filters through the experiments
