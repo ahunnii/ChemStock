@@ -1,9 +1,8 @@
 ﻿<?php
 header("Access-Control-Allow-Origin: *");
 require_once("conn.php");
-if($_GET)
-{
-if($_GET['id'])
+
+if(isset($_GET['id']))
 {
 	$stmt = $db->prepare("SELECT * FROM applications WHERE id = ?");
 	$stmt->bind_param('i', $id);
@@ -50,7 +49,6 @@ if($_GET['id'])
 	
 	$stmt->close();
 	echo json_encode($row);
-}
 }
 else
 {
