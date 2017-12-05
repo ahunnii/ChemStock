@@ -2,6 +2,9 @@
 *.apk
 *.ap_
 
+#Visual Studio files we don't need
+.vs/
+
 #platfor and plugin folders
 platforms/
 plugins/
