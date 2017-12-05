@@ -3,14 +3,20 @@
     <head>
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
 		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+        <!--Import materialize.css-->
+        <link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection" />
+
 		<script type="text/javascript" src="js/jquery.min.js"></script>
 		<script type="text/javascript" src="cordova.js"></script>
 		<script type="text/javascript" src="js/popper.min.js"></script>
 		<script type="text/javascript" src="js/bootstrap.min.js"></script>
 		<script type="text/javascript" src="js/googleOAuth.js"></script>
+        <!--Import jQuery before materialize.js-->
+        <script type="text/javascript" src="js/materialize.min.js"></script>
+        <script type="text/javascript" src="js/lodash.min.js"></script>
         <title>Temp After Login Page</title>
 	</head>
-    <body>
+    <!--<body>
 		<div class="wrapper">
 			<div class="container">
 				<div class="row">
@@ -21,15 +27,118 @@
 				</div>
 			</div>
 		</div>
-	</body>
-	<script type="text/javascript">
-	$(document).ready(function()
-	{
-		$('#logout').click(function()
-		{
-			googleLogout();
-			location.href = "index.html";
-		});
-	});
-	</script>
+	</body>-->
+<body class="green lighten-2">
+    <!--Navigation Bar-->
+    <ul class="side-nav" id="mobile">
+        <li class="logo center">
+            <img src=" img/logo.png" />
+        </li>
+        <li><a href="view.html">Lab View</a></li>
+        <li><a href="taskView.html">Tasks</a></li>
+        <li><a href="contactView.html">Contact Staff</a></li>
+        <li><a href="recipeView.html">Recipes</a></li>
+        <li class="active"><a href="calculator.html">Function Calculator</a></li>
+    </ul>
+    <div class="navbar-fixed">
+        <nav>
+            <div class="nav-wrapper green">
+                <div class="container">
+                    <a href="#!" class="brand-logo">ChemStock</a>
+                    <a href="#!" data-activates="mobile" class="button-collapse">
+                        <i class="material-icons">menu</i>
+                    </a>
+                    <ul class="right hide-on-med-and-down">
+                        <li><a href="view.html">Lab View</a></li>
+                        <li><a href="taskView.html">Tasks</a></li>
+                        <li><a href="contactView.html">Contact Staff</a></li>
+                        <li><a href="recipeView.html">Recipes</a></li>
+                        <li class="active"><a href="calculator.html">Function Calculator</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+    <br />
+
+    <!--Loading Circle-->
+    <div class="preloader-wrapper big active" id="loadingDiv" style="position:fixed; top:50%; left:50%; z-index: 1;">
+        <div class="spinner-layer spinner-blue-only">
+            <div class="circle-clipper left">
+                <div class="circle"></div>
+            </div><div class="gap-patch">
+                <div class="circle"></div>
+            </div><div class="circle-clipper right">
+                <div class="circle"></div>
+            </div>
+        </div>
+    </div>
+
+
+    <!--Top View Area-->
+    <div class=" row" id="top_view">
+
+
+
+        <!--Calculator Card-->
+        <div class="col s12">
+            <div class="card  darken-1 z-depth-1">
+                <div class="card-content ">
+                    <h3 class="card-title" jd="view_lab_name">Function Calculator</h3>
+                    <br />
+                    <div>
+           
+                    </div>
+                </div>
+                <div class="card-action center">
+                    <a href="#" class=" green-text ">Calculate</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        $(document).ready(function () {
+            $('select').material_select();
+        });
+        //Materialize CSS setup calls
+        $(document).ready(function () {
+            $('.modal').modal();
+            $('.collapsible').collapsible();
+            $('ul.tabs').tabs();
+            $('ul.tabs').tabs('select_tab', 'tab_id');
+            $(".button-collapse").sideNav();
+
+            $('#timestamp').html(
+                function () {
+                    var time = new Date();
+
+                    return "Last time checked:  " + time.toUTCString();
+                }
+            );
+        });
+
+        //Loading Indicatior for any ajax calls
+        var $loading = $('#loadingDiv').hide();
+        $(document)
+            .ajaxStart(function () {
+                $loading.show();
+            })
+            .ajaxStop(function () {
+                $loading.hide();
+            });
+
+        $(document).ready(function () {
+            $('#logout').click(function () {
+                googleLogout();
+                location.href = "index.html";
+            });
+        });
+
+
+    </script>
+</body>
+
 </html>

@@ -67,24 +67,8 @@
 
     <!--Top View Area-->
     <div class=" row" id="top_view" >
-        <!--Task Card-->
-        <div class="col s12" id="task_card" name="task_card">
-            <div class="card  darken-1 z-depth-1">
-                <div class="card-content ">
-                    <h5 class="card-title" jd="view_lab_name">CHEM 122</h5>
-                    <br />
-                    <div class="col s10"><span class="black-text">Pending Tasks: <span id="app_num">0</span></span></div>
-                    <div class="col s10"><span class="black-text">Pending Tasks: <span id="app_num">0</span></span></div>
-                    <div class="col s10"><span class="black-text">Pending Tasks: <span id="app_num">0</span></span></div>
-                </div>
-                <div class="card-action">
-                    <a href="#" class=" green-text " onclick="display('app');">View Applications</a>
-                </div>
-            </div>
-        </div>
-
         <!--Lab Card-->
-        <div class="col s12 hide" id="lab_card">
+        <div class="col s12 " id="lab_card">
             <div class="card  darken-1 z-depth-1">
                 <div class="card-content ">
                     <h5 class="card-title" id="lab_name">Lab</h5>
@@ -94,69 +78,11 @@
                 </div>
             </div>
         </div>
-
-        <!--Employee Card-->
-        <div id="emp_card"class="col s12 hide">
-            <div class="card  darken-1 z-depth-1">
-                <div class="card-content ">
-                    <h5 class="card-title" jd="view_lab_name">Contacts</h5>
-                    <br />
-                    <ul class="collection" id="contact_collection">
-                        <li class="collection-item avatar">
-                            <i class="material-icons circle red">face</i>
-                            <span class="title">Andrew Hunn</span>
-                            <p>
-                                <a href="mailto:ahunnii@emich.edu">ahunnii@emich.edu</a> <br>
-                                <a href=" tel:9897801111">9897801111</a>
-                            </p>
-                        </li>
-                        <li class="collection-item avatar">
-                            <i class="material-icons circle red">face</i>
-                            <span class="title">Andrew Hunn</span>
-                            <p>
-                                <a href="mailto:ahunnii@emich.edu">ahunnii@emich.edu</a> <br>
-                                <a href=" tel:9897801111">9897801111</a>
-                            </p>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
     </div>
 
     <!--Bottom View Area-->
     <div class=" row " id="bottom_view">
-        <div  id="viewalltasks"class="col s12" >
-            <div class="card-panel z-depth-1">
-                <h5>Unviewed Tasks</h5>
-                <div class="divider"></div>
-
-                <div id="pend" class=" col s12">
-                    <div class="collection">
-                        <a href="#!" class="collection-item modal-trigger">Task Title 1</a>
-                        <a href="#current_task" class="collection-item modal-trigger">Changeover</a>
-                        <a href="#!" class="collection-item modal-trigger">Task Title 2</a>
-                        <a href="#!" class="collection-item modal-trigger">Task Title 3</a>
-                    </div>
-                </div>
-				
-                <h5>Accepted Tasks</h5>
-                <div class=" divider"></div>
-
-                <div id="pend" class=" col s12">
-                    <div class="collection">
-                        <a href="#!" class="collection-item modal-trigger">Task Title 1</a>
-                        <a href="#accepted_task" class="collection-item modal-trigger">Changeover</a>
-                        <a href="#!" class="collection-item modal-trigger">Task Title 2</a>
-                        <a href="#!" class="collection-item modal-trigger">Task Title 3</a>
-                    </div>
-                </div>
-				
-				<a href="#add_task" class="right waves-effect waves-green btn green modal-trigger">Create Task</a>
-                <p id="timestamp">Last Updated 11/9/17</p>
-            </div>
-        </div>
-        <div id="viewalllab" class=" col s12 hide">
+        <div id="viewalllab" class=" col s12">
             <div class="card-panel z-depth-1">
                 <h5>Experiments</h5>
                 <div class=" divider"></div>
@@ -174,14 +100,11 @@
 				
             </div>
         </div>
-
-
     </div>
 
 
     <!--Different Modal Templates-->
     <div>
-
         <!--Add Task Modal-->
         <div id="add_task" class="modal  modal-fixed-footer" style="width:90% !important">
             <div class="modal-content ">
@@ -221,48 +144,13 @@
                 <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Assign</a>
             </div>
         </div>
-
-        <!--Example of Current Task Modal-->
-        <div id="current_task" name="current_task" class="modal modal-fixed-footer" style="width:90% !important">
-            <div class="modal-content">
-                <div class="modal-body">
-                    <h4 class="left-align" id="task_name"> Changeover</h4>
-                    <h6 class="left-align" id="task_date"> 2017-11-14</h6>
-                    <div class="divider"></div>
-                    <p id="task_content" class="flow-text">Hey, I didn't have a chance to do change over. Can you please do this tonight? Just make sure everything is filled.</p>
-        
-                </div>
-            </div>
-       
-            <div class="modal-footer">
-                <a href="#!" class="modal-action modal-close waves-effect waves-red btn-flat ">Cancel</a>
-                <a href="#!" onclick="triggerEmailAlert('khalob1@yahoo.com','Hey its me, ur brother', 'do this thing');" class="modal-action modal-close waves-effect waves-green btn-flat ">Accept</a>
-            </div>
-        </div>
-		
-		<!--Example of Accepted Task Modal-->
-        <div id="accepted_task" name="accepted_task" class="modal modal-fixed-footer" style="width:90% !important">
-            <div class="modal-content">
-                <div class="modal-body">
-                    <h4 class="left-align" id="task_name"> Changeover</h4>
-                    <h6 class="left-align" id="task_date"> 2017-11-14</h6>
-                    <div class="divider"></div>
-                    <p id="task_content" class="flow-text">Hey, I didn't have a chance to do change over. Can you please do this tonight? Just make sure everything is filled.</p>
-        
-                </div>
-            </div>
-       
-            <div class="modal-footer">
-                <a href="#!" class="modal-action modal-close waves-effect waves-red btn-flat ">Cancel</a>
-            </div>
-        </div>
     </div>
 
     <script>
         $exp = new Array();
         $currentLab = 122;
         var groupedData;
-        $numOfApps = 0;
+
 
         //Materialize CSS setup calls
         $(document).ready(function () {
@@ -368,11 +256,6 @@
             $('.button-collapse').sideNav('hide');
         }
 		
-		//Send email when task is accepted
-		function notifyTaskAccepted(subj, body) {
-			var mailString = 'mailto:khalob1@yahoo.com?subject=' + subj + '&body=' + body;
-			window.open(mailString);
-		}
 		
     </script>
 </body>
