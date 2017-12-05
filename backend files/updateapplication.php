@@ -15,7 +15,7 @@ if($_POST['id'] && $_POST['status'])
 	$appID = $db->real_escape_string($_POST['id']);
 	$newStatus = $db->real_escape_string($_POST['status']);
 
-	if(!($updateStmt->execute())
+	if(!($updateStmt->execute()))
 	{
 		die('An error has occurred');
 	}
@@ -34,7 +34,7 @@ if($_POST['id'] && $_POST['status'])
 		$email = $db->real_escape_string($_POST['email']);
 		$phone = $db->real_escape_string($_POST['phone']);
 		
-		if(!($insertStmt->execute())
+		if(!($insertStmt->execute()))
 		{
 			die('An error has occurred');
 		}
