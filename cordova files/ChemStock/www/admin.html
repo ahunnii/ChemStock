@@ -96,7 +96,13 @@
         
         </div>
 
+        <form class="col s12 hide" id="appform" name="form" method="post">
 
+
+                    <input placeholder="Placeholder" id="edit_app_id" type="text" class="validate" name="id" value="">
+                    <input placeholder="Placeholder" id="edit_app_status" type="text" class="validate" name="applicationStatus" value="">
+     
+        </form>
 
         <!--View Screen-->
         <div class=" row sidenavfix">
@@ -250,12 +256,12 @@
 
                         </ul>
                         <div class="row">
-                            <div class=" col s12 center">
-                                <a href="#!" class="waves-effect waves-green btn-large green " onclick="MoveTo('accept_collection');">Accept</a>
+                            <div class=" col s12 center"><!--onclick="MoveTo('accept_collection');"-->
+                                <a href="#!" class="waves-effect waves-green btn-large green " id="acceptclick">Accept</a>
 
                             </div>
                             <div class=" col s12 center">
-                                <a href="#!" class="waves-effect waves-green btn-large red " onclick="MoveTo('reject_collection');">Reject</a>
+                                <a href="#!" class="waves-effect waves-green btn-large red " id="rejectclick">Reject</a>
 
                             </div>
                             </div>
@@ -362,8 +368,11 @@
                         success: function (data) {
 
                             $apps = data;
+                            var current_status = "#current_collection";
                             $.each(data, function (key, value) {
-                                $('#current_collection').append(
+                                current_status = ((value.applicationStatus == "PENDING") ? current_status : ((value.applicationStatus == "ACCEPTED") ? "#accepted_collection" : "#rejected_collection"));
+                                console.log(current_status);
+                                $(current_status).append(
                                     "<li class='collection-item avatar' id = " + value.studentID + " ><i class='material-icons circle red'>face</i>" +
                                     "<span class='title'>" + value.firstName + " " + value.lastName + "</span >" +
                                     "<p>" + value.email + " <br>" + value.cellPhone + "</p><a href='#app_view' class='waves-effect waves-light btn secondary-content modal-trigger' id = " + value.id + " onclick='GenerateSpecificApplication(this.id);' >View Application</a> </li>"
@@ -529,39 +538,117 @@
 
             //Update App Functions
             function MoveTo(dest) {
-               var current = ($('#app_studentid').html().split("E")[1]);
-                $('#'+current).appendTo('#' + dest);
-                $('#app_view').modal('close');
-                Materialize.toast('Switching to' + dest, 1000, '', function () { alert('Your request has been processed') });
-                console.log($currentApp);
-                var test = (dest == "accept_collection" ? "ACCEPTED" : "DENIED");
-               // UpdateApp($currentApp, test);
+                //Need a better way to move element to a different collection
+                var current = ($('#app_studentid').html().split("E")[1]);
+                var current_id = $currentApp;
+                var location = (dest == "accept_collection" ? "ACCEPTED" : "DENIED");
+               // current_id = parseInt(current_id);
+                var status = UpdateApp(current_id, location);
+                console.log(current_id + " " + location + " " + status);
+                if (status) {
+                    $('#' + current).appendTo('#' + dest);
+                    $('#app_view').modal('close');
+                    Materialize.toast('Switching to' + dest, 1000, '', function () { alert('Successful: Application accepted.') });
+                } else {
+                   // $('#' + current).appendTo('#' + dest);
+                    $('#app_view').modal('close');
+                    Materialize.toast('Switching to' + dest, 1000, '', function () { alert('Error: Something happened. Please try again.') });
+                }
             }
-            function UpdateApp(app_id, app_status) {
-                var formData = new FormData();
-                formData.append('id', app_id);
-                formData.append('status', app_status);
+            function UpdateApp(app_status, formData) {
+               // var formData = new FormData();
+                var isSuccess = false;
+                //formData.append('id', app_id);
+                //formData.append('applicationStatus', app_status);
+
+                $('#edit_app_id').val($currentApp);
+                $('#edit_app_id').val(app_status);
               //  - string eg. "ACCEPTED" "DENIED"
                 $.ajax({
                     type: 'POST',
                     url: 'https://www.bradfriebe.com/chemstock/updateapplication.php',
                     crossDomain: true,
                     data: formData,
+                    contentType: false,
+                    processData: false,
                     success: function (data) {
                         if (data != "") {
                             alert(data);
                             //alert('ERROR');
                         }
                         // updated successfully
+                        isSuccess = true;
                     },
                     error: function (data) {
                         //alert(data);
                         alert('There was an internal error, please try again later');
                     }
                 });
+
+                return isSuccess;
             }
 
-     
+            $('#acceptclick').on('click', function (e) {
+                console.log('click');
+                e.preventDefault();
+                $('#edit_app_id').val($currentApp);
+                $('#edit_app_status').val("ACCEPTED");
+                console.log($('#edit_app_id').val());
+                console.log($('#edit_app_status').val());
+                
+                var formData = new FormData($('#appform')[0]);
+                console.log(JSON.stringify(formData));
+                $.ajax({
+                    type: 'POST',
+                    url: 'https://www.bradfriebe.com/chemstock/updateapplication.php',
+                    crossDomain: true,
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    success: function (data) {
+                        if (data != "") {
+                            alert(data);
+                            //alert('ERROR');
+                        }
+                        // updated successfully
+                   
+                    },
+                    error: function (data) {
+                        //alert(data);
+                        alert('There was an internal error, please try again later');
+                    }
+                });
+
+            })
+            $('#rejectclick').on('click', function (e) {
+                e.preventDefault();
+                $('#edit_app_id').val($currentApp);
+                $('#edit_app_status').val("DENIED");
+                var formData = new FormData($('#appform')[0]);
+                $.ajax({
+                    type: 'POST',
+                    url: 'https://www.bradfriebe.com/chemstock/updateapplication.php',
+                    crossDomain: true,
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    success: function (data) {
+                        if (data != "") {
+                            alert(data);
+                            //alert('ERROR');
+                        }
+                        // updated successfully
+                        alert(data);
+                    },
+                    error: function (data) {
+                        //alert(data);
+                        alert('There was an internal error, please try again later');
+                    }
+                });
+
+
+            })
+
         </script>            
 </body>
 </html>
