@@ -11,7 +11,7 @@ function googleLogin()
 		var provider = email.replace(/^.*@/,"");
 		if(provider === "emich.edu")
 		{
-			location.href = "main.html";
+			location.href = "calculator.html";
 		}
 		else
 		{
@@ -37,7 +37,7 @@ function googleSilentLogin()
 		var provider = email.replace(/^.*@/,"");
 		if(provider === "emich.edu")
 		{
-			location.href = "main.html";
+			location.href = "calculator.html";
 		}
 		else
 		{

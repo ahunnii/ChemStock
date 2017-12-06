@@ -5,8 +5,8 @@
 }
 
 .sidenavfix{
-padding-left:300px;
-height:50%;
+	padding-left:300px;
+	height:50%;
 }
 .modal h6{
     font-size:18.5px;
@@ -17,4 +17,20 @@ height:50%;
 
 .tabs .indicator {
     background-color: green !important;
+}
+
+.button-collapse{
+	margin:0 !important;
+	position: absolute !important;
+	left:40px;
+}
+
+.brand-logo{
+	left:40px;
+	font-weight: 500;
+}
+
+nav .input-field input{
+	padding-left: 0;
+	text-indent: 2.5em;
 }

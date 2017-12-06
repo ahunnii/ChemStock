@@ -16,8 +16,7 @@ else
 			$labID = $db->real_escape_string($_POST['labID']);
 			
 			$stmt = $db->prepare("UPDATE employees SET assignedTo = ? WHERE id = ?");
-			$stmt->bind_param('i',$labID);
-			$stmt->bind_param('i',$employeeID);
+			$stmt->bind_param('ii',$labID, $employeeID);
 			if(!$stmt->execute())
 			{
 				die('failed to execute query');
