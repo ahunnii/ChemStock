@@ -5,7 +5,7 @@
 #Visual Studio files we don't need
 .vs/
 
-#platfor and plugin folders
+#platform and plugins
 platforms/
 plugins/
 
