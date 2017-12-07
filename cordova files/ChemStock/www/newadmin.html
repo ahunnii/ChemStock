@@ -23,11 +23,9 @@
 	<body class="green lighten-2">
         <!--Navigation Bar-->
         <ul id="slide-out" class="side-nav fixed">
-            <li class="logo center">
-                    <img src=" img/logo.png" />
-            </li>
-            <li><a href="#!" onclick="display('app');">Applications</a></li>
-            <li><a href="#!">Personnel</a></li>
+            <li class="logo center"><img src=" img/logo.png" /></li>
+            <li><a href="#!" onclick="SwitchDisplay('apps');">Applications</a></li>
+            <li><a href="#!" onclick="SwitchDisplay('employees');">Personnel</a></li>
             <li class="no-padding">
                 <ul class="collapsible collapsible-accordion">
                     <li>
@@ -45,8 +43,7 @@
                 <div class="nav-wrapper green">
                     <a href="#!" class="brand-logo" style=" padding-left:350px">ChemStock</a>
                     <ul class="right hide-on-med-and-down">
-                        <li><a href="sass.html" Sass</a></li>
-                        <li><a href="badges.html">Components</a></li>
+                        <li><a href="#!" onclick="SwitchDisplay('employees');">All Employees</a></li>
                     </ul>
                 </div>
             </nav>
@@ -76,12 +73,12 @@
                     <div class="card-content ">
                         <h5 class="card-title">Applications</h5>
                         <br />
-                        <div class="col s2"> <img src=" img/view.png"  class="responsive-img"/> </div>
+                        <div class="col s2"> <img src=" img/view_nl.png"  class="responsive-img"/> </div>
                         <br />
                         <div class="col s10"><span class="black-text">Current Number of Pending Applications: <span id="app_num">0</span></span></div>
                     </div>
                     <div class="card-action">
-                        <a href="#" class=" green-text "  onclick="display('app');">View Applications</a>
+                        <a href="#" class=" green-text "  onclick="SwitchDisplay('apps');">View Applications</a>
                     </div>
                 </div>
             </div>
@@ -91,12 +88,12 @@
                     <div class="card-content ">
                         <h5 class="card-title">Lab Overview</h5>
                         <br />
-                        <div class="col s2"> <img src=" img/apply.png" class="responsive-img" /> </div>
+                        <div class="col s2"> <img src=" img/apply_nl.png" class="responsive-img" /> </div>
                         <br />
                         <div class="col s10"><span class="black-text">Current Number of Staff : 14</span></div>
                     </div>
                     <div class="card-action">
-                        <a href="#" class=" green-text" onclick="display('bc');">View All Labs</a>
+                        <a href="#" class=" green-text" onclick="SwitchDisplay('labs');">View All Labs</a>
                     </div>
                 </div>
             </div>
@@ -131,7 +128,7 @@
                     <!--<div class=" divider"></div>-->
          
                         <div id="pend" class=" col s12">
-                            <ul class="collection" id="folla"></ul>
+                            <ul class="collection" id="current_collection"></ul>
                         </div>
 
                         <div id="accept" class=" col s12">
@@ -141,11 +138,19 @@
                         <div id="reject" class=" col s12">
                             <ul class="collection" id="reject_collection"></ul>
                         </div>
-                    <p id="timestamp">Last Updated 11:9:17</p>
+                    <p class="timestamp">Last Updated 11:9:17</p>
                 </div>
             </div>
             <div id="viewallpersonnel" class=" col s12 hide">
+                <div class="card-panel z-depth-1">
+                    <h5>Personnel</h5>
 
+                    <!--Tabs-->
+                    <!--<div class=" divider"></div>-->
+
+
+                    <p class="timestamp">Last Updated 11:9:17</p>
+                </div>
             </div>
 
 
@@ -181,6 +186,7 @@
                                 <div class="collapsible-header"><i class="material-icons">filter_drama</i><span><h5>Basic Information</h5></span></div>
                                 <div class="collapsible-body">
                                     <h6 id="app_studentid">Student ID</h6>
+                                    <h6 id="app_id" class="hide">id</h6>
                                     <h6 id="app_email">Student_Email</h6>
                                     <h6 id="app_birth">Date of Birth</h6>
                                     <h6 id="app_cellphone">Cell Phone</h6>
@@ -194,10 +200,39 @@
                                 <div class="collapsible-body">
                                     <h6 id="app_referral">How you find out about job?</h6>
                                     <h6 id="app_workhours">Perfered Weekly Amt of Hours</h6>
-                                    <h6 id="app_was">Work Study Approved??</h6>
+                                    <h6 id="app_wsa">Work Study Approved??</h6>
                                     <h6 id="app_wasAmt">How much is it??</h6>
-                                    <h6 id="app_chemexp"><b>Previous Chem Classes: </b></h6>
-                                    <h6 id="app_workexp"><b>Previous Work Experience: </b></h6>
+                                    <h6 ><b>Previous Chem Classes: </b></h6>
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th>Course Title</th>
+                                                <th>Final Grade</th>
+                                                <th>Semester</th>
+                                                <th>Year Taken</th>
+                                                <th>Instructor</th>
+                                            </tr>
+                                        </thead>
+
+                                        <tbody id="app_chemexp">
+                                        </tbody>
+                                    </table>
+
+                                    <!--<p id="app_chemexp"></p>-->
+                                    <h6><b>Previous Work Experience: </b></h6>
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th>Employer</th>
+                                                <th>Start Date</th>
+                                                <th>End Date</th>
+                                                <th>Duties and Responsibilities</th>
+                                            </tr>
+                                        </thead>
+
+                                        <tbody id="app_workexp"></tbody>
+                                    </table>
+                                    <!--<p id="app_workexp"></p>-->
                                 </div>
                             </li>
                             <li>
@@ -224,17 +259,11 @@
 
                             </div>
                             <div class=" col s12 center">
-                                <a href="#!" class="waves-effect waves-green btn-large red " onclick="MoveTo();">Reject</a>
+                                <a href="#!" class="waves-effect waves-green btn-large red " onclick="MoveTo('reject_collection');">Reject</a>
 
                             </div>
                             </div>
                     </div>
-
-                  
-                    
-             
-
-          
                 </div>
                 <div class="modal-footer">
                     <a href="#!" class="modal-action modal-close waves-effect waves-green btn green ">Close</a>
@@ -278,7 +307,7 @@
                 $('.collapsible').collapsible();
                 $('ul.tabs').tabs();
                 $('ul.tabs').tabs('select_tab', 'tab_id');
-                $('#timestamp').html(
+                $('.timestamp').html(
                     function () {
                         var time = new Date();
                       
@@ -287,7 +316,6 @@
                 );
             });
 
-          
             //Loading Indicatior for any ajax calls
             var $loading = $('#loadingDiv').hide();
             $(document)
@@ -300,36 +328,16 @@
 
             //Grabs applications (its window on load because applications are by default)
             window.onload = (function () {
-                $.ajax
-                    ({
-                    type: "GET",
-                    url: "https://www.bradfriebe.com/chemstock/getapplication.php",
-                    crossDomain: true,
-                    dataType: "json",
-                    success: function (data) {
-
-                        $apps = data;
-                        $.each(data, function (key, value) {
-                            $('#folla').append(
-                                "<li class='collection-item avatar' id = " + value.studentID + " ><i class='material-icons circle red'>face</i>" +
-                                "<span class='title'>" + value.firstName + " " + value.lastName + "</span >" +
-                                "<p>" + value.email + " <br>" + value.cellPhone + "</p><a href='#app_view' class='waves-effect waves-light btn secondary-content modal-trigger' id = " + key + " onclick='populate_modal(this.id);' >View Application</a> </li>"
-                            );
-                            //$numOfApps = $numOfApps + 1;
-                            $('#app_num').html($numOfApps += 1);
-                        });
-                        console.log($apps);
-                    },
-                    error: function (data) {
-                        alert('There was an error getting application info');
-                    }
-                });
-           
+                GenerateApplications();
             });
 
             //Grabs current lab setup
             $(document).ready (function () {
-               
+                GenerateExperiments();
+
+            });
+
+            function GenerateExperiments() {
                 $.ajax
                     ({
                         type: "GET",
@@ -347,58 +355,131 @@
                             alert('There was an error getting application info');
                         }
                     });
-            });
+            }
+            function GenerateApplications() {
+                $.ajax
+                    ({
+                        type: "GET",
+                        url: "https://www.bradfriebe.com/chemstock/getapplication.php",
+                        crossDomain: true,
+                        dataType: "json",
+                        success: function (data) {
 
-            //Filters through the experiments
-            function custom_filter(id_name) {
+                            $apps = data;
+                            $.each(data, function (key, value) {
+                                $('#current_collection').append(
+                                    "<li class='collection-item avatar' id = " + value.studentID + " ><i class='material-icons circle red'>face</i>" +
+                                    "<span class='title'>" + value.firstName + " " + value.lastName + "</span >" +
+                                    "<p>" + value.email + " <br>" + value.cellPhone + "</p><a href='#app_view' class='waves-effect waves-light btn secondary-content modal-trigger' id = " + value.id + " onclick='GenerateSpecificApplication(this.id);' >View Application</a> </li>"
+                                );
+                                //$numOfApps = $numOfApps + 1;
+                                $('#app_num').html($numOfApps += 1);
+                            });
+                            console.log($apps);
+                        },
+                        error: function (data) {
+                            alert('There was an error getting application info');
+                        }
+                    });
+            }
+            function GenerateSpecificApplication(app_id) {
+                $.ajax
+                    ({
+                        type: "GET",
+                        url: "https://www.bradfriebe.com/chemstock/getapplication.php",
+                        crossDomain: true,
+                        dataType: "json",
+                        data: { id: app_id},
+                        success: function (data) {
+                            //Basic Information
+                            $('#app_status').html(data.applicationStatus);
+                            $currentApp = data.id;
+                            GenerateWorkHistory($currentApp);
+                            GenerateClassHistory($currentApp);
+                            $('#app_name').html(data.firstName + " " + ((data.middleInitial == null) ? "" : data.middleInitial) + " " + data.lastName);
 
-                $('#labarea').append(
-                    "<div class='divider'></div></br><div class='row valign-wrapper'><div class='col s2'><span class='black-text'><b>" + id_name[0].labName + "</b></span></div>" +
+                            $('#app_email').html("<b>Email:</b> " + data.email);
+                            $('#app_homephone').html("<b>Home Phone:</b> " + data.homePhone);
+                            $('#app_cellphone').html("<b>Cell Phone:</b> " + data.cellPhone);
+                            $('#app_studentid').html("<b>Student Id:</b> E" + data.studentID);
+                            $('#app_timestamp').html("Submitted: " + data.timestmp);
+                            $('#app_localaddress').html("<b>Local Address: </b></br>" + data.localAddress + "</br>" + data.localCity + "," + data.localState + " " + data.localZip);
+                            $('#app_homeaddress').html("<b>Home Address: </b></br>" +
+                                ((data.homeAddress == null) ? "Same As Local" : (data.homeAddress + "</br>" + data.homeCity + "," + data.homeState + " " + data.homeZip)));
+                            $('#app_birth').html("<b>Date of Birth: </b> " + data.dateOfBirth);
+                            $('#app_standing').html("<b>Class Standing:</b> " + data.classStanding);
+                            $('#app_cgpa').html("<b>College GPA:</b> " + data.collegeGPA);
+                            $('#app_graduationDate').html("<b>Graduation Date:</b> " + data.graduationDate);
+                            $('#app_hgpa').html("<b>High School GPA:</b> " + data.highschoolGPA);
+                            $('#app_major').html("<b>Major:</b> " + data.major);
+                            $('#app_minor').html("<b>Minor:</b> " + ((data.minor == null) ? "Does Not Have One" : data.minor));
+                            $('#app_workhours').html("<b>Preferred Weekly Hours:</b> " + data.preferredWeeklyHours);
+                            $('#app_referral').html("<b>Referral:</b> " +(( data.referral == null)? "Referral Unavailable" : data.referral));
+                            $('#app_wsa').html("<b>Work Study Approved?:</b> " + data.workStudyApproved);
+                            $('#app_wasAmt').html("<b>Work Study Amount:</b> " + data.workStudyAmount);
 
+                        },
+                        error: function (data) {
+                            alert('There was an error getting application info');
+                        }
+                    });
+            }
+            function GenerateWorkHistory(employee_id) {
+                $('#app_workexp').html("");
+                $.ajax
+                    ({
+                        type: "GET",
+                        url: "https://www.bradfriebe.com/chemstock/getworkhistory.php",
+                        crossDomain: true,
+                        dataType: "json",
+                        data: { id: employee_id },
+                        success: function (data) {
+                            $.each(data, function (key, value) {
+                                $('#app_workexp').append(
+                                    " <tr>" +
+                                    "<td>" + value.employer + "</td>" +
+                                    "<td>" + value.startDate + "</td>" +
+                                    "<td>" + value.endDate + "</td>" +
+                                    "<td>" + value.dutiesResponsibilities + "</td>" +
+                                    "</tr>"
+                                );
+                            });
+                        },
+                        error: function (data) {
+                            alert('There was an error getting application info');
+                        }
+                    });
+            }
+            function GenerateClassHistory(employee_id) {
+                $('#app_chemexp').html("");
+                $.ajax
+                    ({
+                        type: "GET",
+                        url: "https://www.bradfriebe.com/chemstock/getcoursehistory.php",
+                        crossDomain: true,
+                        dataType: "json",
+                        data: { id: employee_id },
+                        success: function (data) {
+                            $.each(data, function (key, value) {
+                                $('#app_chemexp').append(
+                                    " <tr>" +
+                                    "<td>" + value.courseTitle + "</td>" +
+                                    "<td>" + value.finalGrade + "</td>" +
+                                    "<td>" + value.semester + "</td>" +
+                                    "<td>" + value.yearTaken + "</td>" +
+                                    "<td>" + value.instructor + "</td>" +
+                                    "</tr>"
 
-                    " <div class='col s2'>" +
-
-                    " <a href='#lab_view' class='waves-effect waves-light btn green secondary-content modal-trigger' id=" + id_name[0].labID + " onclick='populate_modal_exp(this.id);' >View Lab</a>" +
-                    "</div> </div> " 
-                    
-      );
-
-                $('#side_lab_links').append(
-                    " <li><a href='#lab_view' class=' modal-trigger' id=" + id_name[0].labID + " onclick='populate_modal_exp(this.id);' >CHEM " + id_name[0].labID + '</a ></li >'
-
-                );
-           
+                                );
+                            });
+                        },
+                        error: function (data) {
+                            alert('There was an error getting application info');
+                        }
+                    });
             }
 
-            //Populates modals for application
-            function populate_modal(id_name) {
-                //Basic Information
-                $('#app_status').html($apps[id_name].applicationStatus);
-                $currentApp = $apps[id_name].id;
-                $('#app_name').html($apps[id_name].firstName + " " +( ($apps[id_name].middleInitial == null) ? "" : $apps[id_name].middleInitial )+ " " + $apps[id_name].lastName);
-                $('#app_email').html("<b>Email:</b> " + $apps[id_name].email);
-                $('#app_homephone').html("<b>Home Phone:</b> " + $apps[id_name].homePhone);
-                $('#app_cellphone').html("<b>Cell Phone:</b> " + $apps[id_name].cellPhone);
-                $('#app_studentid').html("<b>Student Id:</b> E" + $apps[id_name].studentID);
-                $('#app_timestamp').html("Submitted: " + $apps[id_name].timestmp);
-                $('#app_localaddress').html("<b>Local Address: </b></br>" + $apps[id_name].localAddress + "</br>" + $apps[id_name].localCity + "," + $apps[id_name].localState + " " + $apps[id_name].localZip);
-                $('#app_homeaddress').html("<b>Home Address: </b></br>" +
-                    (($apps[id_name].homeAddress ==null) ? "Same As Local" : ($apps[id_name].homeAddress + "</br>" + $apps[id_name].homeCity + "," + $apps[id_name].homeState + " " + $apps[id_name].homeZip)));
-                $('#app_birth').html("<b>Date of Birth: </b> " + $apps[id_name].dateOfBirth);
-                $('#app_standing').html("<b>Class Standing:</b> " + $apps[id_name].classStanding);
-                $('#app_cgpa').html("<b>College GPA:</b> " + $apps[id_name].collegeGPA);
-                $('#app_graduationDate').html("<b>Graduation Date:</b> " + $apps[id_name].graduationDate);
-                $('#app_hgpa').html("<b>High School GPA:</b> " + $apps[id_name].highschoolGPA);
-                $('#app_major').html("<b>Major:</b> " + $apps[id_name].major);
-                $('#app_minor').html("<b>Minor:</b> " +( ($apps[id_name].minor == null) ? "Does Not Have One" : $apps[id_name].minor));
-                $('#app_workhours').html("<b>Preferred Weekly Hours:</b> " + $apps[id_name].preferredWeeklyHours);
-                $('#app_referral').html("<b>Referral:</b> " + $apps[id_name].referral);
-                $('#app_wsa').html("<b>Work Study Approved?:</b> " + $apps[id_name].workStudyApproved);
-                $('#app_wasAmt').html("<b>Work Study Amount:</b> " + $apps[id_name].workStudyHours);
-                return "#" + id_name;
-            }
-
-            //Populates mo+dals for experiments
+            //Populates modals for experiments
             function populate_modal_exp(id_lab) {
              
                 $('#lab_collap').html("");
@@ -412,18 +493,45 @@
                     );
                 });
             }
+            function custom_filter(id_name) {
 
-            //Switches application and lab views
-            function display(id_name) {
-                console.log(id_name);
-                if (id_name == "app") {
-                    $('#viewalllabs').addClass("hide");
-                    $('#viewallapps').removeClass("hide");
-                } else {
-                    $('#viewalllabs').removeClass("hide");
-                    $('#viewallapps').addClass("hide");
-                    }
-            };
+                $('#labarea').append(
+                    "<div class='divider'></div></br><div class='row valign-wrapper'><div class='col s2'><span class='black-text'><b>" + id_name[0].labName + "</b></span></div>" +
+
+
+                    " <div class='col s2'>" +
+
+                    " <a href='#lab_view' class='waves-effect waves-light btn green secondary-content modal-trigger' id=" + id_name[0].labID + " onclick='populate_modal_exp(this.id);' >View Lab</a>" +
+                    "</div> </div> "
+
+                );
+
+                $('#side_lab_links').append(
+                    " <li><a href='#lab_view' class=' modal-trigger' id=" + id_name[0].labID + " onclick='populate_modal_exp(this.id);' >CHEM " + id_name[0].labID + '</a ></li >'
+
+                );
+
+            }
+
+            function SwitchDisplay(name) {
+                if(name=="apps") {
+                    $('#viewalllabs').addClass('hide');
+                    $('#viewallpersonnel').addClass('hide');
+                    $('#viewallapps').removeClass('hide');
+                }
+              else  if (name == "labs") {
+                    $('#viewalllabs').removeClass('hide');
+                    $('#viewallpersonnel').addClass('hide');
+                    $('#viewallapps').addClass('hide');
+                }
+              else  if (name == "employees") {
+                    $('#viewalllabs').addClass('hide');
+                    $('#viewallpersonnel').removeClass('hide');
+                    $('#viewallapps').addClass('hide');
+                }
+            }
+
+            //Update App Functions
             function MoveTo(dest) {
                var current = ($('#app_studentid').html().split("E")[1]);
                 $('#'+current).appendTo('#' + dest);
@@ -433,7 +541,6 @@
                 var test = (dest == "accept_collection" ? "ACCEPTED" : "DENIED");
                // UpdateApp($currentApp, test);
             }
-
             function UpdateApp(app_id, app_status) {
                 var formData = new FormData();
                 formData.append('id', app_id);
@@ -458,6 +565,7 @@
                 });
             }
 
+     
         </script>            
 </body>
 </html>

@@ -1,0 +1,250 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+    <!--<link rel="stylesheet" type="text/css" href="css/login.css">-->
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection" />
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/googleOAuth.js"></script>
+    <!--Import jQuery before materialize.js-->
+    <script type="text/javascript" src="js/materialize.min.js"></script>
+    <script type="text/javascript" src="js/lodash.min.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
+	<script type="text/javascript" src="js/email-alert.js"></script>
+    <title>Contacts</title>
+</head>
+
+<body class="green lighten-2">
+    <!--Navigation Bar-->
+    <ul class="side-nav" id="mobile">
+        <li class="logo center">
+            <img src=" img/logo.png" />
+        </li>
+        <li><a href="labView.html">Lab View</a></li>
+        <li class="active"><a href="#!">Tasks</a></li>
+        <li ><a href="contactView.html">Contact Staff</a></li>
+        <li><a href="recipeView.html">Recipes</a></li>
+        <li><a href="calculator.html">Function Calculator</a></li>
+    </ul>
+    <div class="navbar-fixed">
+        <nav>
+            <div class="nav-wrapper green">
+                <div class="container">
+                    <a href="#!" class="brand-logo">ChemStock</a>
+                    <a href="#!" data-activates="mobile" class="button-collapse">
+                        <i class="material-icons" id="menu_icon">menu</i>
+                    </a>
+                    <ul class="right hide-on-med-and-down">
+                        <li ><a href="labView.html">Lab View</a></li>
+                        <li class="active"><a href="#!">Tasks</a></li>
+                        <li ><a href="contactView.html">Contact Staff</a></li>
+                        <li><a href="recipeView.html">Recipes</a></li>
+                        <li><a href="calculator.html">Function Calculator</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+    <br />
+
+    <!--Loading Circle-->
+    <div class="preloader-wrapper big active" id="loadingDiv" style="position:fixed; top:50%; left:50%; z-index: 1;">
+        <div class="spinner-layer spinner-blue-only">
+            <div class="circle-clipper left">
+                <div class="circle"></div>
+            </div><div class="gap-patch">
+                <div class="circle"></div>
+            </div><div class="circle-clipper right">
+                <div class="circle"></div>
+            </div>
+        </div>
+    </div>
+
+
+    <!--View Area-->
+    <div class=" row " id="bottom_view">
+        <div id="viewalltasks" class="col s12">
+            <div class="card-panel z-depth-1">
+                <h5>Unviewed Tasks</h5>
+                <div class="divider"></div>
+
+                <div id="pend" class=" col s12">
+                    <div class="collection">
+                        <a href="#!" class="collection-item modal-trigger">Task Title 1</a>
+                        <a href="#current_task" class="collection-item modal-trigger">Changeover</a>
+                        <a href="#!" class="collection-item modal-trigger">Task Title 2</a>
+                        <a href="#!" class="collection-item modal-trigger">Task Title 3</a>
+                    </div>
+                </div>
+
+                <h5>Accepted Tasks</h5>
+                <div class=" divider"></div>
+
+                <div id="pend" class=" col s12">
+                    <div class="collection">
+                        <a href="#!" class="collection-item modal-trigger">Task Title 1</a>
+                        <a href="#accepted_task" class="collection-item modal-trigger">Changeover</a>
+                        <a href="#!" class="collection-item modal-trigger">Task Title 2</a>
+                        <a href="#!" class="collection-item modal-trigger">Task Title 3</a>
+                    </div>
+                </div>
+
+                <a href="#add_task" class="right waves-effect waves-green btn green modal-trigger">Create Task</a>
+                <p id="timestamp">Last Updated 11/9/17</p>
+            </div>
+        </div>
+    </div>
+
+
+    <!--Different Modal Templates-->
+    <div>
+
+        <!--Add Task Modal-->
+        <div id="add_task" class="modal  modal-fixed-footer" style="width:90% !important">
+            <div class="modal-content ">
+                <div class="modal-body">
+                    <div class=" row">
+                        <div class="col s12 left">
+                            <h3 class="left" id="lab_name">Assign a Task</h3>
+                        </div>
+
+                    </div>
+                    <div class="divider"></div>
+
+                    <div class="row">
+                        <form class="col s12">
+                            <div class="row">
+                                <div class="input-field col s6">
+                                    <input id="task_name" type="text" class="validate">
+                                    <label for="task_name">Task Name</label>
+                                </div>
+                                <div class="input-field col s6">
+                                    <input id="user_name" type="text" class="validate">
+                                    <label for="user_name">Participant</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <input id="task_desc" type="text" class="validate">
+                                    <label for="task_desc">Task Description<label>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a href="#!" class="modal-action modal-close waves-effect waves-red btn-flat">Cancel</a>
+                <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Assign</a>
+            </div>
+        </div>
+
+        <!--Example of Current Task Modal-->
+        <div id="current_task" name="current_task" class="modal modal-fixed-footer" style="width:90% !important">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <h4 class="left-align" id="task_name"> Changeover</h4>
+                    <h6 class="left-align" id="task_date"> 2017-11-14</h6>
+                    <div class="divider"></div>
+                    <p id="task_content" class="flow-text">Hey, I didn't have a chance to do change over. Can you please do this tonight? Just make sure everything is filled.</p>
+
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <a href="#!" class="modal-action modal-close waves-effect waves-red btn-flat ">Cancel</a>
+                <a href="#!" onclick="triggerEmailAlert('khalob1@yahoo.com','Khalob Accepted Your Task', 'This is a notification that Khalob accepted the Changeover Task.');" class="modal-action modal-close waves-effect waves-green btn-flat ">Accept</a>
+            </div>
+        </div>
+
+        <!--Example of Accepted Task Modal-->
+        <div id="accepted_task" name="accepted_task" class="modal modal-fixed-footer" style="width:90% !important">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <h4 class="left-align" id="task_name"> Changeover</h4>
+                    <h6 class="left-align" id="task_date"> 2017-11-14</h6>
+                    <div class="divider"></div>
+                    <p id="task_content" class="flow-text">Hey, I didn't have a chance to do change over. Can you please do this tonight? Just make sure everything is filled.</p>
+
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <a href="#!" class="modal-action modal-close waves-effect waves-red btn-flat ">Cancel</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+        $(document).ready(function () {
+
+        });
+
+        //Materialize CSS setup calls
+        $(document).ready(function () {
+            $('.modal').modal();
+            $('.collapsible').collapsible();
+            $('ul.tabs').tabs();
+            $('ul.tabs').tabs('select_tab', 'tab_id');
+            $(".button-collapse").sideNav();
+            $('#edit_recipe_text').val('New Text');
+            $('#edit_recipe_text').trigger('autoresize');
+            $('#edit_recipe_required').val('New Text');
+            $('#edit_recipe_required').trigger('autoresize');
+            $('select').material_select();
+            $('#timestamp').html(
+                function () {
+                    var time = new Date();
+
+                    return "Last time checked:  " + time.toUTCString();
+                }
+            );
+        });
+
+        //Loading Indicatior for any ajax calls
+        var $loading = $('#loadingDiv').hide();
+        $(document)
+            .ajaxStart(function () {
+                $loading.show();
+            })
+            .ajaxStop(function () {
+                $loading.hide();
+            });
+        //Needs to be updated to pull employee contact information
+        function GenerateEmployees() {
+            $.ajax
+                ({
+                    type: "GET",
+                    url: "https://www.bradfriebe.com/chemstock/getrecipe.php",
+                    crossDomain: true,
+                    dataType: "json",
+                    success: function (data) {
+
+                        $.each(data, function (key, value) {
+                            $('#employee_collection').append(
+                                "<li class='collection-item avatar'><i class='material-icons circle red'>face</i><span class='title'>" + value.name + "</span><p><a href='mailto:" + value.email + "'>" + value.email +
+                                "</a> <br>  <a href='tel:" + value.cellPhone + "'>" + value.cellPhone + " </a></p > </li >"
+                               );
+                        });
+                    },
+                    error: function (data) {
+                        alert('There was an error getting the list of employees...');
+                    }
+                });
+        }
+
+        //Send email when task is accepted
+        function notifyTaskAccepted(subj, body) {
+            var mailString = 'mailto:khalob1@yahoo.com?subject=' + subj + '&body=' + body;
+            window.open(mailString);
+        }
+
+    </script>
+</body>
+</html>
