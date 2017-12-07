@@ -103,6 +103,7 @@
             $('#edit_recipe_required').val('New Text');
             $('#edit_recipe_required').trigger('autoresize');
             $('select').material_select();
+            GenerateEmployees();
             $('#timestamp').html(
                 function () {
                     var time = new Date();
@@ -126,15 +127,16 @@
             $.ajax
                 ({
                     type: "GET",
-                    url: "https://www.bradfriebe.com/chemstock/getrecipe.php",
+                    url: "https://www.bradfriebe.com/chemstock/getemployees.php",
                     crossDomain: true,
                     dataType: "json",
                     success: function (data) {
-
+                    
                         $.each(data, function (key, value) {
+                            
                             $('#employee_collection').append(
-                                "<li class='collection-item avatar'><i class='material-icons circle red'>face</i><span class='title'>" + value.name + "</span><p><a href='mailto:" + value.email + "'>" + value.email +
-                                "</a> <br>  <a href='tel:" + value.cellPhone + "'>" + value.cellPhone + " </a></p > </li >"
+                                "<li class='collection-item avatar'><i class='material-icons circle red'>face</i><span class='title'>" + value.firstName +" " + value.lastName + "</span><p><a href='mailto:" + value.email + "'>" + value.email +
+                                "</a> <br>  <a href='tel:" + value.phoneNumber + "'>" + value.phoneNumber + " </a><br>Works in:  " +( value.assignedTo==null ? "Unnasigned": "CHEM " + value.assignedTo) + "</p > </li >"
                                );
                         });
                     },
@@ -143,7 +145,28 @@
                     }
                 });
         }
+        //function GenerateLabSetEmployees(labNumber) {
+        //    $.ajax
+        //        ({
+        //            type: "GET",
+        //            url: "https://www.bradfriebe.com/chemstock/getemployees.php",
+        //            crossDomain: true,
+        //            dataType: "json",
+        //            success: function (data) {
 
+        //                $.each(data, function (key, value) {
+        //                    if(value.assignedTo == labNumber)
+        //                    $('#employee_collection').append(
+        //                        "<li class='collection-item avatar'><i class='material-icons circle red'>face</i><span class='title'>" + value.firstName + " " + value.lastName + "</span><p><a href='mailto:" + value.email + "'>" + value.email +
+        //                        "</a> <br>  <a href='tel:" + value.phoneNumber + "'>" + value.phoneNumber + " </a><br>Works in:  " + (value.assignedTo == null ? "Unnasigned" : "CHEM " + value.assignedTo) + "</p > </li >"
+        //                    );
+        //                });
+        //            },
+        //            error: function (data) {
+        //                alert('There was an error getting the list of employees...');
+        //            }
+        //        });
+        //}
 
 
     </script>

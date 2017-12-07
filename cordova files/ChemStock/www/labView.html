@@ -22,6 +22,16 @@
 <body class="green lighten-2">
     <!--Navigation Bar-->
     <ul class="side-nav" id="mobile">
+        <!--<li>
+            <div class="user-view">
+                <div class="background">
+                    <img src="img/logo.png">
+                </div>
+           
+                <a href="#!name"><span class="black-text name">John Doe</span></a>
+                <a href="#!email"><span class="black-text email">jdandturk@gmail.com</span></a>
+            </div>
+        </li>-->
         <li class="logo center">
             <img src=" img/logo.png" />
         </li>
@@ -74,8 +84,9 @@
                 <div class="card-content ">
                     <h5 class="card-title" id="lab_name">Lab</h5>
                     <br />
-                    <div class="col s10"><span class="black-text">Location: 202</span></div>
-                    <div class="col s10"><span class="black-text">Assigned To Lab: Andrew, Mishka, Alex, Emily</span></div>
+                   <!-- <div class="col s10"><span class="black-text">Location: 202</span></div>-->
+                  
+                    <div class="col s10"><span class="black-text" id="listOfEmployees">Assigned To Lab: Andrew, Mishka, Alex, Emily</span></div>
                 </div>
             </div>
         </div>
@@ -201,6 +212,8 @@
                         alert('There was an error getting application info');
                     }
                 });
+
+            GenerateEmployees();
         });
 
         //Filters through the experiments
@@ -257,7 +270,27 @@
             $('.button-collapse').sideNav('hide');
         }
 		
-		
+        function GenerateEmployees() {
+            $('#listOfEmployees').html("Assigned to: <br>");
+            $.ajax
+                ({
+                    type: "GET",
+                    url: "https://www.bradfriebe.com/chemstock/getemployees.php",
+                    crossDomain: true,
+                    dataType: "json",
+                    success: function (data) {
+
+                        
+                        $.each(data, function (key, value) {
+                            if(value.assignedTo == $currentLab)
+                                 $('#listOfEmployees').append(value.firstName + "<br>");
+                        });
+                    },
+                    error: function (data) {
+                        alert('There was an error getting the list of employees...');
+                    }
+                });
+        }
     </script>
 </body>
 </html>

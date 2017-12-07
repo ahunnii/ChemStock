@@ -2,7 +2,7 @@
 <html>
 	<head>
 	    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
-        <!--<link rel="stylesheet" type="text/css" href="css/login.css">-->
+
 		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
         <!--Import materialize.css-->
         <link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection" />
@@ -88,7 +88,7 @@
                         <br />
                         <div class="col s2"> <img src=" img/apply_nl.png" class="responsive-img" /> </div>
                         <br />
-                        <div class="col s10"><span class="black-text">Current Number of Staff : 14</span></div>
+                        <div class="col s10"><span class="black-text">Current Number of Staff : <span id="emp_num">0</span></span></div>
                     </div>
                     <div class="card-action">
                         <a href="#" class=" green-text" onclick="SwitchDisplay('labs');">View All Labs</a>
@@ -98,12 +98,24 @@
         
         </div>
 
+        <!--Throwaway form. Need to come up with a better way of updating application  AH 12/5-->
         <form class="col s12 hide" id="appform" name="form" method="post">
-
-
-                    <input placeholder="Placeholder" id="edit_app_id" type="text" class="validate" name="id" value="">
-                    <input placeholder="Placeholder" id="edit_app_status" type="text" class="validate" name="applicationStatus" value="">
-     
+            <input placeholder="Placeholder" id="edit_app_id" type="text" class="validate" name="id" value="">
+             <input placeholder="Placeholder" id="edit_app_status" type="text" class="validate" name="applicationStatus" value="">
+        </form>
+        <!--Throwaway form. Need to come up with a better way of updating application  AH 12/5-->
+        <form class="col s12 hide" id="acceptform" name="form" method="post">
+            <input placeholder="Placeholder" id="edit_app_id_accept" type="text" class="validate" name="id" value="">
+            <input placeholder="Placeholder" id="edit_app_status_accept" type="text" class="validate" name="applicationStatus" value="">
+            
+  
+            <input placeholder="Placeholder" id="edit_app_firstName" type="text" class="validate" name="firstName" value="">
+            <input placeholder="Placeholder" id="edit_app_lastName" type="text" class="validate" name="lastName" value="">
+            <input placeholder="Placeholder" id="edit_app_email" type="text" class="validate" name="email" value="">
+            <input placeholder="Placeholder" id="edit_app_phone" type="text" class="validate" name="phone" value="">
+            
+          
+           <!-- <input placeholder="Placeholder" id="edit_app_lab" type="text" class="validate" name="assignedTo" value="">-->
         </form>
 
         <!--View Screen-->
@@ -148,7 +160,9 @@
             <div id="viewallpersonnel" class=" col s12 hide">
                 <div class="card-panel z-depth-1">
                     <h5>Personnel</h5>
-
+                    <div class=" col s12">
+                        <ul class="collection" id="employee_collection"></ul>
+                    </div>
                     <!--Tabs-->
                     <!--<div class=" divider"></div>-->
 
@@ -253,17 +267,17 @@
                             </li>
                             <li>
                                 <div class="collapsible-header"><i class="material-icons">whatshot</i><span><h5>Schedule</h5></span></div>
-                                <div class="collapsible-body"><span>Full Schedule</span></div>
+                                <div class="collapsible-body"><span>Full Schedule</span><p id="app_schedule"></p></div>
                             </li>
 
                         </ul>
                         <div class="row">
-                            <div class=" col s12 center"><!--onclick="MoveTo('accept_collection');"-->
-                                <a href="#!" class="waves-effect waves-green btn-large green " id="acceptclick">Accept</a>
+                            <div class=" col s12 center">
+                                <a href="#!" class="waves-effect waves-green btn green " id="acceptclick">Accept</a>
 
                             </div>
                             <div class=" col s12 center">
-                                <a href="#!" class="waves-effect waves-green btn-large red " id="rejectclick">Reject</a>
+                                <a href="#!" class="waves-effect waves-green btn red " id="rejectclick">Reject</a>
 
                             </div>
                             </div>
@@ -295,6 +309,44 @@
                     <a href="#!" class="modal-action modal-close waves-effect waves-green btn green ">Close</a>
                 </div>
             </div>
+
+            <!--Lab Assign View-->
+            <div id="lab_assign" class="modal modal-fixed-footer">
+                <div class="modal-content ">
+                    <div>
+                        <div class=" row">
+                            <div class="col s12 left">
+                                <h3 class="left" id="lab_name"> Assign Lab</h3>
+                            </div>
+
+                        </div>
+                        <div class="divider"></div>
+                        <form id="labform" name="form" method="post">
+                            <div class="input-field col s12 hide">
+                                <input placeholder="Placeholder" id="select_employee_id" type="text" class="validate" name="employeeID" value="">
+                            </div>
+                            <div class="input-field col s12">
+                                <select id="select_lab_value" name="labID">
+                                    <option value="" disabled selected>Lab</option>
+                                    <option value="101">CHEM 101</option>
+                                    <option value="116">CHEM 116</option>
+                                    <option value="118">CHEM 118</option>
+                                    <option value="120">CHEM 120</option>
+                                    <option value="122">CHEM 122</option>
+                                    <option value="124">CHEM 124</option>
+                                    <option value="271">CHEM 271</option>
+                                    <option value="373">CHEM 373</option>
+                                </select>
+                                
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <a href="#!" class="waves-effect waves-green btn-flat  " id="labassignclick">Assign</a>
+                    <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+                </div>
+            </div>
         </div>
 
         <script>
@@ -304,7 +356,7 @@
             $currentApp = -1;
             var groupedData;
             $numOfApps = 0;
-
+            $numOfEmp = 0;
             //Materialize CSS setup calls
             $(document).ready(function () {
                 $('.modal').modal();
@@ -338,7 +390,7 @@
             //Grabs current lab setup
             $(document).ready (function () {
                 GenerateExperiments();
-
+                GenerateEmployees();
             });
 
             function GenerateExperiments() {
@@ -372,7 +424,7 @@
                             $apps = data;
                             var current_status = "#current_collection";
                             $.each(data, function (key, value) {
-                                current_status = ((value.applicationStatus == "PENDING") ? current_status : ((value.applicationStatus == "ACCEPTED") ? "#accepted_collection" : "#rejected_collection"));
+                                current_status = ((value.applicationStatus == "PENDING") ? "#current_collection" : ((value.applicationStatus == "ACCEPTED") ? "#accept_collection" : "#reject_collection"));
                                 console.log(current_status);
                                 $(current_status).append(
                                     "<li class='collection-item avatar' id = " + value.studentID + " ><i class='material-icons circle red'>face</i>" +
@@ -382,7 +434,7 @@
                                 //$numOfApps = $numOfApps + 1;
                                 $('#app_num').html($numOfApps += 1);
                             });
-                            console.log($apps);
+                          //  console.log($apps);
                         },
                         error: function (data) {
                             alert('There was an error getting application info');
@@ -424,6 +476,12 @@
                             $('#app_referral').html("<b>Referral:</b> " +(( data.referral == null)? "Referral Unavailable" : data.referral));
                             $('#app_wsa').html("<b>Work Study Approved?:</b> " + data.workStudyApproved);
                             $('#app_wasAmt').html("<b>Work Study Amount:</b> " + data.workStudyAmount);
+                            $('#app_schedule').html(data.weeklySchedule);
+
+                            $('#edit_app_firstName').val(data.firstName);
+                            $('#edit_app_lastName').val(data.lastName);
+                            $('#edit_app_email').val(data.email);
+                            $('#edit_app_phone').val(data.cellPhone);
 
                         },
                         error: function (data) {
@@ -519,7 +577,36 @@
                 );
 
             }
+            function AssignLab(id) {
 
+                $('#select_employee_id').val(id);
+                
+            }
+
+            function GenerateEmployees() {
+                $('#employee_collection').html("");
+                $.ajax
+                    ({
+                        type: "GET",
+                        url: "https://www.bradfriebe.com/chemstock/getemployees.php",
+                        crossDomain: true,
+                        dataType: "json",
+                        success: function (data) {
+                            $.each(data, function (key, value) {
+                                $('#employee_collection').append(
+                                    "<li class='collection-item avatar' ><i class='material-icons circle red'>face</i>" +
+                                    "<span class='title'>" + value.firstName + " " + value.lastName + "</span >" +
+                                    "<p>" + value.email + " <br>" + value.phoneNumber + " <br>" + "Current Lab: " + (value.assignedTo == null ? "Unnasigned" : "CHEM " + value.assignedTo) + "</p><a href='#lab_assign' class='waves-effect waves-light btn secondary-content modal-trigger' id = " + value.id + " onclick='AssignLab(this.id);' >Assign Lab </a> </li>"
+                                );
+                                $('#emp_num').html($numOfEmp += 1);
+                            });
+                        
+                        },
+                        error: function (data) {
+                            alert('There was an error getting application info');
+                        }
+                    });
+            }
             function SwitchDisplay(name) {
                 if(name=="apps") {
                     $('#viewalllabs').addClass('hide');
@@ -537,69 +624,41 @@
                     $('#viewallapps').addClass('hide');
                 }
             }
+            function GetQuickInfo(id) {
+                $.ajax
+                    ({
+                        type: "GET",
+                        url: "https://www.bradfriebe.com/chemstock/getapplication.php",
+                        crossDomain: true,
+                        dataType: "json",
+                        data: { id: id },
+                        success: function (data) {
 
-            //Update App Functions
-            function MoveTo(dest) {
-                //Need a better way to move element to a different collection
-                var current = ($('#app_studentid').html().split("E")[1]);
-                var current_id = $currentApp;
-                var location = (dest == "accept_collection" ? "ACCEPTED" : "DENIED");
-               // current_id = parseInt(current_id);
-                var status = UpdateApp(current_id, location);
-                console.log(current_id + " " + location + " " + status);
-                if (status) {
-                    $('#' + current).appendTo('#' + dest);
-                    $('#app_view').modal('close');
-                    Materialize.toast('Switching to' + dest, 1000, '', function () { alert('Successful: Application accepted.') });
-                } else {
-                   // $('#' + current).appendTo('#' + dest);
-                    $('#app_view').modal('close');
-                    Materialize.toast('Switching to' + dest, 1000, '', function () { alert('Error: Something happened. Please try again.') });
-                }
-            }
-            function UpdateApp(app_status, formData) {
-               // var formData = new FormData();
-                var isSuccess = false;
-                //formData.append('id', app_id);
-                //formData.append('applicationStatus', app_status);
+                
 
-                $('#edit_app_id').val($currentApp);
-                $('#edit_app_id').val(app_status);
-              //  - string eg. "ACCEPTED" "DENIED"
-                $.ajax({
-                    type: 'POST',
-                    url: 'https://www.bradfriebe.com/chemstock/updateapplication.php',
-                    crossDomain: true,
-                    data: formData,
-                    contentType: false,
-                    processData: false,
-                    success: function (data) {
-                        if (data != "") {
-                            alert(data);
-                            //alert('ERROR');
+                        },
+                        error: function (data) {
+                            alert('There was an error getting application info');
                         }
-                        // updated successfully
-                        isSuccess = true;
-                    },
-                    error: function (data) {
-                        //alert(data);
-                        alert('There was an internal error, please try again later');
-                    }
-                });
-
-                return isSuccess;
+                    });
+              
             }
 
             $('#acceptclick').on('click', function (e) {
-                console.log('click');
+  
                 e.preventDefault();
-                $('#edit_app_id').val($currentApp);
-                $('#edit_app_status').val("ACCEPTED");
-                console.log($('#edit_app_id').val());
-                console.log($('#edit_app_status').val());
-                
-                var formData = new FormData($('#appform')[0]);
-                console.log(JSON.stringify(formData));
+
+                $('#edit_app_id_accept').val($currentApp);
+                $('#edit_app_status_accept').val("ACCEPTED");
+
+   
+
+                //$('#edit_app_lab').val(1);
+              
+                var formData = new FormData($('#acceptform')[0]);
+                for (var value of formData.values()) {
+                    console.log(value);
+                }
                 $.ajax({
                     type: 'POST',
                     url: 'https://www.bradfriebe.com/chemstock/updateapplication.php',
@@ -613,7 +672,9 @@
                             //alert('ERROR');
                         }
                         // updated successfully
-                   
+                        alert("Succesfully added to active list of employees.")
+                        GenerateEmployees();
+                        $('#app_view').modal('close');
                     },
                     error: function (data) {
                         //alert(data);
@@ -640,7 +701,39 @@
                             //alert('ERROR');
                         }
                         // updated successfully
-                        alert(data);
+                        alert("Successfully changed application status to REJECTED");
+                        $('#app_view').modal('close');
+                    },
+                    error: function (data) {
+                        //alert(data);
+                        alert('There was an internal error, please try again later');
+                    }
+                });
+
+
+            })
+            $('#labassignclick').on('click', function (e) {
+                e.preventDefault();
+
+                var formData = new FormData($('#labform')[0]);
+                for (var value of formData.values()) {
+                    console.log(value);
+                }
+                $.ajax({
+                    type: 'POST',
+                    url: 'https://www.bradfriebe.com/chemstock/assignemployee.php',
+                    crossDomain: true,
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    success: function (data) {
+                        if (data != "") {
+                            //alert(data);
+                            alert('ERROR');
+                        }
+                        // updated successfully
+                        alert("Successfully saved employee to lab");
+                        $('#lab_assign').modal('close');
                     },
                     error: function (data) {
                         //alert(data);
