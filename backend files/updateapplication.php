@@ -16,7 +16,7 @@ if(isset($_POST['id']) && isset($_POST['applicationStatus']))
 
 	if(!($updateStmt->execute()))
 	{
-		die('An error has occurred');
+		die($db->error);
 	}
 	$updateStmt->close();
 
@@ -24,8 +24,8 @@ if(isset($_POST['id']) && isset($_POST['applicationStatus']))
 	{
 		if(isset($_POST['firstName']) && isset($_POST['lastName']) && isset($_POST['email']) && isset($_POST['phone']))
 		{
-			$insertStmt = $db->prepare("INSERT INTO employees (firstName, lastName, email, phoneNumber) VALUES (?, ?, ?, ?)");
-			$insertStmt->bind_param('ssss', $firstName,$lastName,$email,$phone);
+			$insertStmt = $db->prepare("INSERT INTO employees (applicationID, firstName, lastName, email, phoneNumber) VALUES (?, ?, ?, ?, ?)");
+			$insertStmt->bind_param('issss', $appID, $firstName,$lastName,$email,$phone);
 			
 			$firstName = $db->real_escape_string($_POST['firstName']);
 			$lastName = $db->real_escape_string($_POST['lastName']);
@@ -34,7 +34,7 @@ if(isset($_POST['id']) && isset($_POST['applicationStatus']))
 			
 			if(!($insertStmt->execute()))
 			{
-				die('An error has occurred');
+				die($db->error);
 			}
 			$insertStmt->close();
 		}

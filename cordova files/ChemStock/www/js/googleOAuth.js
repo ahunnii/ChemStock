@@ -11,7 +11,9 @@ function googleLogin()
 		var provider = email.replace(/^.*@/,"");
 		if(provider === "emich.edu")
 		{
-			location.href = "main.html";
+			//TODO: Check if user is in employee database
+			// Relocate to new page
+			location.href = "labView.html";
 		}
 		else
 		{
@@ -37,7 +39,9 @@ function googleSilentLogin()
 		var provider = email.replace(/^.*@/,"");
 		if(provider === "emich.edu")
 		{
-			location.href = "main.html";
+			//TODO: Check if user is in employee database
+			// Relocate to new page
+			location.href = "labView.html";
 		}
 		else
 		{
