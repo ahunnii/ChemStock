@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+        <link rel="stylesheet" type="text/css" href="css/apply.css">
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+        <!--Import materialize.css-->
+        <link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection" />
+        <!--Import Materialize Icons Font-->
+		<link href="css/materializeicons.css" rel="stylesheet">
+		<script src="js/jquery.min.js"></script>
+        <!--Import jQuery before materialize.js-->
+        <script type="text/javascript" src="js/materialize.min.js"></script>
+		<!--Import Cordova and Google OAuth-->
+		<script type="text/javascript" src="cordova.js"></script>
+		<script type="text/javascript" src="js/googleOAuth.js"></script>
+
+        <title>Application</title>
+
+        <!--Let browser know website is optimized for mobile-->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+	</head>
+	
+    <body class=" teal lighten-2">
+
+        <!--Navigation Bar-->
+        <nav class=" green">
+            <div class="nav-wrapper  container">
+                <a href="#!" class="brand-logo">ChemStock</a>
+                <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+                <ul class="right hide-on-med-and-down">
+                    <li><a href="sass.html">Apply</a></li>
+                    <li><a href="badges.html">Login</a></li>
+                </ul>
+                <ul class="side-nav" id="mobile-demo">
+                    <li><a href="sass.html">Apply</a></li>
+                    <li><a href="badges.html">Login</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <form class="container" id="apply-form" style="margin-top: 5vh;">
+
+            <h3>L022 Chemistry Stockroom</h3>
+            <p>Please fill out the form below to apply to the stockroom related jobs.</p>
+
+            <!--Section 1: Basic Information-->
+            <div class=" card-panel ">
+                <h4 class="mb-3 mt-4"> Basic Information </h4>
+                <div class="row ">
+                    <div class="col-md-2 mb-3">
+                        <label for="inputGroupSuccess2">Student E#:</label>
+                        <div class="input-group">
+                            <span class="input-group-addon" style="font-weight: 700; font-size:18px;">E</span>
+                            <input pattern="(?=.*\d).{8,8}" type="text" class="form-control" name="eID" required oninvalid="this.setCustomValidity('Must be an 8 digit ID number')" oninput="this.setCustomValidity('');">
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label for="validationDefault01">Eastern Email</label>
+                        <input type="text" class="form-control" name="email" required>
+                    </div>
+                    <div class="col-md-2 mb-3">
+                        <label for="validationDefault01">First Name</label>
+                        <input type="text" class="form-control" name="firstName" required>
+                    </div>
+                    <div class="col-md-1 mb-3">
+                        <label for="validationDefault01">Initial</label>
+                        <input type="text" class="form-control" name="middleInitial" maxlength="1">
+                    </div>
+                    <div class="col-md-2 mb-3">
+                        <label for="validationDefault02">Last Name</label>
+                        <input type="text" class="form-control" name="lastName" required>
+                    </div>
+                    <div class="col-md-2 mb-3">
+                        <label for="validationDefault02">Date of Birth</label>
+                        <input type="date" class="form-control" name="dateOfBirth" required>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4 mb-3">
+                        <label for="validationDefault03">Local Address</label>
+                        <input type="text" class="form-control" id="validationDefault03" name="localAddress" required>
+                    </div>
+                    <div class="col-md-2 mb-3">
+                        <label for="validationDefault04">City</label>
+                        <input type="text" class="form-control" id="validationDefault04" name="localCity" required>
+                    </div>
+                    <div class="col-md-1 mb-3">
+                        <label for="validationDefault04">State</label>
+                        <input type="text" class="form-control" minlength="2" maxlength="2" name="localState" oninvalid="this.setCustomValidity('Must be state intials. Ex: MI')" oninput="this.setCustomValidity('');" required>
+                    </div>
+                    <div class="col-md-2 mb-3">
+                        <label for="validationDefault05">Zip</label>
+                        <input pattern="(?=.*\d).{5,5}" class="form-control" name="localZip" oninvalid="this.setCustomValidity('Must be a five digit zip code. Ex: 48197')" oninput="this.setCustomValidity('');" required>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label for="validationDefault05">Cell Phone</label>
+                        <input pattern="(?=.*\d).{7,11}" class="form-control" name="cellPhone" oninvalid="this.setCustomValidity('Must be between 7 and 10 digits.')" oninput="this.setCustomValidity('');">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4 mb-3">
+                        <label for="validationDefault03">Home Address</label>
+                        <input type="text" class="form-control" name="homeAddress" id="validationDefault03">
+                    </div>
+                    <div class="col-md-2 mb-3">
+                        <label for="validationDefault04">City</label>
+                        <input type="text" class="form-control" name="homeCity" id="validationDefault04">
+                    </div>
+                    <div class="col-md-1 mb-3">
+                        <label for="validationDefault04">State</label>
+                        <input type="text" class="form-control" name="homeState" minlength="2" maxlength="2" oninvalid="this.setCustomValidity('Must be state intials. Ex: MI')" oninput="this.setCustomValidity('');">
+                    </div>
+                    <div class="col-md-2 mb-3">
+                        <label for="validationDefault05">Zip</label>
+                        <input pattern="(?=.*\d).{5,5}" class="form-control" name="homeZip" oninvalid="this.setCustomValidity('Must be a five digit zip code. Ex: 48197')" oninput="this.setCustomValidity('');">
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label for="validationDefault05">Home Phone</label>
+                        <input pattern="(?=.*\d).{7,11}" class="form-control" name="homePhone" oninvalid="this.setCustomValidity('Must be between 7 and 10 digits.')" oninput="this.setCustomValidity('');">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-3 mb-3">
+                        <label id="validationDefault04">How did you find out about this job?</label>
+                        <input type="text" class="form-control" name="referred">
+                    </div>
+
+                    <div class="col-md-1"></div>
+
+                    <div class="col-md-2 mb-3">
+                        <label for="validationDefault03">Perferred weekly amount of hours?</label>
+                        <input type="number" class="form-control hs" max="70" name="weeklyHours" required>
+                    </div>
+                    <div class="col-md-2 mb-3">
+                        <label for="validationDefault03">Are you work study approved?</label>
+                        <select class="form-control hs" id="validationDefault03" name="workStudyApproved" required>
+                            <option value="" disabled selected hidden></option>
+                            <option value="No">No</option>
+                            <option value="Yes">Yes</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2 mb-3">
+                        <label for="validationDefault03">Amount of work study?</label>
+                        <input type="number" min="0" name="amountWorkStudy" class="form-control hs">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-2 mb-3">
+                        <label for="exampleFormControlFile1">Resume Upload</label>
+                        <input type="file" name="resume" class="form-control-file">
+                    </div>
+                </div>
+            </div>
+
+            <!--Section 2: Qualifications-->
+            <div class=" card-panel ">
+                <h4 class="mb-3 mt-4"> Qualifications </h4>
+                <div class="row">
+                    <div class="col-md-2 mb-3">
+                        <label for="validationDefault03">Class standing</label>
+                        <select class="form-control" id="validationDefault03" name="classStanding" required>
+                            <option value="" disabled selected hidden></option>
+                            <option value="Freshman">Freshman</option>
+                            <option value="Sophmore">Sophmore</option>
+                            <option value="Junior">Junior</option>
+                            <option value="Senior">Senior</option>
+                            <option value="Graduate Student">Graduate Student</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2 mb-3">
+                        <label for="validationDefault04">Major</label>
+                        <input type="text" class="form-control" id="validationDefault04" name="major" required>
+                    </div>
+                    <div class="col-md-2 mb-3">
+                        <label for="validationDefault04">Minor</label>
+                        <input type="text" class="form-control" name="minor" id="validationDefault04">
+                    </div>
+                    <div class="col-md-2 mb-3">
+                        <label for="validationDefault05">Graduation Date</label>
+                        <input type="month" class="form-control" name="graduationDate" required>
+                    </div>
+                    <div class="col-md-2 mb-3">
+                        <label for="validationDefault05">Highschool GPA (if known)</label>
+                        <input pattern="([0-5]{1})\..{1,2}" class="form-control" name="highschoolGPA" oninvalid="this.setCustomValidity('Must be a valid GPA. Ex: 4.0 or 3.64')" oninput="this.setCustomValidity('');">
+                    </div>
+                    <div class="col-md-2 mb-3">
+                        <label for="validationDefault05">College GPA</label>
+                        <input pattern="([0-5]{1})\..{1,2}" class="form-control" name="collegeGPA" oninvalid="this.setCustomValidity('Must be a valid GPA. Ex: 4.0 or 3.64')" oninput="this.setCustomValidity('');" required>
+                    </div>
+                </div>
+
+
+                <div class="row" style="margin-bottom: 0px;">
+                    <div class="col-md-10 mb-1">
+                        <label style="margin-top:1vh; font-weight: 700;"> Chemistry Courses Taken in Highschool or College</label>
+                    </div>
+                    <div class="col-md-2 mb-1" style="height:90%;">
+                        <button type="button" class="btn-sm mobile-button" onclick="insertNewClass()">Add New Course</button>
+                    </div>
+                </div>
+
+                <hr>
+
+                <table id="course-history"></table>
+
+                <div class="row mt-3" style="margin-bottom: 0px;">
+                    <div class="col-md-10 mb-1">
+                        <label style="margin-top:1vh; font-weight: 700;"> Work History </label>
+                    </div>
+                    <div class="col-md-2 mb-1" style="height:90%;">
+                        <button type="button" class="btn-sm mobile-button" onclick="insertNewJob()">Add New Job</button>
+                    </div>
+                </div>
+
+                <hr>
+				
+                <table id="work-history"></table>
+            </div>
+
+            <!--Section 3: Schedule-->
+            <div class=" card-panel">
+                <h4 class="mb-3 mt-4"> Weekly Schedule </h4>
+                <p> Indicate your schedule for the semester. Be sure to label class times with their course numbers. Ex: CHM371<p>
+                    <div id="weekly-schedule"></div>
+            </div>
+
+            <button type="submit" class="center-button mobile-button mt-5 mb-5" style="background-color:white;">Submit</button>
+        </form>
+       <!--Javascript Imports-->
+			<script type="text/javascript" src="js/apply.js"></script>
+			<script type="text/javascript" src="js/popper.min.js"></script>
+			<script type="text/javascript" src="js/bootstrap.min.js"></script>
+			<script src="js/artsy.js"></script>
+        <!--Materialize CSS Jquery-->
+            <script>
+                $(".button-collapse").sideNav();
+            </script>
+
+        <!--Schedule Javascript-->
+			<script>		
+				(function ($) {
+					$("#weekly-schedule").dayScheduleSelector({
+						// Mon - Fri
+						days        : [1, 2, 3, 4, 5],  
+						
+						// HH:mm format
+						startTime   : '08:00',   
+						
+						// HH:mm format       
+						endTime     : '23:00',
+						
+						// minutes                
+						interval    : 60,    
+						
+						stringDays  : ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'],
+						
+						// Custom template                 
+						template    : '<div id="day-scheduler" class="day-schedule-selector">'         +
+						'<table class="schedule-table">'            +
+						'<thead class="schedule-header"></thead>' +
+						'<tbody class="schedule-rows"></tbody>'   +
+					'</table>'                                  +
+					'<div>'
+				});
+				$("#weekly-schedule").on('selected.artsy.dayScheduleSelector', function (e, selected) {
+					var cNum = prompt("Please enter your course number. Example: CHM371");
+					for (var i = 0; i < selected.length; i++){
+						selected[i].innerHTML = cNum;
+					}
+					//console.log(selected);
+				})
+			})($);
+				
+			function jsonSchedule(){
+				var array = [];
+				var objs = [];
+				
+				$('.schedule-table').find(".time-slot").each(function () {
+					if(this.dataset.selected == "selected"){
+						//push each selected time-slot onto array
+						array.push({"day":dayToText(this.dataset.day), "time":this.dataset.time, "content":this.innerHTML});
+					}
+				});
+				
+				//Sort time-slots into ranges
+				var max = "0";
+				var prevTime = 0;
+
+				for(i=0;i<array.length;i++){
+					if(array[i]["content"]!= null && objs.indexOf(array[i]["content"]) < 0){
+						max = array[i]["time"];
+						prevTime = parseInt(array[i]["time"]);
+						for(x=0;x<array.length;x++){
+							if(array[i]["day"] == array[x]["day"] && array[i]["content"] == array[x]["content"] && prevTime == (parseInt(array[x]["time"])-1)){
+								if(max < array[x]["time"]){
+									max = array[x]["time"];
+								}
+								prevTime = parseInt(array[x]["time"]);
+								array.splice(x, 1);
+								x--;
+							}
+						}
+						objs.push({"day":array[i]["day"], "startTime":array[i]["time"], "endTime":max, "content":array[i]["content"]});	
+						array.splice(i, 1);
+						i--;
+					}
+				}
+				
+				//Resulting json
+				return JSON.stringify(objs);
+			}
+			
+			function dayToText(num){
+				var day = "";
+				num = parseInt(num);
+				switch(num){
+					case 1:
+						day = "M";
+						break;
+					case 2:
+						day = "T";
+						break;
+					case 3:
+						day = "W";
+						break;
+					case 4:
+						day = "TR";
+						break;
+					case 5:
+						day = "F";
+						break;
+					default:
+						day = "Something went wrong in dayToText function";
+						break;
+					}
+				return day;
+			}
+			
+			
+			// Form submit
+			$('#apply-form').on('submit',
+			function(e)
+			{
+				e.preventDefault();
+				var formData = new FormData($('#apply-form')[0]);
+				
+				// Get the applicant's course history
+				var courseHistory = new Array();
+				$('#course-history').find('tr').each(function(i)
+				{
+					var tds = $(this).find('td');
+					// start eq from 1 to skip delete button
+					courseHistory[i]={
+						"courseTitle": tds.eq(1).children('input')[0].value,
+						"finalGrade" : tds.eq(2).children('input')[0].value,
+						"semester" : tds.eq(3).children('select')[0].selectedIndex,
+						"year" : tds.eq(4).children('input')[0].value,
+						"instructor" : tds.eq(5).children('input')[0].value
+					}
+				});
+				
+				formData.append('courseHistory', JSON.stringify(courseHistory));
+				//console.log(courseHistory);
+				
+				// Get Applicant's work history
+				var workHistory = new Array();
+				$('#work-history').find('tr').each(function(i)
+				{
+					var tds = $(this).find('td');
+					workHistory[i]={
+						"employer": tds.eq(1).children('input')[0].value,
+						"dutiesResponsibilities" : tds.eq(2).children('input')[0].value,
+						"startDate" : tds.eq(3).children('input')[0].value,
+						"endDate" : tds.eq(4).children('input')[0].value
+					}
+				});
+				
+				
+				formData.append('workHistory', JSON.stringify(workHistory));
+				
+				// Get weekly schedule
+				var weeklyScheduleData = jsonSchedule();
+				formData.append('weeklySchedule', weeklyScheduleData);
+				
+				$.ajax({
+					type: 'POST',
+					url: 'https://www.bradfriebe.com/chemstock/apply.php',
+					crossDomain: true,
+					data: formData,
+					contentType: false,
+					processData: false,
+					success: function(data)
+					{
+						if(data != "")
+						{
+							alert(data);
+							//alert('There was an error submitting your application');
+						}
+						else
+						{
+							alert('Your app is in yo');
+						}
+					},
+					error: function(data)
+					{
+						alert('There was an error submitting your application');
+					}
+				});
+			});
+			</script>
+		</body>
+	</html>

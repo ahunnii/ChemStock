@@ -1,0 +1,296 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+    <!--<link rel="stylesheet" type="text/css" href="css/login.css">-->
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection" />
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link href="css/icon.css" rel="stylesheet">
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="js/googleOAuth.js"></script>
+    <!--Import jQuery before materialize.js-->
+    <script type="text/javascript" src="js/materialize.min.js"></script>
+    <script type="text/javascript" src="js/lodash.min.js"></script>
+    <script type="text/javascript"src="js/main.js"></script>
+	<script type="text/javascript"src="js/email-alert.js"></script>
+    <title>Lab Overview</title>
+</head>
+
+<body class="green lighten-2">
+    <!--Navigation Bar-->
+    <ul class="side-nav" id="mobile">
+        <!--<li>
+            <div class="user-view">
+                <div class="background">
+                    <img src="img/logo.png">
+                </div>
+           
+                <a href="#!name"><span class="black-text name">John Doe</span></a>
+                <a href="#!email"><span class="black-text email">jdandturk@gmail.com</span></a>
+            </div>
+        </li>-->
+        <li class="logo center">
+            <img src=" img/logo.png" />
+        </li>
+        <li class="active"><a href="#!">Lab View</a></li>
+        <li ><a href="taskView.html">Tasks</a></li>
+        <li><a href="contactView.html">Contact Staff</a></li>
+        <li><a href="recipeView.html">Recipes</a></li>
+        <li ><a href="calculator.html">Function Calculator</a></li>
+    </ul>
+    <div class="navbar-fixed">
+        <nav>
+            <div class="nav-wrapper green">
+                <div class="container">
+                    <a href="#!" class="brand-logo">ChemStock</a>
+                    <a href="#!" data-activates="mobile" class="button-collapse">
+                        <i class="material-icons">menu</i>
+                    </a>
+                    <ul class="right hide-on-med-and-down">
+                        <li class="active"><a href="#!">Lab View</a></li>
+                        <li><a href="taskView.html">Tasks</a></li>
+                        <li><a href="contactView.html">Contact Staff</a></li>
+                        <li><a href="recipeView.html">Recipes</a></li>
+                        <li><a href="calculator.html">Function Calculator</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+    <br />
+    <!--Comment-->
+    <!--Loading Circle-->
+    <div class="preloader-wrapper big active" id="loadingDiv" style="position:fixed; top:50%; left:50%; z-index: 1;">
+        <div class="spinner-layer spinner-blue-only">
+            <div class="circle-clipper left">
+                <div class="circle"></div>
+            </div><div class="gap-patch">
+                <div class="circle"></div>
+            </div><div class="circle-clipper right">
+                <div class="circle"></div>
+            </div>
+        </div>
+    </div>
+
+    <!--Top View Area-->
+    <div class=" row" id="top_view" >
+        <!--Lab Card-->
+        <div class="col s12 " id="lab_card">
+            <div class="card  darken-1 z-depth-1">
+                <div class="card-content ">
+                    <h5 class="card-title" id="lab_name">Lab</h5>
+                    <br />
+                   <!-- <div class="col s10"><span class="black-text">Location: 202</span></div>-->
+                  
+                    <div class="col s10"><span class="black-text" id="listOfEmployees">Assigned To Lab: Andrew, Mishka, Alex, Emily</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Bottom View Area-->
+    <div class=" row " id="bottom_view">
+        <div id="viewalllab" class=" col s12">
+            <div class="card-panel z-depth-1">
+                <h5>Experiments</h5>
+                <div class=" divider"></div>
+                <br />
+
+                    <ul class="collapsible" data-collapsible="accordion" id="exp_collection">
+
+                    </ul>
+       
+
+
+                <p id="timestamp">Last Updated 11/9/17</p>
+				
+				
+				
+            </div>
+        </div>
+    </div>
+
+
+    <!--Different Modal Templates-->
+    <div>
+        <!--Add Task Modal-->
+        <div id="add_task" class="modal  modal-fixed-footer" style="width:90% !important">
+            <div class="modal-content ">
+                <div class="modal-body">
+                    <div class=" row">
+                        <div class="col s12 left">
+                            <h3 class="left" id="lab_name">Assign a Task</h3>
+                        </div>
+
+                    </div>
+                    <div class="divider"></div>
+
+                    <div class="row">
+                        <form class="col s12">
+                            <div class="row">
+                                <div class="input-field col s6">
+                                    <input id="task_name" type="text" class="validate">
+                                    <label for="task_name">Task Name</label>
+                                </div>
+                                <div class="input-field col s6">
+                                    <input id="user_name" type="text" class="validate">
+                                    <label for="user_name">Participant</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <input id="task_desc" type="text" class="validate">
+                                    <label for="task_desc">Task Description<label>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+				<a href="#!" class="modal-action modal-close waves-effect waves-red btn-flat">Cancel</a>
+                <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Assign</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $exp = new Array();
+        $currentLab = 122;
+        var groupedData;
+
+
+        //Materialize CSS setup calls
+        $(document).ready(function () {
+            $('.modal').modal();
+            $('.collapsible').collapsible();
+            $('ul.tabs').tabs();
+            $('ul.tabs').tabs('select_tab', 'tab_id');
+            $(".button-collapse").sideNav();
+            $('#timestamp').html(
+                function () {
+                    var time = new Date();
+
+                    return "Last time checked:  " + time.toUTCString();
+                }
+            );
+        });
+
+
+        //Loading Indicatior for any ajax calls
+        var $loading = $('#loadingDiv').hide();
+        $(document)
+            .ajaxStart(function () {
+                $loading.show();
+            })
+            .ajaxStop(function () {
+                $loading.hide();
+            });
+
+
+        //Grabs current lab setup
+        $(document).ready(function () {
+
+            $.ajax
+                ({
+                    type: "GET",
+                    url: "https://www.bradfriebe.com/chemstock/getexperiments.php",
+                    crossDomain: true,
+                    dataType: "json",
+                    success: function (data) {
+                        //$exp = data;
+                        groupedData = _.groupBy(data, function (d) { return d.labID });
+                       // $.each(groupedData, function (key, value) {
+                            FilterLabView($currentLab);
+                       // });
+                    },
+                    error: function (data) {
+                        alert('There was an error getting application info');
+                    }
+                });
+
+            GenerateEmployees();
+        });
+
+        //Filters through the experiments
+
+        function FilterLabView(lab) {
+
+            $('#lab_name').html(groupedData[lab][0].labName);
+            $.each(groupedData[lab], function (key, value) {
+                $('#exp_collection').append(
+                    "<li>" +
+                    " <div class='collapsible-header'><i class='material-icons'>filter_drama</i><span>" + value.experimentName + "</span ></div >" +
+                    "<div class='collapsible-body'></div></li>"
+                );
+            });
+
+        }
+        //Populates modals for experiments
+        function populate_modal_exp(id_lab) {
+
+            $('#lab_collap').html("");
+            $('#lab_name').html("<h5>" + groupedData[id_lab][0].labName + "</h5>");
+
+            $.each(groupedData[id_lab], function (key, value) {
+                $('#lab_collap').append(
+                    "<li>" +
+                    " <div class='collapsible-header'><i class='material-icons'>filter_drama</i><span>" + value.experimentName + "</span ></div >" +
+                    "<div class='collapsible-body'></div></li>"
+                );
+            });
+        }
+        //Switches application and lab views
+        function display(id_name) {
+
+            if (id_name == "viewalllab") {
+                $('#viewalltasks').addClass("hide");
+                $('#viewalllab').removeClass("hide");
+                $('#task_card').addClass("hide");
+                $('#emp_card').addClass("hide");
+                $('#lab_card').removeClass("hide");
+            } else if (id_name == "viewalltasks") {
+                $('#viewalltasks').removeClass("hide");
+                $('#viewalllab').addClass("hide");
+                $('#task_card').removeClass("hide");
+                $('#lab_card').addClass("hide");
+                $('#emp_card').addClass("hide");
+            } else if (id_name == "viewallemp") {
+                $('#viewalltasks').addClass("hide");
+                $('#viewalllab').addClass("hide");
+                $('#task_card').addClass("hide");
+                $('#lab_card').addClass("hide");
+                $('#emp_card').removeClass("hide");
+
+            }
+            $('.button-collapse').sideNav('hide');
+        }
+		
+        function GenerateEmployees() {
+            $('#listOfEmployees').html("Assigned to: <br>");
+            $.ajax
+                ({
+                    type: "GET",
+                    url: "https://www.bradfriebe.com/chemstock/getemployees.php",
+                    crossDomain: true,
+                    dataType: "json",
+                    success: function (data) {
+
+                        
+                        $.each(data, function (key, value) {
+                            if(value.assignedTo == $currentLab)
+                                 $('#listOfEmployees').append(value.firstName + "<br>");
+                        });
+                    },
+                    error: function (data) {
+                        alert('There was an error getting the list of employees...');
+                    }
+                });
+        }
+    </script>
+</body>
+</html>

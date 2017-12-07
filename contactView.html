@@ -1,0 +1,174 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+    <!--<link rel="stylesheet" type="text/css" href="css/login.css">-->
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection" />
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link href="css/materializeicons.css" rel="stylesheet">
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+	<!--Import Cordova and Google OAuth-->
+		<script type="text/javascript" src="cordova.js"></script>
+		<script type="text/javascript" src="js/googleOAuth.js"></script>
+    <!--Import jQuery before materialize.js-->
+    <script type="text/javascript" src="js/materialize.min.js"></script>
+    <script type="text/javascript" src="js/lodash.min.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
+    <title>Contacts</title>
+</head>
+
+<body class="green lighten-2">
+    <!--Navigation Bar-->
+    <ul class="side-nav" id="mobile">
+        <li class="logo center">
+            <img src=" img/logo.png" />
+        </li>
+        <li><a href="labView.html">Lab View</a></li>
+        <li ><a href="taskView.html" >Tasks</a></li>
+        <li class="active"><a href="#!">Contact Staff</a></li>
+        <li><a href="recipeView.html">Recipes</a></li>
+        <li><a href="calculator.html">Function Calculator</a></li>
+    </ul>
+    <div class="navbar-fixed">
+        <nav>
+            <div class="nav-wrapper green">
+                <div class="container">
+                    <a href="#!" class="brand-logo">ChemStock</a>
+                    <a href="#!" data-activates="mobile" class="button-collapse">
+                        <i class="material-icons" id="menu_icon">menu</i>
+                    </a>
+                    <ul class="right hide-on-med-and-down">
+                        <li><a href="labView.html">Lab View</a></li>
+                        <li><a href="taskView.html">Tasks</a></li>
+                        <li class="active"><a href="#!">Contact Staff</a></li>
+                        <li><a href="recipeView.html">Recipes</a></li>
+                        <li><a href="calculator.html">Function Calculator</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+    <br />
+
+    <!--Loading Circle-->
+    <div class="preloader-wrapper big active" id="loadingDiv" style="position:fixed; top:50%; left:50%; z-index: 1;">
+        <div class="spinner-layer spinner-blue-only">
+            <div class="circle-clipper left">
+                <div class="circle"></div>
+            </div><div class="gap-patch">
+                <div class="circle"></div>
+            </div><div class="circle-clipper right">
+                <div class="circle"></div>
+            </div>
+        </div>
+    </div>
+
+
+    <!--View Area-->
+    <div class=" row " id="bottom_view">
+        <div id="employee_view" class="col s12">
+            <div class="card-panel z-depth-1">
+                <h5>All Employees</h5>
+                <div class=" divider"></div>
+
+                <div id="pend">
+                    <ul class="collection" id="employee_collection">
+                        
+                    </ul>
+                </div>
+                <p id="timestamp">Last Updated 11:9:17</p>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+
+        $(document).ready(function () {
+           
+        });
+
+        //Materialize CSS setup calls
+        $(document).ready(function () {
+            $('.modal').modal();
+            $('.collapsible').collapsible();
+            $('ul.tabs').tabs();
+            $('ul.tabs').tabs('select_tab', 'tab_id');
+            $(".button-collapse").sideNav();
+            $('#edit_recipe_text').val('New Text');
+            $('#edit_recipe_text').trigger('autoresize');
+            $('#edit_recipe_required').val('New Text');
+            $('#edit_recipe_required').trigger('autoresize');
+            $('select').material_select();
+            GenerateEmployees();
+            $('#timestamp').html(
+                function () {
+                    var time = new Date();
+
+                    return "Last time checked:  " + time.toUTCString();
+                }
+            );
+        });
+
+        //Loading Indicatior for any ajax calls
+        var $loading = $('#loadingDiv').hide();
+        $(document)
+            .ajaxStart(function () {
+                $loading.show();
+            })
+            .ajaxStop(function () {
+                $loading.hide();
+            });
+        //Needs to be updated to pull employee contact information
+        function GenerateEmployees() {
+            $.ajax
+                ({
+                    type: "GET",
+                    url: "https://www.bradfriebe.com/chemstock/getemployees.php",
+                    crossDomain: true,
+                    dataType: "json",
+                    success: function (data) {
+                    
+                        $.each(data, function (key, value) {
+                            
+                            $('#employee_collection').append(
+                                "<li class='collection-item avatar'><i class='material-icons circle red'>face</i><span class='title'>" + value.firstName +" " + value.lastName + "</span><p><a href='mailto:" + value.email + "'>" + value.email +
+                                "</a> <br>  <a href='tel:" + value.phoneNumber + "'>" + value.phoneNumber + " </a><br>Works in:  " +( value.assignedTo==null ? "Unnasigned": "CHEM " + value.assignedTo) + "</p > </li >"
+                               );
+                        });
+                    },
+                    error: function (data) {
+                        alert('There was an error getting the list of employees...');
+                    }
+                });
+        }
+        //function GenerateLabSetEmployees(labNumber) {
+        //    $.ajax
+        //        ({
+        //            type: "GET",
+        //            url: "https://www.bradfriebe.com/chemstock/getemployees.php",
+        //            crossDomain: true,
+        //            dataType: "json",
+        //            success: function (data) {
+
+        //                $.each(data, function (key, value) {
+        //                    if(value.assignedTo == labNumber)
+        //                    $('#employee_collection').append(
+        //                        "<li class='collection-item avatar'><i class='material-icons circle red'>face</i><span class='title'>" + value.firstName + " " + value.lastName + "</span><p><a href='mailto:" + value.email + "'>" + value.email +
+        //                        "</a> <br>  <a href='tel:" + value.phoneNumber + "'>" + value.phoneNumber + " </a><br>Works in:  " + (value.assignedTo == null ? "Unnasigned" : "CHEM " + value.assignedTo) + "</p > </li >"
+        //                    );
+        //                });
+        //            },
+        //            error: function (data) {
+        //                alert('There was an error getting the list of employees...');
+        //            }
+        //        });
+        //}
+
+
+    </script>
+</body>
+</html>

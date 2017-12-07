@@ -1,0 +1,224 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+   
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+	<!--Import Materialize Icons Font-->
+		<link href="css/materializeicons.css" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection" />
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link href="css/icon.css" rel="stylesheet">
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <!--Import jQuery before materialize.js-->
+    <script type="text/javascript" src="js/materialize.min.js"></script>
+    <script type="text/javascript" src="js/lodash.min.js"></script>
+	<!--Import Cordova and Google OAuth-->
+		<script type="text/javascript" src="cordova.js"></script>
+		<script type="text/javascript" src="js/googleOAuth.js"></script>
+    <title>Function Calculator</title>
+</head>
+
+<body class="green lighten-2">
+    <!--Navigation Bar-->
+    <ul class="side-nav" id="mobile">
+        <li class="logo center">
+            <img src=" img/logo.png" />
+        </li>
+        <li><a href="labView.html">Lab View</a></li>
+        <li ><a href="taskView.html">Tasks</a></li>
+        <li><a href="contactView.html">Contact Staff</a></li>
+        <li><a href="recipeView.html">Recipes</a></li>
+        <li class="active"><a href="calculator.html">Function Calculator</a></li>
+    </ul>
+    <div class="navbar-fixed">
+        <nav>
+            <div class="nav-wrapper green">
+                <div class="container">
+                    <a href="#!" class="brand-logo">ChemStock</a>
+                    <a href="#!" data-activates="mobile" class="button-collapse">
+                        <i class="material-icons">menu</i>
+                    </a>
+                    <ul class="right hide-on-med-and-down">
+                        <li><a href="labView.html">Lab View</a></li>
+                        <li><a href="taskView.html">Tasks</a></li>
+                        <li><a href="contactView.html">Contact Staff</a></li>
+                        <li><a href="recipeView.html">Recipes</a></li>
+                        <li class="active"><a href="calculator.html">Function Calculator</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+    <br />
+
+    <!--Loading Circle-->
+    <div class="preloader-wrapper big active" id="loadingDiv" style="position:fixed; top:50%; left:50%; z-index: 1;">
+        <div class="spinner-layer spinner-blue-only">
+            <div class="circle-clipper left">
+                <div class="circle"></div>
+            </div><div class="gap-patch">
+                <div class="circle"></div>
+            </div><div class="circle-clipper right">
+                <div class="circle"></div>
+            </div>
+        </div>
+    </div>
+
+
+    <!--Top View Area-->
+    <div class=" row" id="top_view">
+
+
+
+        <!--Calculator Card-->
+        <div class="col s12">
+            <div class="card  darken-1 z-depth-1">
+                <div class="card-content ">
+                    <h3 class="card-title" jd="view_lab_name">Function Calculator</h3>
+                    <br />
+                    <div>
+                        <div class="col s12">
+                            <ul class="tabs ">
+                                <li class="tab green-text"><a class="active green-text" href="#dil">Dilutions</a></li>
+                                <li class="tab "><a href="#mass" class=" green-text">Mass</a></li>
+                                <div class="indicator green" style="z-index:1"></div>
+                            </ul>
+                        </div>
+                        <div id="dil" class="col s12">
+                            <form class="col s12">
+                                <div class="row">
+                                    <div class="input-field col s12">
+                                        <input id="stock_conc" type="number" class="validate" step="any">
+                                        <label for="stock_conc">Stock Concentration(M)</label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="input-field col s12">
+                                        <input id="final_vol" type="number" class="validate" step="any">
+                                        <label for="final_vol">Desired Final Volume (L)</label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="input-field col s12">
+                                        <input id="final_conc" type="number" class="validate" step="any">
+                                        <label for="final_conc">Desired Final Concentration (M)</label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class=" col s12 grey lighten-3">
+                                        <label for="disabled_dil">Result</label>
+                                        <h4 id="disabled_dil">0.00 L</h4>
+                                        
+                                    </div>
+                                </div>
+                            </form>
+
+                        </div>
+                        <div id="mass" class="col s12">
+                            <form class="col s12">
+                                <div class="row">
+                                    <div class="input-field col s12">
+                                        <input id="form_wei" type="number" class="validate" step="any">
+                                        <label for="form_wei">Formula Weight(g/mol)</label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="input-field col s12">
+                                        <input id="final_vol_mass" type="number" class="validate" step="any">
+                                        <label for="final_vol_mass">Desired Final Volume (L)</label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="input-field col s12">
+                                        <input id="final_conc_mass" type="number" class="validate" step="any">
+                                        <label for="final_conc_mass">Desired Concentration (M)</label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class=" col s12 grey lighten-3">
+                                        <label for="disabled_mass">Result</label>
+                                        <h4 id="disabled_mass">0.00 g</h4>
+
+                                    </div>
+                                </div>
+                            </form>
+
+                        </div>
+  
+                    </div>
+                </div>
+                <div class="card-action center">
+                    <a href="#" class=" green-text " onclick="calculateDil();">Calculate</a>
+                </div>
+            </div>
+        </div>
+    </div>
+   
+
+    <script>
+        $(document).ready(function () {
+            $('select').material_select();
+        });
+//Materialize CSS setup calls
+$(document).ready(function () {
+    $('.modal').modal();
+    $('.collapsible').collapsible();
+    $('ul.tabs').tabs();
+    $('ul.tabs').tabs('select_tab', 'tab_id');
+        $(".button-collapse").sideNav();
+    
+    $('#timestamp').html(
+        function () {
+            var time = new Date();
+
+            return "Last time checked:  " + time.toUTCString();
+        }
+    );
+});
+
+        
+
+
+//Loading Indicatior for any ajax calls
+var $loading = $('#loadingDiv').hide();
+$(document)
+    .ajaxStart(function () {
+        $loading.show();
+    })
+    .ajaxStop(function () {
+        $loading.hide();
+            });
+
+
+
+        function calculateDil() {
+
+            if ($('#dil').hasClass("active")) {
+                if ($('#final_conc').val() > $('#stock_conc').val())
+                {
+                    Materialize.toast('Final concentration cant be higner than Stock concentration!', 4000) // 4000 is the duration of the toast
+                } else {
+                    $val = ($('#final_vol').val() * $('#final_conc').val()) / $('#stock_conc').val();
+                    $('#disabled_dil').html($val + " L");
+                    console.log($val);
+                }
+            } else {
+                if ($('#final_conc_mass').val() <= 0 || $('#final_vol_mass').val() <= 0 || $('#form_wei').val() <= 0) {
+                    Materialize.toast('You cannot have a value less than or equal to zero!', 4000) // 4000 is the duration of the toast
+                    console.log($('#final_conc').val() <= 0);
+                } else {
+                    $val = ($('#final_vol_mass').val() * $('#final_conc_mass').val()) * $('#form_wei').val();
+                    $('#disabled_mass').html($val + " g");
+                    console.log($val);
+                }
+            }
+
+
+         
+        }
+    </script>
+</body>
+</html>
