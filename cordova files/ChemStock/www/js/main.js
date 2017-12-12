@@ -80,3 +80,143 @@ function toggle_view(id_array, current) {
 };
 
 
+
+
+function PostAddRecipe(formData) {
+    $.ajax({
+        type: 'POST',
+        url: 'https://www.bradfriebe.com/chemstock/addrecipe.php',
+        crossDomain: true,
+        data: formData,
+        contentType: false,
+        processData: false,
+        success: function (data) {
+            if (data != "") {
+                //alert(data);
+                alert('There was an internal error, please try again later.');
+            }
+            else {
+                alert("Recipe added to database. Press OK to continue.")
+                ReturnToMain();
+            }
+            // updated successfully
+        },
+        error: function (data) {
+            alert('There was an internal error, please try again later.');
+        }
+
+    });
+}
+
+function PostEditRecipe(formData) {
+
+    $.ajax({
+        type: 'POST',
+        url: 'https://www.bradfriebe.com/chemstock/editrecipe.php',
+        crossDomain: true,
+        data: formData,
+        contentType: false,
+        processData: false,
+        success: function (data) {
+            if (data != "") {
+                alert(data);
+                //alert('ERROR');
+            }
+            else {
+                alert("Recipe was successfully altered. Press OK to continue.")
+                ReturnToMain();
+            }
+            // updated successfully
+        },
+        error: function (data) {
+            //alert(data);
+            alert('There was an internal error, please try again later');
+        }
+
+    });
+
+}
+
+function GenerateRecipeView(section) {
+    $.ajax ({
+            type: "GET",
+            url: "https://www.bradfriebe.com/chemstock/getrecipe.php",
+            crossDomain: true,
+            dataType: "json",
+            success: function (data) {
+
+                $.each(data, function (key, value) {
+                    $(section).append(
+                        "<li class='collection-item'><div>" + value.name + "<a href='#!' class='secondary-content' onclick='GetRecipe(" + value.id + ");'><i class='material-icons'>send</i></a></div></li>"
+                    );
+                });
+            },
+            error: function (data) {
+                alert('There was an error getting the list of recipes...');
+            }
+        });
+}
+
+function GetRecipe(x) {
+    $.ajax ({
+            type: "GET",
+            url: "https://www.bradfriebe.com/chemstock/getrecipe.php",
+            crossDomain: true,
+            dataType: "json",
+            data: { id: x },
+            success: function (data) {
+                $('#recipe_name').html(data.name);
+                $('#recipe_expTitle').html("<b>Experiment: </b><br />" + data.experiment);
+                $('#recipe_amt').html("<b>Prep Quantity: </b><br />" + data.prepQuantity + " " + data.prepType);
+                $('#recipe_formula').html("<b>Formula/FW:</b><br />" + data.formula);
+                $('#recipe_text').html(data.prepProcedure);
+                $('#recipe_required').html("<b>Reqired Chemicals: </b>" + data.requiredChemicals);
+                $('#recipe_id').html(data.id);
+            },
+            error: function (data) {
+                alert('There was an error getting recipe info');
+            }
+        });
+
+    $('#recipe_view').removeClass("hide");
+    $('#recipe_search').addClass("hide");
+    $('#menu_icon').html("arrow_back");
+}
+
+function GenerateRecipeEditView() {
+    var y = parseInt($('#recipe_id').html());
+    $.ajax({
+        type: "GET",
+        url: "https://www.bradfriebe.com/chemstock/getrecipe.php",
+        crossDomain: true,
+        dataType: "json",
+        data: { id: y },
+        success: function (data) {
+            $('#recipe_view').addClass("hide");
+            $('#recipe_edit').removeClass("hide");
+
+            $('#edit_recipe_name').val(data.name);
+            $('#edit_recipe_expTitle').val(data.experiment);
+            $('#edit_recipe_amt').val(data.prepQuantity);
+            $('#edit_recipe_prefix').val(data.prepType);
+            $('#edit_recipe_formula').val(data.formula);
+            $('#edit_recipe_text').val(data.prepProcedure);
+            $('#edit_recipe_required').val(data.requiredChemicals);
+
+        },
+        error: function (data) {
+            alert('There was an error getting application info');
+        }
+    });
+
+    $('#recipe_view').removeClass("hide");
+    $('#recipe_search').addClass("hide");
+    $('#menu_icon').html("arrow_back");
+}
+
+function GenerateRecipeAdd() {
+    $('#recipe_search').addClass("hide");
+    $('#recipe_add').removeClass("hide");
+    $('#menu_icon').html("arrow_back");
+}
+
