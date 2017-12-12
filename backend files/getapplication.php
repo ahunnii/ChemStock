@@ -12,7 +12,7 @@ if(isset($_GET['id']))
 		die('query failed to execute');
 	}
 	
-	$stmt->bind_result($appID, $studentID, $email, $firstName, $middleInitial, $lastName, $dateOfBirth, $localAddress, $localCity, $localState, $localZip, $cellPhone, $homeAddress, $homeCity, $homeState, $homeZip, $homePhone, $referral, $preferredWeeklyHours, $workStudyApproved, $workStudyAmount, $classStanding, $major, $minor, $graduationDate, $highschoolGPA, $collegeGPA, $weeklySchedule, $applicationStatus, $timestmp);
+	$stmt->bind_result($appID, $studentID, $email, $firstName, $middleInitial, $lastName, $dateOfBirth, $localAddress, $localCity, $localState, $localZip, $cellPhone, $referral, $preferredWeeklyHours, $workStudyApproved, $workStudyAmount, $classStanding, $major, $minor, $graduationDate, $highschoolGPA, $collegeGPA, $weeklySchedule, $applicationStatus, $timestmp);
 	$stmt->fetch();
 
 	$row = array();
@@ -28,11 +28,6 @@ if(isset($_GET['id']))
 	$row['localState'] = $localState;
 	$row['localZip'] = $localZip;
 	$row['cellPhone'] = $cellPhone;
-	$row['homeAddress'] = $homeAddress;
-	$row['homeCity'] = $homeCity;
-	$row['homeState'] = $homeState;
-	$row['homeZip'] = $homeZip;
-	$row['homePhone'] = $homePhone;
 	$row['referral'] = $referral;
 	$row['preferredWeeklyHours'] = $preferredWeeklyHours;
 	$row['workStudyApproved'] = $workStudyApproved;
