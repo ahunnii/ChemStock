@@ -17,11 +17,6 @@ $localCity = $db->real_escape_string($_POST["localCity"]);
 $localState = $db->real_escape_string($_POST["localState"]);
 $localZip = $db->real_escape_string($_POST["localZip"]);
 $cellPhone = $db->real_escape_string($_POST["cellPhone"]);
-$homeAddress = $db->real_escape_string($_POST["homeAddress"]);
-$homeCity = $db->real_escape_string($_POST["homeCity"]);
-$homeState = $db->real_escape_string($_POST["homeState"]);
-$homeZip = $db->real_escape_string($_POST["homeZip"]);
-$homePhone = $db->real_escape_string($_POST["homePhone"]);
 $referral  = $db->real_escape_string($_POST["referred"]);
 $weeklyHours = $db->real_escape_string($_POST["weeklyHours"]);
 $workStudyApproved = $db->real_escape_string($_POST["workStudyApproved"]);
@@ -55,7 +50,7 @@ foreach($schedule as $timeslot)
 	$weeklySchedule = $weeklySchedule.",".$timeslot['day'].":".$timeslot['startTime']."-".$timeslot['endTime'].":".$timeslot['content'];
 }
 
-$applicationSQL = "INSERT INTO applications (studentID, email, firstName, middleInitial, lastName, dateOfBirth, localAddress, localCity, localState, localZip, cellPhone, homeAddress, homeCity, homeState, homeZip, homePhone, referral, preferredWeeklyHours, workStudyApproved, workStudyAmount, classStanding, major, minor, graduationDate, highschoolGPA, collegeGPA, weeklySchedule, timestmp) VALUES ('$eID', '$email','$firstName', '$middleInitial', '$lastName', '$dateOfBirth', '$localAddress', '$localCity', '$localState', '$localZip', '$cellPhone', '$homeAddress', '$homeCity', '$homeState', '$homeZip', '$homePhone', '$referral', '$weeklyHours', '$workStudyApproved', '$workStudyAmount', '$classStanding', '$major', '$minor', '$graduationDate', '$highschoolGPA', '$collegeGPA' , '$weeklySchedule', NOW())";
+$applicationSQL = "INSERT INTO applications (studentID, email, firstName, middleInitial, lastName, dateOfBirth, localAddress, localCity, localState, localZip, cellPhone, referral, preferredWeeklyHours, workStudyApproved, workStudyAmount, classStanding, major, minor, graduationDate, highschoolGPA, collegeGPA, weeklySchedule, timestmp) VALUES ('$eID', '$email','$firstName', '$middleInitial', '$lastName', '$dateOfBirth', '$localAddress', '$localCity', '$localState', '$localZip', '$cellPhone', '$referral', '$weeklyHours', '$workStudyApproved', '$workStudyAmount', '$classStanding', '$major', '$minor', '$graduationDate', '$highschoolGPA', '$collegeGPA' , '$weeklySchedule', NOW())";
 
 if($db->query($applicationSQL) !== true)
 {
