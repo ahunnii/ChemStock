@@ -199,7 +199,7 @@ $(document)
             if ($('#dil').hasClass("active")) {
                 if ($('#final_conc').val() > $('#stock_conc').val())
                 {
-                    Materialize.toast('Final concentration cant be higner than Stock concentration!', 4000) // 4000 is the duration of the toast
+                    Materialize.toast('Final concentration cant be higher than Stock concentration!', 4000) // 4000 is the duration of the toast
                 } else {
                     $val = ($('#final_vol').val() * $('#final_conc').val()) / $('#stock_conc').val();
                     $('#disabled_dil').html($val + " L");
