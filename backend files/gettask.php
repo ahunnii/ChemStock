@@ -31,7 +31,7 @@ if(isset($_GET['taskID']))
 }
 else if(isset($_GET['employeeID']))
 {
-	$stmt = $db->prepare("SELECT taskID, creatorID, employeeID, taskName, taskDate FROM tasks WHERE employeeID = ? AND WHERE taskComplete = 0 ORDER BY taskID ASC");
+	$stmt = $db->prepare("SELECT taskID, creatorID, employeeID, taskName, taskDate, taskContent FROM tasks WHERE employeeID = ? AND taskComplete = 0 ORDER BY taskID ASC");
 	$stmt->bind_param('i', $employeeID);
 	
 	$employeeID = $db->real_escape_string($_GET['employeeID']);
@@ -43,7 +43,7 @@ else if(isset($_GET['employeeID']))
 	
 	$output = array();
 	
-	$stmt->bind_result($taskID, $creatorID, $employee, $taskName, $taskDate);
+	$stmt->bind_result($taskID, $creatorID, $employee, $taskName, $taskDate, $taskContent);
 	
 	while($stmt->fetch())
 	{
@@ -60,6 +60,7 @@ else if(isset($_GET['employeeID']))
 	}
 	$stmt->close();
 	echo json_encode($output);
+	
 }
 $db->close();
 ?>
