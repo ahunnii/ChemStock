@@ -14,20 +14,24 @@ if(isset($_GET['email']))
 		die('Could not execute query');
 	}
 	
-	$stmt->bind_result($labID);
+	$stmt->bind_result($assignedTo);
 	if(!$stmt->fetch())
 	{
 		die('could not fetch result');
 	}
+	$stmt->close();
 	
 	$getLab = $db->prepare("SELECT id, labName FROM labs WHERE id = ?");
-	$getLab->bind_param('i', $labID);
+	
+	$getLab->bind_param('i', $assignedTo);
 	
 	if(!$getLab->execute())
 	{
 		die('Could not get lab info');
 	}
+	
 	$getLab->bind_result($id, $name);
+	
 	if(!$getLab->fetch())
 	{
 		die('failed to fetch lab info');
@@ -36,7 +40,6 @@ if(isset($_GET['email']))
 	$output['id'] = $id;
 	$output['labName'] = $name;
 	
-	$stmt->close();
 	$getLab->close();
 	
 	echo json_encode($output);
