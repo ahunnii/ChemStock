@@ -47,7 +47,7 @@ if(isset($_GET['id']))
 }
 else
 {
-	$sql = "SELECT id, studentID, firstName, lastName, email, cellPhone, homePhone, applicationStatus, timestmp FROM applications ORDER BY timestmp DESC";
+	$sql = "SELECT id, studentID, firstName, lastName, email, cellPhone, applicationStatus, timestmp FROM applications ORDER BY timestmp DESC";
 	$output = array();
 	if($result = $db->query($sql))
 	{
